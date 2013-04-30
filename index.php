@@ -1,7 +1,7 @@
 <?php
 //print_r($_POST);
 
-if (isset($_POST)) {
+if (isset($_POST) && $_POST != NULL) {
 
   $allowed_datasets = array("activities","transactions","budgets");
   if (isset($_POST["entry_1085079344"])) { //dataset
