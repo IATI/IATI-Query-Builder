@@ -1,8 +1,10 @@
 <?php
 //print_r($_POST);
-
+if (isset($_POST["reset"])) {
+    unset($_POST);
+  }
 if (isset($_POST) && $_POST != NULL) {
-
+  
   $allowed_datasets = array("activities","transactions","budgets");
   if (isset($_POST["entry_1085079344"])) { //dataset
     $requested_dataset = filter_var($_POST["entry_1085079344"], FILTER_SANITIZE_STRING);
@@ -64,9 +66,14 @@ if (isset($_POST) && $_POST != NULL) {
   $allowed_regions = array();
   if (isset($_POST["entry_1179181326"])) { //organisations
     $requested_region = filter_var($_POST["entry_1179181326"], FILTER_SANITIZE_STRING);
-    if (!in_array($requested_region, $allowed_types)&& $requested_region != NULL) { //!!!!FIX ME!!!!
+    if (!in_array($requested_region, $allowed_types) && $requested_region != NULL) { //!!!!FIX ME!!!!
       $region = $requested_region;
     }
+  }
+  if (isset($region) && isset($country)) {
+    unset($region);
+    unset($country);
+    $notice_message = "** You cannot select both a country and a region **";
   }
   if (isset($dataset) && isset($format) && isset($size)) {
    //&& isset($org) && isset($type) && isset($sector) && (isset($country) || isset($region)) ) {
@@ -133,6 +140,7 @@ echo $region . "<br/>";
             <p>Your link:<br/>
               <a href="<?php echo $api_link; ?>"><?php echo htmlspecialchars($api_link); ?></a>
             </p>
+            <?php if (isset($notice_message)) { echo $notice_message; } ?>
           </div>
           <?php
            } elseif (isset($error_message)) {
@@ -159,19 +167,19 @@ echo $region . "<br/>";
                     <ul class="ss-choices">
                       <li class="ss-choice-item">
                         <label>
-                          <input type="radio" name="entry.1085079344" value="activities" id="group_1085079344_1" class="ss-q-radio" aria-label="Activities">
+                          <input type="radio" name="entry.1085079344" value="activities" id="group_1085079344_1" class="ss-q-radio" aria-label="Activities" <?php if (isset($dataset) && $dataset == "activities") { echo 'checked="checked"'; } ?>>
                             <span class="ss-choice-label">Activities</span>
                           </label>
                         </li>
                         <li class="ss-choice-item">
                           <label>
-                            <input type="radio" name="entry.1085079344" value="transactions" id="group_1085079344_2" class="ss-q-radio" aria-label="Transactions">
+                            <input type="radio" name="entry.1085079344" value="transactions" id="group_1085079344_2" class="ss-q-radio" aria-label="Transactions" <?php if (isset($dataset) && $dataset == "transactions") { echo 'checked="checked"'; } ?>>
                             <span class="ss-choice-label">Transactions</span>
                           </label>
                         </li>
                         <li class="ss-choice-item">
                           <label>
-                            <input type="radio" name="entry.1085079344" value="budgets" id="group_1085079344_3" class="ss-q-radio" aria-label="Budgets">
+                            <input type="radio" name="entry.1085079344" value="budgets" id="group_1085079344_3" class="ss-q-radio" aria-label="Budgets" <?php if (isset($dataset) && $dataset == "budgets") { echo 'checked="checked"'; } ?>>
                             <span class="ss-choice-label">Budgets</span>
                           </label>
                         </li>
@@ -191,19 +199,19 @@ echo $region . "<br/>";
                       <ul class="ss-choices">
                         <li class="ss-choice-item">
                           <label>
-                            <input type="radio" name="entry.71167035" value="summary" id="group_71167035_1" class="ss-q-radio" aria-label="Summary">
+                            <input type="radio" name="entry.71167035" value="summary" id="group_71167035_1" class="ss-q-radio" aria-label="Summary" <?php if (isset($format) && $format == "summary") { echo 'checked="checked"'; } ?>>
                             <span class="ss-choice-label">Summary</span>
                           </label>
                         </li>
                         <li class="ss-choice-item">
                           <label>
-                            <input type="radio" name="entry.71167035" value="by_sector" id="group_71167035_2" class="ss-q-radio" aria-label="By Sector">
+                            <input type="radio" name="entry.71167035" value="by_sector" id="group_71167035_2" class="ss-q-radio" aria-label="By Sector" <?php if (isset($format) && $format == "by_sector") { echo 'checked="checked"'; } ?>>
                             <span class="ss-choice-label">By Sector</span>
                           </label>
                         </li>
                         <li class="ss-choice-item">
                           <label>
-                            <input type="radio" name="entry.71167035" value="by_country" id="group_71167035_3" class="ss-q-radio" aria-label="By Country">
+                            <input type="radio" name="entry.71167035" value="by_country" id="group_71167035_3" class="ss-q-radio" aria-label="By Country" <?php if (isset($format) && $format == "by_country") { echo 'checked="checked"'; } ?>>
                             <span class="ss-choice-label">By Country</span>
                           </label>
                         </li>
@@ -223,13 +231,13 @@ echo $region . "<br/>";
                       <ul class="ss-choices">
                         <li class="ss-choice-item">
                           <label>
-                            <input type="radio" name="entry.1352830161" value="50 rows" id="group_1352830161_1" class="ss-q-radio" aria-label="50 rows">
+                            <input type="radio" name="entry.1352830161" value="50 rows" id="group_1352830161_1" class="ss-q-radio" aria-label="50 rows" <?php if (isset($size) && $size == "50 rows") { echo 'checked="checked"'; } ?>>
                             <span class="ss-choice-label">50 rows</span>
                           </label>
                         </li>
                         <li class="ss-choice-item">
                           <label>
-                            <input type="radio" name="entry.1352830161" value="Entire selection" id="group_1352830161_2" class="ss-q-radio" aria-label="Entire selection">
+                            <input type="radio" name="entry.1352830161" value="Entire selection" id="group_1352830161_2" class="ss-q-radio" aria-label="Entire selection" <?php if (isset($size) && $size == "stream=True") { echo 'checked="checked"'; } ?>>
                             <span class="ss-choice-label">Entire selection</span>
                           </label>
                         </li>
@@ -241,7 +249,7 @@ echo $region . "<br/>";
                   <div dir="ltr" class="ss-item  ss-text">
                     <div class="ss-form-entry">
                       <label class="ss-q-item-label" for="entry_1922375458">
-                        <div class="ss-q-title">Select Reporting Organisation <span class="ss-q-help ss-secondary-text">(eg UK DFID = GB-1)</span></div>
+                        <div class="ss-q-title">Select Reporting Organisation (eg UK DFID = GB-1)</div>
                         <div class="ss-q-help ss-secondary-text" dir="ltr"></div>
                       </label>
                       <select name="entry.1922375458" value="" class="ss-q-short" id="entry_1922375458">
@@ -254,10 +262,11 @@ echo $region . "<br/>";
                   <div dir="ltr" class="ss-item  ss-text">
                     <div class="ss-form-entry">
                       <label class="ss-q-item-label" for="entry_18398991">
-                        <div class="ss-q-title">Select Type of Reporting Organisation</div>
-                        <div class="ss-q-help ss-secondary-text" dir="ltr">(eg. INGO = 21)</div>
+                        <div class="ss-q-title">Select Type of Reporting Organisation (eg. INGO = 21)</div>
                       </label>
-                      <input type="text" name="entry.18398991" value="" class="ss-q-short" id="entry_18398991" dir="auto">
+                      <select name="entry.18398991" value="" class="ss-q-short" id="entry_18398991">
+                        <?php include("include/reporting_org_type.php"); ?>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -265,9 +274,11 @@ echo $region . "<br/>";
                 <div dir="ltr" class="ss-item  ss-text">
                   <div class="ss-form-entry">
                     <label class="ss-q-item-label" for="entry_1954968791">
-                      <div class="ss-q-title">Select Sector</div>
-                      <div class="ss-q-help ss-secondary-text" dir="ltr">(eg Basic Health Care = 12220)</div></label>
-                      <input type="text" name="entry.1954968791" value="" class="ss-q-short" id="entry_1954968791" dir="auto">
+                      <div class="ss-q-title">Select Sector (eg Basic Health Care = 12220)</div>
+                    </label>
+                      <select name="entry.1954968791" value="" class="ss-q-short" id="entry_1954968791">
+                        <?php include("include/sector.php"); ?>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -275,10 +286,11 @@ echo $region . "<br/>";
                   <div dir="ltr" class="ss-item  ss-text">
                     <div class="ss-form-entry">
                       <label class="ss-q-item-label" for="entry_605980212">
-                        <div class="ss-q-title">Select Country</div>
-                        <div class="ss-q-help ss-secondary-text" dir="ltr">(eg DRC = CD)</div>
+                        <div class="ss-q-title">Select Country (eg DRC = CD)</div>
                       </label>
-                      <input type="text" name="entry.605980212" value="" class="ss-q-short" id="entry_605980212" dir="auto">
+                      <select name="entry.605980212" value="" class="ss-q-short" id="entry_605980212">
+                        <?php include("include/country.php"); ?>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -286,9 +298,12 @@ echo $region . "<br/>";
                   <div dir="ltr" class="ss-item  ss-text">
                     <div class="ss-form-entry">
                       <label class="ss-q-item-label" for="entry_1179181326">
-                        <div class="ss-q-title">Select Region</div>
-                        <div class="ss-q-help ss-secondary-text" dir="ltr">(eg South Asia = 679)</div></label>
-                        <input type="text" name="entry.1179181326" value="" class="ss-q-short" id="entry_1179181326" dir="auto">
+                        <div class="ss-q-title">Select Region (eg South Asia = 679)</div>
+                      </label>
+
+                      <select name="entry.1179181326" value="" class="ss-q-short" id="entry_1179181326" >
+                        <?php include("include/region.php"); ?>
+                      </select>
                       </div>
                     </div>
                   </div>
@@ -299,6 +314,9 @@ echo $region . "<br/>";
                   <div class="ss-item ss-navigate">
                     <div class="ss-form-entry">
                       <input type="submit" name="submit" value="Submit" id="ss-submit">
+                    </div>
+                    <div class="ss-form-entry">
+                      <input type="submit" name="reset" value="Reset" id="reset">
                     </div>
                   </div>
                 </form>
