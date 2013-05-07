@@ -81,7 +81,7 @@ if (isset($_POST) && $_POST != NULL) {
     $api_link .= "api/1/access/";
     $api_link .= $dataset;
     if (isset($format) && $format == "by_sector" || $format == "by_country") {
-      $api_link .= "/" . $format . "/";
+      $api_link .= "/" . $format;
     }
     $api_link .= ".csv";
    //echo $api_link;
