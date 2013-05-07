@@ -79,7 +79,11 @@ if (isset($_POST) && $_POST != NULL) {
    //&& isset($org) && isset($type) && isset($sector) && (isset($country) || isset($region)) ) {
     $api_link = "http://iati-datastore.herokuapp.com/";
     $api_link .= "api/1/access/";
-    $api_link .= $dataset . ".csv";
+    $api_link .= $dataset;
+    if (isset($format) && $format == "by_sector" || $format == "by_country") {
+      $api_link .= "/" . $format . "/";
+    }
+    $api_link .= ".csv";
    //echo $api_link;
     if (isset($org) || isset($type) || isset($sector) || (isset($country) || isset($region)) ) {
       $api_link .= "?";
