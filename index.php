@@ -5,7 +5,7 @@ if (isset($_POST["reset"])) {
   }
 if (isset($_POST) && $_POST != NULL) {
   
-  $allowed_datasets = array("activities","transactions","budgets");
+  $allowed_datasets = array("activity","transaction","budgets");
   if (isset($_POST["entry_1085079344"])) { //dataset
     $requested_dataset = filter_var($_POST["entry_1085079344"], FILTER_SANITIZE_STRING);
     if (in_array($requested_dataset, $allowed_datasets)) {
@@ -171,13 +171,13 @@ echo $region . "<br/>";
                     <ul class="ss-choices">
                       <li class="ss-choice-item">
                         <label>
-                          <input type="radio" name="entry.1085079344" value="activities" id="group_1085079344_1" class="ss-q-radio" aria-label="Activities" <?php if (isset($dataset) && $dataset == "activities") { echo 'checked="checked"'; } ?>>
-                            <span class="ss-choice-label">Activities</span>
+                          <input type="radio" name="entry.1085079344" value="activity" id="group_1085079344_1" class="ss-q-radio" aria-label="Activity" <?php if (isset($dataset) && $dataset == "activity") { echo 'checked="checked"'; } ?>>
+                            <span class="ss-choice-label">Activity</span>
                           </label>
                         </li>
                         <li class="ss-choice-item">
                           <label>
-                            <input type="radio" name="entry.1085079344" value="transactions" id="group_1085079344_2" class="ss-q-radio" aria-label="Transactions" <?php if (isset($dataset) && $dataset == "transactions") { echo 'checked="checked"'; } ?>>
+                            <input type="radio" name="entry.1085079344" value="transaction" id="group_1085079344_2" class="ss-q-radio" aria-label="Transaction" <?php if (isset($dataset) && $dataset == "transaction") { echo 'checked="checked"'; } ?>>
                             <span class="ss-choice-label">Transactions</span>
                           </label>
                         </li>
