@@ -1,5 +1,5 @@
 <?php
-//print_r($_POST);
+print_r($_POST);
 if (isset($_POST["reset"])) {
     unset($_POST);
   }
@@ -33,7 +33,7 @@ if (isset($_POST) && $_POST != NULL) {
   
   $allowed_orgs = array();
   if (isset($_POST["entry_1922375458"])) { //organisations
-    $requested_org = filter_var($_POST["entry_1922375458"], FILTER_SANITIZE_STRING);
+    $requested_org = filter_var_array($_POST["entry_1922375458"], FILTER_SANITIZE_STRING);
     if (!in_array($requested_org, $allowed_orgs) && $requested_org != NULL) { //!!!!FIX ME!!!!
       $org = $requested_org;
     }
@@ -41,7 +41,7 @@ if (isset($_POST) && $_POST != NULL) {
 
   $allowed_types = array();
   if (isset($_POST["entry_18398991"])) { //organisations
-    $requested_type = filter_var($_POST["entry_18398991"], FILTER_SANITIZE_STRING);
+    $requested_type = filter_var_array($_POST["entry_18398991"], FILTER_SANITIZE_STRING);
     if (!in_array($requested_type, $allowed_types) && $requested_type != NULL) { //!!!!FIX ME!!!!
       $type = $requested_type;
     }
@@ -49,7 +49,7 @@ if (isset($_POST) && $_POST != NULL) {
 
   $allowed_sectors = array();
   if (isset($_POST["entry_1954968791"])) { //organisations
-    $requested_sector = filter_var($_POST["entry_1954968791"], FILTER_SANITIZE_STRING);
+    $requested_sector = filter_var_array($_POST["entry_1954968791"], FILTER_SANITIZE_STRING);
     if (!in_array($requested_sector, $allowed_types) && $requested_sector != NULL) { //!!!!FIX ME!!!!
       $sector = $requested_sector;
     }
@@ -57,7 +57,7 @@ if (isset($_POST) && $_POST != NULL) {
 
   $allowed_countries = array();
   if (isset($_POST["entry_605980212"])) { //organisations
-    $requested_country = filter_var($_POST["entry_605980212"], FILTER_SANITIZE_STRING);
+    $requested_country = filter_var_array($_POST["entry_605980212"], FILTER_SANITIZE_STRING);
     if (!in_array($requested_country, $allowed_types) && $requested_country != NULL) { //!!!!FIX ME!!!!
       $country = $requested_country;
     }
@@ -65,7 +65,7 @@ if (isset($_POST) && $_POST != NULL) {
   
   $allowed_regions = array();
   if (isset($_POST["entry_1179181326"])) { //organisations
-    $requested_region = filter_var($_POST["entry_1179181326"], FILTER_SANITIZE_STRING);
+    $requested_region = filter_var_array($_POST["entry_1179181326"], FILTER_SANITIZE_STRING);
     if (!in_array($requested_region, $allowed_types) && $requested_region != NULL) { //!!!!FIX ME!!!!
       $region = $requested_region;
     }
@@ -89,19 +89,19 @@ if (isset($_POST) && $_POST != NULL) {
       $api_link .= "?";
       $api_link_parameters = array();
       if (isset($org)) {
-        $api_link_parameters ["reporting-org"] = $org;
+        $api_link_parameters ["reporting-org"] = implode('|',$org);
       }
       if (isset($type)) {
-        $api_link_parameters ["reporting-org_type"] = $type;
+        $api_link_parameters ["reporting-org_type"] = implode('|',$type);
       }
       if (isset($sector)) {
-        $api_link_parameters ["sector"] = $sector;
+        $api_link_parameters ["sector"] = implode('|',$sector);
       }
       if (isset($country) && !isset($region)) {
-        $api_link_parameters ["recipient-country"] = $country;
+        $api_link_parameters ["recipient-country"] = implode('|',$country);
       }
       if (isset($region) && !isset($country)) {
-        $api_link_parameters ["recipient-region"] = $region;
+        $api_link_parameters ["recipient-region"] = implode('|',$region);
       }
       if ($size == "stream=True") {
         $api_link_parameters ["stream"] = "True";
@@ -256,7 +256,7 @@ echo $region . "<br/>";
                         <div class="ss-q-title">Select Reporting Organisation (eg UK DFID = GB-1)</div>
                         <div class="ss-q-help ss-secondary-text" dir="ltr"></div>
                       </label>
-                      <select name="entry.1922375458" value="" class="ss-q-short" id="entry_1922375458">
+                      <select multiple name="entry.1922375458[]" value="" class="ss-q-short" id="entry_1922375458[]">
                         <?php include("include/reporting_org.php"); ?>
                       </select>
                     </div>
@@ -268,7 +268,7 @@ echo $region . "<br/>";
                       <label class="ss-q-item-label" for="entry_18398991">
                         <div class="ss-q-title">Select Type of Reporting Organisation (eg. INGO = 21)</div>
                       </label>
-                      <select name="entry.18398991" value="" class="ss-q-short" id="entry_18398991">
+                      <select multiple name="entry.18398991[]" value="" class="ss-q-short" id="entry_18398991[]">
                         <?php include("include/reporting_org_type.php"); ?>
                       </select>
                     </div>
@@ -280,7 +280,7 @@ echo $region . "<br/>";
                     <label class="ss-q-item-label" for="entry_1954968791">
                       <div class="ss-q-title">Select Sector (eg Basic Health Care = 12220)</div>
                     </label>
-                      <select name="entry.1954968791" value="" class="ss-q-short" id="entry_1954968791">
+                      <select multiple name="entry.1954968791[]" value="" class="ss-q-short" id="entry_1954968791[]">
                         <?php include("include/sector.php"); ?>
                       </select>
                     </div>
@@ -292,7 +292,7 @@ echo $region . "<br/>";
                       <label class="ss-q-item-label" for="entry_605980212">
                         <div class="ss-q-title">Select Country (eg DRC = CD)</div>
                       </label>
-                      <select name="entry.605980212" value="" class="ss-q-short" id="entry_605980212">
+                      <select multiple name="entry.605980212[]" value="" class="ss-q-short" id="entry_605980212[]">
                         <?php include("include/country.php"); ?>
                       </select>
                     </div>
@@ -305,7 +305,7 @@ echo $region . "<br/>";
                         <div class="ss-q-title">Select Region (eg South Asia = 679)</div>
                       </label>
 
-                      <select name="entry.1179181326" value="" class="ss-q-short" id="entry_1179181326" >
+                      <select multiple name="entry.1179181326[]" value="" class="ss-q-short" id="entry_1179181326[]" >
                         <?php include("include/region.php"); ?>
                       </select>
                       </div>
