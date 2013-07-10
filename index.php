@@ -1,5 +1,5 @@
 <?php
-print_r($_POST);
+//print_r($_POST);
 if (isset($_POST["reset"])) {
     unset($_POST);
   }
