@@ -127,7 +127,7 @@ echo $region . "<br/>";
 
 <html>
   <head>
-    <title>IATI Data Store CSV Query</title>
+    <title>IATI Data Store CSV Query Builder</title>
     <link href='style.css' type='text/css' rel='stylesheet'>
   </head>
 <body dir="ltr" class="ss-base-body">
@@ -135,7 +135,7 @@ echo $region . "<br/>";
     <div class="ss-form-container">
       <div class="ss-top-of-page">
         <div class="ss-form-heading">
-          <h1 class="ss-form-title" dir="ltr">IATI Data Store CSV Query</h1>
+          <h1 class="ss-form-title" dir="ltr">IATI Data Store CSV Query Builder</h1>
           <hr class="ss-email-break" style="display:none;">
           <?php
             if (isset($api_link)) {
@@ -162,7 +162,7 @@ echo $region . "<br/>";
         <form action="index.php" method="POST" id="ss-form" target="_self" onsubmit="">
           <div class="errorbox-good">
             <div dir="ltr" class="ss-item ss-item-required ss-radio">
-              <div class="ss-form-entry">
+              <div class="ss-form-entry-top">
                 <label class="ss-q-item-label" for="entry_1689841214">
                   <div class="ss-q-title">Choose Dataset
                     <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
@@ -193,7 +193,7 @@ echo $region . "<br/>";
                 </div> 
                 <div class="errorbox-good">
                   <div dir="ltr" class="ss-item ss-item-required ss-radio">
-                    <div class="ss-form-entry">
+                    <div class="ss-form-entry-top">
                       <label class="ss-q-item-label" for="entry_1948547450">
                         <div class="ss-q-title">Choose Dataset Format
                           <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
@@ -225,7 +225,7 @@ echo $region . "<br/>";
                 </div>
                 <div class="errorbox-good">
                 <div dir="ltr" class="ss-item ss-item-required ss-radio">
-                    <div class="ss-form-entry">
+                    <div class="ss-form-entry-top">
                       <label class="ss-q-item-label" for="entry_1414120858">
                         <div class="ss-q-title">Choose Sample Size
                           <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
@@ -280,7 +280,7 @@ echo $region . "<br/>";
                     <label class="ss-q-item-label" for="entry_1954968791">
                       <div class="ss-q-title">Select Sector (eg Basic Health Care = 12220)</div>
                     </label>
-                      <select multiple name="entry.1954968791[]" value="" class="ss-q-short" id="entry_1954968791[]">
+                      <select multiple name="entry.1954968791[]" value="" size="10" class="ss-q-short" id="entry_1954968791[]">
                         <?php include("include/sector.php"); ?>
                       </select>
                     </div>
