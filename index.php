@@ -155,9 +155,10 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
   return $values;
 }
 ?>
-
+<!DOCTYPE html>
 <html>
   <head>
+    <meta charset='utf-8'> 
     <title>IATI Data Store CSV Query Builder</title>
     <link href='style.css' type='text/css' rel='stylesheet'>
   </head>

@@ -12,7 +12,10 @@ if (($handle = fopen($reporting_org_type_file, "r")) !== FALSE) {
            $selected = "";
          }
        }
-        echo '<option value="' . $data[0] . '"' . $selected . '>' . $data[0] . ': ' . $data[1] . '</option>';
+        $data[0] = htmlspecialchars($data[0]);
+        $data[1] = htmlspecialchars($data[1]);
+        
+        echo '<option value="' . $data[0] . '"' . $selected . '>' . ucwords(strtolower($data[1])) . ': ' . $data[0] . '</option>';
     }
     fclose($handle);
 }
