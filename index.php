@@ -288,7 +288,7 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
                         <div class="ss-q-title">Select Reporting Organisation (eg UK DFID = GB-1)</div>
                         <div class="ss-q-help ss-secondary-text" dir="ltr"></div>
                       </label>
-                      <select multiple name="entry.1922375458[]" value="" class="ss-q-short" id="entry_1922375458[]">
+                      <select multiple name="entry.1922375458[]" size="6" value="" class="ss-q-short" id="entry_1922375458[]">
                         <?php include("include/reporting_org.php"); ?>
                       </select>
                     </div>
@@ -300,7 +300,7 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
                       <label class="ss-q-item-label" for="entry_18398991">
                         <div class="ss-q-title">Select Type of Reporting Organisation (eg. INGO = 21)</div>
                       </label>
-                      <select multiple name="entry.18398991[]" value="" class="ss-q-short" id="entry_18398991[]">
+                      <select multiple name="entry.18398991[]" size="6" value="" class="ss-q-short" id="entry_18398991[]">
                         <?php include("include/reporting_org_type.php"); ?>
                       </select>
                     </div>
@@ -312,7 +312,7 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
                     <label class="ss-q-item-label" for="entry_1954968791">
                       <div class="ss-q-title">Select Sector (eg Basic Health Care = 12220)</div>
                     </label>
-                      <select multiple name="entry.1954968791[]" value="" size="10" class="ss-q-short" id="entry_1954968791[]">
+                      <select multiple name="entry.1954968791[]" size="10" value="" class="ss-q-short" id="entry_1954968791[]">
                         <?php include("include/sector.php"); ?>
                       </select>
                     </div>
@@ -324,7 +324,7 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
                       <label class="ss-q-item-label" for="entry_605980212">
                         <div class="ss-q-title">Select Country (eg DRC = CD)</div>
                       </label>
-                      <select multiple name="entry.605980212[]" value="" class="ss-q-short" id="entry_605980212[]">
+                      <select multiple name="entry.605980212[]" size="6"value="" class="ss-q-short" id="entry_605980212[]">
                         <?php include("include/country.php"); ?>
                       </select>
                     </div>
@@ -337,7 +337,7 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
                         <div class="ss-q-title">Select Region (eg South Asia = 679)</div>
                       </label>
 
-                      <select multiple name="entry.1179181326[]" value="" class="ss-q-short" id="entry_1179181326[]" >
+                      <select multiple name="entry.1179181326[]" size="6" value="" class="ss-q-short" id="entry_1179181326[]" >
                         <?php include("include/region.php"); ?>
                       </select>
                       </div>
