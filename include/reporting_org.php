@@ -22,8 +22,8 @@ ksort($reporting_orgs);
 //Create our html string
 echo  '<option value="">- None -</option>' . PHP_EOL;
 foreach ($reporting_orgs as $key=>$value) {
-  if (isset($org)) {
-    if (in_array($value,$org)) { //remember posted variables may be a multi-array
+  if (isset($orgs)) {
+    if (in_array($value,$orgs)) { //remember posted variables may be a multi-array
        $selected = 'selected="selected"';
      } else {
        $selected = "";
