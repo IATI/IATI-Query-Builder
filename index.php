@@ -32,6 +32,23 @@ if (isset($_POST) && $_POST != NULL) {
   }
   
   $allowed_orgs = array();
+  //Build allowed orgs from the cache of org info
+  $cachefile = "helpers/groups_cache_dc.json";
+  $groups = file_get_contents($cachefile);
+  $groups = json_decode($groups,true);
+
+  //Set up an arry of Organisations and their IDs
+  $reporting_orgs = array();
+  $excluded_ids = array("To be confirmed.");
+  foreach ($groups as $key=>$value) {
+    if (!empty($value["packages"])) { //only select publishers with files!
+      if (!empty($value["extras"]["publisher_iati_id"])) { //only select publishers with and id
+        if (!in_array($value["extras"]["publisher_iati_id"],$excluded_ids)) { //don't select publishers with excluded ids
+          $allowed_orgs[] = $value["extras"]["publisher_iati_id"];
+        }
+      }
+    }
+  }
   
   if (isset($_POST["entry_1922375458"])) { //organisations
     $requested_org = filter_var_array($_POST["entry_1922375458"], FILTER_SANITIZE_STRING);
