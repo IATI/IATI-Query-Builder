@@ -31,6 +31,8 @@ if (isset($_POST) && $_POST != NULL) {
     }
   }
   
+  //The rest of the values can be multiselect values so they are all passed as arrays!
+  
   $allowed_orgs = array();
   //Build allowed orgs from the cache of org info
   $cachefile = "helpers/groups_cache_dc.json";
@@ -49,37 +51,40 @@ if (isset($_POST) && $_POST != NULL) {
       }
     }
   }
-  
+  //print_r($allowed_orgs);
   if (isset($_POST["entry_1922375458"])) { //organisations
-    $requested_org = filter_var_array($_POST["entry_1922375458"], FILTER_SANITIZE_STRING);
-    if (!in_array($requested_org, $allowed_orgs) && !empty($requested_org) ) { //!!!!FIX ME!!!!
-      $org = $requested_org;
+    $requested_orgs = filter_var_array($_POST["entry_1922375458"], FILTER_SANITIZE_STRING);
+    foreach ($requested_orgs as $requested_org) {
+      if (in_array($requested_org, $allowed_orgs) && !empty($requested_org) ) { //!!!!FIX ME!!!!
+        $orgs[] = $requested_org;
+      }
     }
   }
 
   //$allowed_types = array();
   if (isset($_POST["entry_18398991"])) { //types
     $requested_type = filter_var_array($_POST["entry_18398991"], FILTER_SANITIZE_STRING);
-    $type = build_sanitised_multi_select_values("codelists/OrganisationType.csv",$requested_type);
+    $type = build_sanitised_multi_select_values("codelists/OrganisationType.csv",$requested_type); //returns Null if 'none is selected
+    //print_r($type);
   }
 
   //$allowed_sectors = array();
   if (isset($_POST["entry_1954968791"])) { //sectors
     $requested_sector = filter_var_array($_POST["entry_1954968791"], FILTER_SANITIZE_STRING);
-    $sector = build_sanitised_multi_select_values("codelists/Sector.csv",$requested_sector);
+    $sector = build_sanitised_multi_select_values("codelists/Sector.csv",$requested_sector); //returns Null if 'none is selected
   }
 
 
   if (isset($_POST["entry_605980212"])) { //countries
     $requested_countries = filter_var_array($_POST["entry_605980212"], FILTER_SANITIZE_STRING);
-    $country = build_sanitised_multi_select_values("codelists/Country.csv", $requested_countries);
+    $country = build_sanitised_multi_select_values("codelists/Country.csv", $requested_countries); //returns Null if 'none is selected
   }
 
   
   //$allowed_regions = array();
   if (isset($_POST["entry_1179181326"])) { //organisations
     $requested_region = filter_var_array($_POST["entry_1179181326"], FILTER_SANITIZE_STRING);
-    $region = build_sanitised_multi_select_values("codelists/Region.csv",$requested_region);
+    $region = build_sanitised_multi_select_values("codelists/Region.csv",$requested_region); //returns Null if 'none is selected
   }
   
   if (isset($region) && isset($country)) {
@@ -97,11 +102,12 @@ if (isset($_POST) && $_POST != NULL) {
     }
     $api_link .= ".csv";
    //echo $api_link;
-    if (isset($org) || isset($type) || isset($sector) || (isset($country) || isset($region)) ) {
+   //print_r($orgs);
+    if ( isset($orgs) || isset($type) || isset($sector) || isset($country) || isset($region) ) {
       $api_link .= "?";
       $api_link_parameters = array();
-      if (isset($org)) {
-        $api_link_parameters ["reporting-org"] = implode('|',$org);
+      if (isset($orgs)) {
+        $api_link_parameters ["reporting-org"] = implode('|',$orgs);
       }
       if (isset($type)) {
         $api_link_parameters ["reporting-org_type"] = implode('|',$type);
@@ -152,6 +158,7 @@ function csv_to_array ($path_to_csv) {
  * @param   $path_to_csv          string      A path to a csv file - e.g. containing county codes
  * @param   $sanitized_post_var   string      A user passed variable from a form of e.g. country codes
  * @return  $values               array       an array of allowed values based on those requested
+ * @return  NULL If only 'none' has been selected
  * 
  */
 
@@ -163,13 +170,16 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
   //print_r($sanitized_post_var);
   if (!empty($sanitized_post_var)) { 
     foreach ($sanitized_post_var as $requested_value) {
-      if (in_array($requested_value, $allowed_values)) {
+      if (in_array($requested_value, $allowed_values) && !empty($requested_value)) { //check it's an allowed value and also that it is not empty
         $values[] = $requested_value;
       }
     }
   }
-  
-  return $values;
+  if (empty($values)) {
+    return; //returns NULL
+  } else {
+    return $values;
+  }
 }
 ?>
 <!DOCTYPE html>
