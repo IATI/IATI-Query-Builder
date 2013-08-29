@@ -1,151 +1,38 @@
-<option value="">- None -</option>
-<option value="GB-COH-294860">ADD International : GB-COH-294860</option>
-<option value="adrauk">ADRA-UK : adrauk</option>
-<option value="GB-CHC-261488">AMREF UK : GB-CHC-261488</option>
-<option value="GB-CHC-290836">APT Action on Poverty : GB-CHC-290836</option>
-<option value="NL-KVK-27264198">ActionAid International : NL-KVK-27264198</option>
-<option value="GB-CHC-274467">ActionAid UK : GB-CHC-274467</option>
-<option value="Afghanaid">Afghanaid : Afghanaid</option>
-<option value="gb-chc-1093624">AfriKids : gb-chc-1093624</option>
-<option value="GB-CHC-313139">Africa Educational Trust : GB-CHC-313139</option>
-<option value="46002">African Development Bank : 46002</option>
-<option value="GB-CHC-1064413">African Initiatives : GB-CHC-1064413</option>
-<option value="GB-COH-1100897">Aga Khan Foundation (United Kingdom) : GB-COH-1100897</option>
-<option value="GB-CHC-283302">Agency for cooperation and research in development : GB-CHC-283302</option>
-<option value="NL-KVK-27327087">Akvo Foundation : NL-KVK-27327087</option>
-<option value="asdb">Asian Development Bank : asdb</option>
-<option value="NG-CAC-5938">Association for Reproductive and Family Health : NG-CAC-5938</option>
-<option value="AU-5">Australian Agency for International Development : AU-5</option>
-<option value="NL-CCI-20081098">BRAC International : NL-CCI-20081098</option>
-<option value="GB-CHC-1079599">BasicNeeds : GB-CHC-1079599</option>
-<option value="GB-CHC-1068839">Bond : GB-CHC-1068839</option>
-<option value="GB-CC-220949">British Red Cross : GB-CC-220949</option>
-<option value="GB-CHC-298316">Build Africa : GB-CHC-298316</option>
-<option value="GB-CHC-292506">CARE International UK : GB-CHC-292506</option>
-<option value="US-IRS-562339052">CDA Collaborative Learning Projects : US-IRS-562339052</option>
-<option value="GB-2">CDC Group plc : GB-2</option>
-<option value="GB-CHC-1102028">Canon Collins Trust : GB-CHC-1102028</option>
-<option value="GB-CC-285776">Catholic Agency For Overseas Development : GB-CC-285776</option>
-<option value="GB-CC-326568">Charity Projects Ltd (Comic Relief) : GB-CC-326568</option>
-<option value="GB-CHC-328434">ChildHope UK : GB-CHC-328434</option>
-<option value="GB-CHC-1020488">Children in Crisis : GB-CHC-1020488</option>
-<option value="GB-CHC-110585">Christian Aid : GB-CHC-110585</option>
-<option value="GB-CHC-272465">Concern Universal : GB-CHC-272465</option>
-<option value="GB-CHC-1055436">Conciliation Resources : GB-CHC-1055436</option>
-<option value="DK-1">Danida - Danish Ministry of Foreigh Affairs : DK-1</option>
-<option value="GB-1">Department for International Development, United Kingdom : GB-1</option>
-<option value="IE-1">Department of Foreign Affairs and Trade, Ireland : IE-1</option>
-<option value="GB-COH-06368740">Development Initiatives Poverty Research : GB-COH-06368740</option>
-<option value="GB-CHC-1122924">Developments In Literacy Trust UK : GB-CHC-1122924</option>
-<option value="EU-6">European Commission – Service for Foreign Policy Instruments : EU-6</option>
-<option value="EU">European Union : EU</option>
-<option value="GB-CC-1089879">EveryChild : GB-CC-1089879</option>
-<option value="GB-COH-01926828">Farm Africa : GB-COH-01926828</option>
-<option value="GB-COH-0277068">Fauna &amp; Flora International : GB-COH-0277068</option>
-<option value="GB-CHC-250456">Find Your Feet : GB-CHC-250456</option>
-<option value="FI-3">Finland, Ministry of Foreign Affairs : FI-3</option>
-<option value="CA-3">Foreign Affairs, Trade and Development Canada - Affaires étrangères, Commerce et Développement Canada : CA-3</option>
-<option value="GB-COH-3008440">Forests Monitor : GB-COH-3008440</option>
-<option value="NP-DAO-27-127/062/063">Freedom Forum : NP-DAO-27-127/062/063</option>
-<option value="GB-CHC-281681">Friends of the Earth England, Wales and Northern Ireland : GB-CHC-281681</option>
-<option value="47122">GAVI Alliance : 47122</option>
-<option value="ZA-CIPC-2001/005850/08">Gender Links : ZA-CIPC-2001/005850/08</option>
-<option value="BMZ">German Ministry for Economic Cooperation and Development : BMZ</option>
-<option value="US-EIN-26-0126537">Global Integrity : US-EIN-26-0126537</option>
-<option value="US-EIN-300108263">GlobalGiving.org : US-EIN-300108263</option>
-<option value="GB-CHC-1043641">Habitat for Humanity Great Britain : GB-CHC-1043641</option>
-<option value="GB-CHC-1837621">Health Poverty Action : GB-CHC-1837621</option>
-<option value="GB-COH-1762840">HelpAge International : GB-COH-1762840</option>
-<option value="NL-KVK-41198677">Hivos : NL-KVK-41198677</option>
-<option value="hi">Homeless International : hi</option>
-<option value="GB-CHC-1090745">ICA:UK : GB-CHC-1090745</option>
-<option value="GB-CHC-1075920">Indigo Trust : GB-CHC-1075920</option>
-<option value="IADB">Inter-American Development Bank : IADB</option>
-<option value="icn-ke">InterClimate Network : icn-ke</option>
-<option value="GB-CHC-1001698">Interact Worldwide : GB-CHC-1001698</option>
-<option value="GB-COH-21531930">International Alert : GB-COH-21531930</option>
-<option value="21020">International HIV/AIDS Alliance : 21020</option>
-<option value="IPPF">International Planned Parenthood Federation : IPPF</option>
-<option value="GB-CHC-328158">Islamic Relief Worldwide : GB-CHC-328158</option>
-<option value="GB-CHC-291167">Jeevika Trust : GB-CHC-291167</option>
-<option value="GB-COH-4075590">LEAD International : GB-COH-4075590</option>
-<option value="GB-CHC-218186">Leonard Cheshire Disability : GB-CHC-218186</option>
-<option value="GB-CHC-800672">Living Earth Foundation : GB-CHC-800672</option>
-<option value="GB-CHC-1099776">Malaria Consortium : GB-CHC-1099776</option>
-<option value="IM-CR-017899B">Manx Times : IM-CR-017899B</option>
-<option value="mapaction">MapAction : mapaction</option>
-<option value="GB-COH-1102208">Marie Stopes International : GB-COH-1102208</option>
-<option value="GB-CHC-SC030289">Mercy Corps Scotland : GB-CHC-SC030289</option>
-<option value="GB-CHC-291691">Methodist Relief and Development Fund : GB-CHC-291691</option>
-<option value="ES-5">Ministry of Foreign Affairs and Cooperation, Spain : ES-5</option>
-<option value="NL-1">Ministry of Foreign Affairs, The Netherlands : NL-1</option>
-<option value="NP-DAO-27-689/063/064">NGO Federation of Nepal : NP-DAO-27-689/063/064</option>
-<option value="NO-BRC-977538319">Norwegian Refugee Council : NO-BRC-977538319</option>
-<option value="41127-FTS">OCHA Financial Tracking Service : 41127-FTS</option>
-<option value="GB-COH-05322719">Opportunity International UK : GB-COH-05322719</option>
-<option value="GB-CHC-202918">Oxfam GB : GB-CHC-202918</option>
-<option value="GB-CHC-1125948">PONT : GB-CHC-1125948</option>
-<option value="GB-CHC-1078768">People In Aid : GB-CHC-1078768</option>
-<option value="GB-COH-1364201">Plan International UK : GB-COH-1364201</option>
-<option value="pontis">Pontis Foundation : pontis</option>
-<option value="21032">Population Service International : 21032</option>
-<option value="GB-CHC-1059996">Power International : GB-CHC-1059996</option>
-<option value="GB-COH-871954">Practical Action : GB-COH-871954</option>
-<option value="Pragya India">Pragya India : Pragya India</option>
-<option value="Progressio">Progressio : Progressio</option>
-<option value="GB-COH-07676886">Publish What You Fund : GB-COH-07676886</option>
-<option value="rspb_">RSPB : rspb_</option>
-<option value="GB-CHC-1058991">Railway Children : GB-CHC-1058991</option>
-<option value="GB-CHC-1138287">Rainforest Foundation UK : GB-CHC-1138287</option>
-<option value="GB-CHC-1098106">Relief International UK : GB-CHC-1098106</option>
-<option value="GB-COH-4905100">Resource Extraction Monitoring : GB-COH-4905100</option>
-<option value="GB-CHC-1127488">Restless Development : GB-CHC-1127488</option>
-<option value="GB-COH-2100867">SOS Sahel International UK : GB-COH-2100867</option>
-<option value="NL-KVK-41213450">SPARK : NL-KVK-41213450</option>
-<option value="GB-CHC-1043843">Saferworld : GB-CHC-1043843</option>
-<option value="GB-COH-213890">Save the Children UK : GB-COH-213890</option>
-<option value="sciaf">Scottish Catholic International Aid Fund (SCIAF) : sciaf</option>
-<option value="IE6663">Self Help Africa : IE6663</option>
-<option value="GB-CHC-299717">Send a Cow : GB-CHC-299717</option>
-<option value="487b4c37-481d-42a1-8672-388aa727de46">Sense International : 487b4c37-481d-42a1-8672-388aa727de46</option>
-<option value="GB-CHC-207544">Sightsavers : GB-CHC-207544</option>
-<option value="GB-CHC-1065705">Survivors Fund (SURF) : GB-CHC-1065705</option>
-<option value="SE-6">Swedish International Development Cooperation Agency : SE-6</option>
-<option value="GB-CHC-1071886">TB Alert : GB-CHC-1071886</option>
-<option value="GB CHC 265464">Tearfund : GB CHC 265464</option>
-<option value="US-AGO-CA-941191246">The Asia Foundation : US-AGO-CA-941191246</option>
-<option value="CH-TRG-660.0.653.003-4">The Global Alliance for Improved Nutrition : CH-TRG-660.0.653.003-4</option>
-<option value="47045">The Global Fund to Fight AIDS, Tuberculosis and Malaria : 47045</option>
-<option value="GB-CC-254781">The International Children's Trust : GB-CC-254781</option>
-<option value="97647930-f217-4723-8314-6b3638bfee35">The Leprosy Mission England and Wales : 97647930-f217-4723-8314-6b3638bfee35</option>
-<option value="US-EIN-941655673">The William and Flora Hewlett Foundation : US-EIN-941655673</option>
-<option value="44000">The World Bank : 44000</option>
-<option value="GB-COH-3031674">Traidcraft Exchange : GB-COH-3031674</option>
-<option value="Transparency International">Transparency International Secretariat : Transparency International</option>
-<option value="f61960aa-0200-4b24-a9f1-633be22bb2b9">Trocaire (Northern Ireland) : f61960aa-0200-4b24-a9f1-633be22bb2b9</option>
-<option value="GB-CHC-1069208">Trust for Africa's Orphans : GB-CHC-1069208</option>
-<option value="TWIN-CSCF-PERU-2011-13">Twin : TWIN-CSCF-PERU-2011-13</option>
-<option value="GB-9">UK Department for Work and Pensions : GB-9</option>
-<option value="GB-3">UK Foreign &amp; Commonwealth Office : GB-3</option>
-<option value="GB-GOVUK-uk_Home Office">UK Home Office : GB-GOVUK-uk_Home Office</option>
-<option value="411124">UN Women : 411124</option>
-<option value="41120">UN-Habitat : 41120</option>
-<option value="41AAA">UNOPS (United Nations Office for Project Services) : 41AAA</option>
-<option value="41111">United Nations Capital Development Fund : 41111</option>
-<option value="41122">United Nations Children's Fund : 41122</option>
-<option value="41114">United Nations Development Programme : 41114</option>
-<option value="unfpa">United Nations Population Fund : unfpa</option>
-<option value="41140">United Nations World Food Programme : 41140</option>
-<option value="usg">United States : usg</option>
-<option value="GB-CHC-1140123">Vision for a Nation Foundation : GB-CHC-1140123</option>
-<option value="GB-CHC-313757">Voluntary Service Overseas (VSO) : GB-CHC-313757</option>
-<option value="GB-COH-1081247">WWF-UK : GB-COH-1081247</option>
-<option value="GB-CHC-208724">War on Want : GB-CHC-208724</option>
-<option value="GB-COH-5419428">Water &amp; Sanitation for the Urban Poor (WSUP) : GB-COH-5419428</option>
-<option value="GB-CC-288701">WaterAid : GB-CC-288701</option>
-<option value="GBCHC328206">Womankind Worldwide : GBCHC328206</option>
-<option value="GB-CHC-1115109">Women for Women International (UK) : GB-CHC-1115109</option>
-<option value="GB-COH-2082273">World Association for Christian Communication (UK) : GB-COH-2082273</option>
-<option value="GB-CHC-285908">World Vision UK : GB-CHC-285908</option>
-<option value="21-PK-WWF">World Wide Fund for Nature - Pakistan : 21-PK-WWF</option>
-<option value="NP-CRO-45995/063/064">Young Innovations Pvt. Ltd : NP-CRO-45995/063/064</option>
+<?php
+//Grab data from the cache file of Registry API data
+$cachefile = "helpers/groups_cache_dc.json";
+$groups = file_get_contents($cachefile);
+$groups = json_decode($groups,true);
+
+//Set up an arry of Organisations and their IDs
+$reporting_orgs = array();
+$excluded_ids = array("To be confirmed.");
+foreach ($groups as $key=>$value) {
+  if (!empty($value["packages"])) { //only select publishers with files!
+    if (!empty($value["extras"]["publisher_iati_id"])) { //only select publishers with and id
+      if (!in_array($value["extras"]["publisher_iati_id"],$excluded_ids)) { //don't select publishers with excluded ids
+        $reporting_orgs[$value["display_name"]] = $value["extras"]["publisher_iati_id"];
+      }
+    }
+  }
+}
+//asort($reporting_orgs);
+ksort($reporting_orgs);
+
+//Create our html string
+echo  '<option value="">- None -</option>' . PHP_EOL;
+foreach ($reporting_orgs as $key=>$value) {
+  if (isset($org)) {
+    if (in_array($value,$org)) { //remember posted variables may be a multi-array
+       $selected = 'selected="selected"';
+     } else {
+       $selected = "";
+     }
+   }
+  echo '<option value="' . trim(htmlspecialchars($value)) . '" ' . $selected . '>' . trim(htmlspecialchars($key)) . ' : ' . trim(htmlspecialchars($value)) . '</option>' . PHP_EOL;
+}
+
+//Write this to a file for use in the page
+//file_put_contents("../include/reporting_org.php",$options);
+//print_r($bad_files);
+ ?>
