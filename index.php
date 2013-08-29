@@ -32,44 +32,39 @@ if (isset($_POST) && $_POST != NULL) {
   }
   
   $allowed_orgs = array();
+  
   if (isset($_POST["entry_1922375458"])) { //organisations
     $requested_org = filter_var_array($_POST["entry_1922375458"], FILTER_SANITIZE_STRING);
-    if (!in_array($requested_org, $allowed_orgs) && $requested_org != NULL) { //!!!!FIX ME!!!!
+    if (!in_array($requested_org, $allowed_orgs) && !empty($requested_org) ) { //!!!!FIX ME!!!!
       $org = $requested_org;
     }
   }
 
-  $allowed_types = array();
-  if (isset($_POST["entry_18398991"])) { //organisations
+  //$allowed_types = array();
+  if (isset($_POST["entry_18398991"])) { //types
     $requested_type = filter_var_array($_POST["entry_18398991"], FILTER_SANITIZE_STRING);
-    if (!in_array($requested_type, $allowed_types) && $requested_type != NULL) { //!!!!FIX ME!!!!
-      $type = $requested_type;
-    }
+    $type = build_sanitised_multi_select_values("codelists/OrganisationType.csv",$requested_type);
   }
 
-  $allowed_sectors = array();
-  if (isset($_POST["entry_1954968791"])) { //organisations
+  //$allowed_sectors = array();
+  if (isset($_POST["entry_1954968791"])) { //sectors
     $requested_sector = filter_var_array($_POST["entry_1954968791"], FILTER_SANITIZE_STRING);
-    if (!in_array($requested_sector, $allowed_types) && $requested_sector != NULL) { //!!!!FIX ME!!!!
-      $sector = $requested_sector;
-    }
+    $sector = build_sanitised_multi_select_values("codelists/Sector.csv",$requested_sector);
   }
 
-  $allowed_countries = array();
-  if (isset($_POST["entry_605980212"])) { //organisations
-    $requested_country = filter_var_array($_POST["entry_605980212"], FILTER_SANITIZE_STRING);
-    if (!in_array($requested_country, $allowed_types) && $requested_country != NULL) { //!!!!FIX ME!!!!
-      $country = $requested_country;
-    }
+
+  if (isset($_POST["entry_605980212"])) { //countries
+    $requested_countries = filter_var_array($_POST["entry_605980212"], FILTER_SANITIZE_STRING);
+    $country = build_sanitised_multi_select_values("codelists/Country.csv", $requested_countries);
   }
+
   
-  $allowed_regions = array();
+  //$allowed_regions = array();
   if (isset($_POST["entry_1179181326"])) { //organisations
     $requested_region = filter_var_array($_POST["entry_1179181326"], FILTER_SANITIZE_STRING);
-    if (!in_array($requested_region, $allowed_types) && $requested_region != NULL) { //!!!!FIX ME!!!!
-      $region = $requested_region;
-    }
+    $region = build_sanitised_multi_select_values("codelists/Region.csv",$requested_region);
   }
+  
   if (isset($region) && isset($country)) {
     unset($region);
     unset($country);
@@ -123,6 +118,42 @@ echo $sector . "<br/>";
 echo $country . "<br/>";
 echo $region . "<br/>";
 */
+
+function csv_to_array ($path_to_csv) {
+  if (($handle = fopen($path_to_csv, "r")) !== FALSE) {
+      fgetcsv($handle, 1000, ","); //skip first line
+      while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+         $new_array[] =  $data[0];
+      }
+      fclose($handle);
+  }
+  return $new_array;
+}
+/*
+ * 
+ * name: build_sanitised_multi_select_values
+ * @param   $path_to_csv          string      A path to a csv file - e.g. containing county codes
+ * @param   $sanitized_post_var   string      A user passed variable from a form of e.g. country codes
+ * @return  $values               array       an array of allowed values based on those requested
+ * 
+ */
+
+function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) {
+  $values = array();
+  //$allowed_countries = csv_to_array("codelists/Country.csv");
+  $allowed_values = csv_to_array($path_to_csv);
+  //print_r($allowed_values);
+  //print_r($sanitized_post_var);
+  if (!empty($sanitized_post_var)) { 
+    foreach ($sanitized_post_var as $requested_value) {
+      if (in_array($requested_value, $allowed_values)) {
+        $values[] = $requested_value;
+      }
+    }
+  }
+  
+  return $values;
+}
 ?>
 
 <html>

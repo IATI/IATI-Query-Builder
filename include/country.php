@@ -6,7 +6,7 @@ if (($handle = fopen($reporting_org_type_file, "r")) !== FALSE) {
     fgetcsv($handle, 1000, ","); //skip first line
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
        if (isset($country)) {
-         if ($country == $data[0]) {
+         if (in_array($data[0],$country)) { //remember posted variables may be a multi-array
            $selected = 'selected="selected"';
          } else {
            $selected = "";

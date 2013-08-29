@@ -72,4 +72,5 @@ echo '<option value="">- None -</option>' . PHP_EOL;
 foreach ($reporting_orgs as $key=>$value) {
   echo '<option value="' . trim($key) . '">' . trim($value) . ' : ' . trim($key) . '</option>' . PHP_EOL;
 }
+//print_r($bad_files);
  ?>
