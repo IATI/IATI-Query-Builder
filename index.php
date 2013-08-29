@@ -176,7 +176,7 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
 <html>
   <head>
     <meta charset='utf-8'> 
-    <title>IATI Data Store CSV Query Builder</title>
+    <title>IATI Data Store CSV Query Builder (Alpha Version)</title>
     <link href='style.css' type='text/css' rel='stylesheet'>
   </head>
 <body dir="ltr" class="ss-base-body">
@@ -184,7 +184,7 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
     <div class="ss-form-container">
       <div class="ss-top-of-page">
         <div class="ss-form-heading">
-          <h1 class="ss-form-title" dir="ltr">IATI Data Store CSV Query Builder</h1>
+          <h1 class="ss-form-title" dir="ltr">IATI Data Store CSV Query Builder (Alpha Version)</h1>
           <p class="guide">Please read the <a href="https://docs.google.com/document/d/1x9S_MX643jfxVY3IA2-wRdiBhLKyDIucrd7DO05BSSA/edit#">User Guide</a></p>
           <hr class="ss-email-break" style="display:none;">
           <?php
