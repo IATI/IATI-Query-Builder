@@ -110,7 +110,7 @@ if (isset($_POST) && $_POST != NULL) {
         $api_link_parameters ["reporting-org"] = implode('|',$orgs);
       }
       if (isset($type)) {
-        $api_link_parameters ["reporting-org_type"] = implode('|',$type);
+        $api_link_parameters ["reporting-org.type"] = implode('|',$type);
       }
       if (isset($sector)) {
         $api_link_parameters ["sector"] = implode('|',$sector);
