@@ -391,7 +391,8 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
                   <div class="disclaimer-separator">
                     <p>IATI Query Builder is Free Software licenced under the GNU General Public License<br/>
                     <a href="https://github.com/caprenter/IATI-Query-Builder">IATI Query Builder on GitHub</a> <br/>
-                    Please report problems to our <a href="https://github.com/caprenter/IATI-Query-Builder/issues">issues list</a>.
+                    Please report problems to our <a href="https://github.com/caprenter/IATI-Query-Builder/issues">issues list</a>.</br>
+                    Datastore documentation: <a href="http://iati-datastore.herokuapp.com/">http://iati-datastore.herokuapp.com/</a>
                     </p>
                     </div>
                   <div class="disclaimer">
