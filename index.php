@@ -224,7 +224,7 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
             <div dir="ltr" class="ss-item ss-item-required ss-radio">
               <div class="ss-form-entry-top">
                 <label class="ss-q-item-label" for="entry_1689841214">
-                  <div class="ss-q-title">Choose Dataset
+                  <div class="ss-q-title">Choose Format
                     <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                       <span class="ss-required-asterisk">*</span></div>
                     </label>
@@ -232,19 +232,19 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
                       <li class="ss-choice-item">
                         <label>
                           <input type="radio" name="entry.1085079344" value="activity" id="group_1085079344_1" class="ss-q-radio" aria-label="Activity" <?php if (isset($dataset) && $dataset == "activity") { echo 'checked="checked"'; } ?>>
-                            <span class="ss-choice-label">Activity</span>
+                            <span class="ss-choice-label">One Activity per row</span>
                           </label>
                         </li>
                         <li class="ss-choice-item">
                           <label>
                             <input type="radio" name="entry.1085079344" value="transaction" id="group_1085079344_2" class="ss-q-radio" aria-label="Transaction" <?php if (isset($dataset) && $dataset == "transaction") { echo 'checked="checked"'; } ?>>
-                            <span class="ss-choice-label">Transactions</span>
+                            <span class="ss-choice-label">One Transaction per row</span>
                           </label>
                         </li>
                         <li class="ss-choice-item">
                           <label>
                             <input type="radio" name="entry.1085079344" value="budgets" id="group_1085079344_3" class="ss-q-radio" aria-label="Budgets" <?php if (isset($dataset) && $dataset == "budgets") { echo 'checked="checked"'; } ?>>
-                            <span class="ss-choice-label">Budgets</span>
+                            <span class="ss-choice-label">One Budget per row</span>
                           </label>
                         </li>
                       </ul>
@@ -255,7 +255,7 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
                   <div dir="ltr" class="ss-item ss-item-required ss-radio">
                     <div class="ss-form-entry-top">
                       <label class="ss-q-item-label" for="entry_1948547450">
-                        <div class="ss-q-title">Choose Dataset Format
+                        <div class="ss-q-title">Repeat Rows?
                           <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                           <span class="ss-required-asterisk">*</span>
                         </div>
@@ -264,19 +264,19 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
                         <li class="ss-choice-item">
                           <label>
                             <input type="radio" name="entry.71167035" value="summary" id="group_71167035_1" class="ss-q-radio" aria-label="Summary" <?php if (isset($format) && $format == "summary") { echo 'checked="checked"'; } ?>>
-                            <span class="ss-choice-label">Summary</span>
+                            <span class="ss-choice-label">No</span>
                           </label>
                         </li>
                         <li class="ss-choice-item">
                           <label>
                             <input type="radio" name="entry.71167035" value="by_sector" id="group_71167035_2" class="ss-q-radio" aria-label="By Sector" <?php if (isset($format) && $format == "by_sector") { echo 'checked="checked"'; } ?>>
-                            <span class="ss-choice-label">By Sector</span>
+                            <span class="ss-choice-label">Multi-Sector expansion</span>
                           </label>
                         </li>
                         <li class="ss-choice-item">
                           <label>
                             <input type="radio" name="entry.71167035" value="by_country" id="group_71167035_3" class="ss-q-radio" aria-label="By Country" <?php if (isset($format) && $format == "by_country") { echo 'checked="checked"'; } ?>>
-                            <span class="ss-choice-label">By Country</span>
+                            <span class="ss-choice-label">Multi-Country expansion</span>
                           </label>
                         </li>
                       </ul>
