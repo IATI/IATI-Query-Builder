@@ -1,8 +1,8 @@
-A simple form to build a query string for the IATi Datastore API
+A simple form to build a query string for the IATI Datastore API.
 
 Place all the files on your server and visit index.php to deploy.
 
-
+```
 /*
  * This file is part of IATI Query Builder.
  * 
@@ -20,3 +20,4 @@ Place all the files on your server and visit index.php to deploy.
  * along with IATI Query Builder.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
+```
