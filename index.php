@@ -94,7 +94,7 @@ if (isset($_POST) && $_POST != NULL) {
   }
   if (isset($dataset) && isset($format) && isset($size)) {
    //&& isset($org) && isset($type) && isset($sector) && (isset($country) || isset($region)) ) {
-    $api_link = "http://iati-datastore.herokuapp.com/";
+    $api_link = "http://datastore.iatistandard.org/";
     $api_link .= "api/1/access/";
     $api_link .= $dataset;
     if (isset($format) && $format == "by_sector" || $format == "by_country") {
@@ -195,7 +195,7 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
       <div class="ss-top-of-page">
         <div class="ss-form-heading">
           <h1 class="ss-form-title" dir="ltr">IATI Data Store CSV Query Builder (Alpha Version)</h1>
-          <p class="guide">Please read the <a href="https://docs.google.com/document/d/1x9S_MX643jfxVY3IA2-wRdiBhLKyDIucrd7DO05BSSA/edit#">User Guide</a></p>
+          <p class="guide">Please read the <a href=http://iatistandard.org/datastore/user-guide/"">User Guide</a></p>
           <hr class="ss-email-break" style="display:none;">
           <?php
             if (isset($api_link)) {
@@ -392,7 +392,7 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
                     <p>IATI Query Builder is Free Software licenced under the GNU General Public License<br/>
                     <a href="https://github.com/caprenter/IATI-Query-Builder">IATI Query Builder on GitHub</a> <br/>
                     Please report problems to our <a href="https://github.com/caprenter/IATI-Query-Builder/issues">issues list</a>.</br>
-                    Datastore documentation: <a href="http://iati-datastore.herokuapp.com/">http://iati-datastore.herokuapp.com/</a>
+                    Datastore documentation: <a href="http://datastore.iatistandard.org/">http://datastore.iatistandard.org</a>
                     </p>
                     </div>
                   <div class="disclaimer">
