@@ -3,14 +3,22 @@ About
 
 A simple form that will build a query string that can then be used to fetch data from the IATI Datastore API.
 
+
+Requirements
+============
+A webserver running php and php-curl
+
 Installation
 ============
 
 Place all the files on your server and visit index.php to deploy.
 
-Requirements
-============
-A webserver running php and php-curl
+Helpers
+-------
+The /helpers directory has a script `refresh_group_data.example.php` that you should modify for your needs.
+Running this script will generate a .json file of groups in use on the IATI registry, and this in turn will populate the group drop down of the form.
+
+You could set this up as a cron job on your server.
 
 Licence
 =======
