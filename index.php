@@ -195,7 +195,7 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
       <div class="ss-top-of-page">
         <div class="ss-form-heading">
           <h1 class="ss-form-title" dir="ltr">IATI Data Store CSV Query Builder (Alpha Version)</h1>
-          <p class="guide">Please read the <a href=http://iatistandard.org/datastore/user-guide/"">User Guide</a></p>
+          <p class="guide">Please read the <a href="http://datastore.iatistandard.org/docs/user-guide/">User Guide</a></p>
           <hr class="ss-email-break" style="display:none;">
           <?php
             if (isset($api_link)) {
