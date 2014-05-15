@@ -346,31 +346,34 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
                     </div>
                   </div>
                 </div>
-                <div class="errorbox-good">
-                  <div dir="ltr" class="ss-item  ss-text">
-                    <div class="ss-form-entry">
-                      <label class="ss-q-item-label" for="entry_605980212">
-                        <div class="ss-q-title">Select Country (eg DRC = CD)</div>
-                      </label>
-                      <select multiple name="entry.605980212[]" size="6"value="" class="ss-q-short" id="entry_605980212[]">
-                        <?php include("include/country.php"); ?>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="errorbox-good">
-                  <div dir="ltr" class="ss-item  ss-text">
-                    <div class="ss-form-entry">
-                      <label class="ss-q-item-label" for="entry_1179181326">
-                        <div class="ss-q-title">Select Region (eg South Asia = 679)</div>
-                      </label>
-
-                      <select multiple name="entry.1179181326[]" size="6" value="" class="ss-q-short" id="entry_1179181326[]" >
-                        <?php include("include/region.php"); ?>
-                      </select>
+                <fieldset>
+                  <legend>Select EITHER a country OR a region</legend>
+                  <div class="errorbox-good">
+                    <div dir="ltr" class="ss-item  ss-text">
+                      <div class="ss-form-entry">
+                        <label class="ss-q-item-label" for="entry_605980212">
+                          <div class="ss-q-title">Select Country (eg DRC = CD)</div>
+                        </label>
+                        <select multiple name="entry.605980212[]" size="6"value="" class="ss-q-short" id="entry_605980212[]">
+                          <?php include("include/country.php"); ?>
+                        </select>
                       </div>
                     </div>
                   </div>
+                  <div class="errorbox-good">
+                    <div dir="ltr" class="ss-item  ss-text">
+                      <div class="ss-form-entry">
+                        <label class="ss-q-item-label" for="entry_1179181326">
+                          <div class="ss-q-title">Select Region (eg South Asia = 679)</div>
+                        </label>
+
+                        <select multiple name="entry.1179181326[]" size="6" value="" class="ss-q-short" id="entry_1179181326[]" >
+                          <?php include("include/region.php"); ?>
+                        </select>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
                   <!--<input type="hidden" name="draftResponse" value="[]">
                   <input type="hidden" name="pageHistory" value="0">-->
 
