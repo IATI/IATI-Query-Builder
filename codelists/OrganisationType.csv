@@ -1,11 +1,11 @@
-code,name
-10,Government
-15,Other Public Sector
-21,International NGO
-22,National NGO
-23,Regional NGO
-30,Public Private Partnership
-40,Multilateral
-60,Foundation
-70,Private Sector
-80,"Academic, Training and Research"
+code,name,description,language,category,category-name,category-description
+10,Government,,en,,,
+15,Other Public Sector,,en,,,
+21,International NGO,,en,,,
+22,National NGO,,en,,,
+23,Regional NGO,,en,,,
+30,Public Private Partnership,,en,,,
+40,Multilateral,,en,,,
+60,Foundation,,en,,,
+70,Private Sector,,en,,,
+80,"Academic, Training and Research",,en,,,
