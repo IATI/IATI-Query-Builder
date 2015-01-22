@@ -1,5 +1,10 @@
+IATI-Query-Builder
+==================
+
+[![License: MIT](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://github.com/IATI/IATI-Query-Builder#licence)
+
 About
-=====
+-----
 
 A simple form that will build a query string that can then be used to fetch data from the IATI Datastore API.
 
