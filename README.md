@@ -6,7 +6,7 @@ IATI-Query-Builder
 About
 -----
 
-A simple form that will build a query string that can then be used to fetch data from the IATI Datastore API.  
+A simple form that will build a query string that can then be used to fetch data from the IATI Datastore API.
 
 See it in action here - http://datastore.iatistandard.org/query/index.php
 
@@ -18,7 +18,19 @@ A webserver running php and php-curl
 Installation
 ============
 
-Place all the files on your server and visit index.php to deploy.
+Place all the files on your server and visit `index.php`.
+
+```
+# Clone the repository and enter into the root folder
+git clone https://github.com/IATI/IATI-Query-Builder.git
+cd IATI-Query-Builder
+
+# Run a webserver
+php -S localhost:8000
+
+# Open a browser and visit localhost:8000
+```
+
 
 Helpers
 -------
