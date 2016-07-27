@@ -1,5 +1,0 @@
-http://iatistandard.org/codelists/downloads/clv1/codelist/Country.csv
-http://iatistandard.org/codelists/downloads/clv1/codelist/Region.csv
-http://iatistandard.org/codelists/downloads/clv1/codelist/Sector.csv
-http://iatistandard.org/codelists/downloads/clv1/codelist/SectorCategory.csv
-http://iatistandard.org/codelists/downloads/clv1/codelist/OrganisationType.csv
