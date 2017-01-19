@@ -16,8 +16,8 @@ foreach ($groups as $key=>$value) {
     }
   }
 }
-//asort($reporting_orgs);
-ksort($reporting_orgs);
+
+ksort($reporting_orgs, SORT_NATURAL | SORT_FLAG_CASE);
 
 //Create our html string
 echo  '<option value="">- None -</option>' . PHP_EOL;
