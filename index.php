@@ -1,4 +1,11 @@
 <?php
+require_once 'vendor/autoload.php';
+
+$loader = new Twig_Loader_Filesystem('templates');
+$twig = new Twig_Environment($loader, array(
+    'debug' => true,
+));
+
 //print_r($_POST);
 if (isset($_POST["reset"])) {
     unset($_POST);
@@ -181,230 +188,152 @@ function build_sanitised_multi_select_values ($path_to_csv,$sanitized_post_var) 
     return $values;
   }
 }
+
+function reporting_orgs() {
+  //Grab data from the cache file of Registry API data
+  $cachefile = "helpers/groups_cache_dc.json";
+  $groups = file_get_contents($cachefile);
+  $groups = json_decode($groups,true);
+
+  //Set up an arry of Organisations and their IDs
+  $reporting_orgs = array();
+  $excluded_ids = array("To be confirmed.");
+  foreach ($groups as $key=>$value) {
+    if (!empty($value["packages"])) { //only select publishers with files!
+      if (!empty($value["extras"]["publisher_iati_id"])) { //only select publishers with and id
+        if (!in_array($value["extras"]["publisher_iati_id"],$excluded_ids)) { //don't select publishers with excluded ids
+          $reporting_orgs[$value["display_name"]] = $value["extras"]["publisher_iati_id"];
+        }
+      }
+    }
+  }
+
+  ksort($reporting_orgs, SORT_NATURAL | SORT_FLAG_CASE);
+
+  return $reporting_orgs;
+}
+
+function get_countries() {
+  $countries = array();
+  $country_file = "codelists/Country.csv";
+  if (($handle = fopen($country_file, "r")) !== FALSE) {
+      fgetcsv($handle, 1000, ","); //skip first line
+      while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+          $data[0] = htmlspecialchars($data[0]);
+          $data[1] = mb_convert_case($data[1], MB_CASE_TITLE, 'UTF-8'); // Convert case based on unicode character properties
+          $data[1] = htmlspecialchars($data[1]);
+          $countries[] = $data;
+      }
+      fclose($handle);
+  }
+  return $countries;
+}
+
+function get_regions() {
+  $regions = array();
+  $region_file = "codelists/Region.csv";
+  if (($handle = fopen($region_file, "r")) !== FALSE) {
+      fgetcsv($handle, 1000, ","); //skip first line
+      while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+        $regions[] = $data;
+      }
+      fclose($handle);
+  }
+  return $regions;
+}
+
+function get_org_types() {
+  $org_types = array();
+  $org_type_file = "codelists/OrganisationType.csv";
+  if (($handle = fopen($org_type_file, "r")) !== FALSE) {
+      fgetcsv($handle, 1000, ","); //skip first line
+      while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+        $org_types[] = $data;
+      }
+      fclose($handle);
+  }
+  return $org_types;
+}
+
+function get_sector_categories() {
+  $selected = "";
+  $category = "";
+  $categories = array();
+
+  //1.04 codelist changes so we need to get both DAC-3 categories
+  //and DAC-% categories from seperate lists.
+
+  //Make an array of categories and their names
+  $dac_3_categories_data = "codelists/SectorCategory.csv";
+  if (($handle = fopen($dac_3_categories_data, "r")) !== FALSE) {
+      fgetcsv($handle, 1000, ","); //skip first line
+      while (($data = fgetcsv($handle, 2000, ",")) !== FALSE) {
+        $dac_3_categories[$data[0]] = $data[1];
+      }
+  }
+  //print_r($dac_3_categories); die;
+
+  $current_data = array();
+  $current_category = "";
+
+  $reporting_org_type_file = "codelists/Sector.csv";
+  if (($handle = fopen($reporting_org_type_file, "r")) !== FALSE) {
+    fgetcsv($handle, 1000, ","); //skip first line
+    while (($data = fgetcsv($handle, 2000, ",")) !== FALSE) {
+      //Put options into categories
+      $next_category = htmlspecialchars($data[4]);
+      if ($category == "") { //First run through - categories not set, so set it as the first value found
+        $category = $next_category;
+        $category_name = $dac_3_categories[$category];
+        $category_name = ucfirst(strtolower(htmlspecialchars($category_name)));
+      }
+      if ($next_category != $category) {
+        $categories[] = array(
+          'category' => $category,
+          'category_name' => $category_name,
+          'data' => $current_data
+        );
+        $category = $next_category;
+        //echo $category; print_r($data);die;
+        //Find the associated name of the category
+        $category_name = $dac_3_categories[$category];
+        $category_name = ucfirst(strtolower(htmlspecialchars($category_name)));
+        $current_data = array();
+      }
+      $current_data[] = $data;
+    }
+    $categories[] = array(
+      'category' => $category,
+      'category_name' => $category_name,
+      'data' => $current_data
+    );
+    fclose($handle);
+  }
+
+  return $categories;
+}
+
+$context = array();
+
+$context['api_link'] = isset($api_link) ? $api_link : null;
+$context['notice_message'] = isset($notice_message) ? $notice_message : null;
+$context['error_message'] = isset($error_message) ? $error_message : null;
+
+$context['dataset'] = isset($dataset) ? $dataset : null;
+$context['format'] = isset($format) ? $format : null;
+$context['size'] = isset($size) ? $size : null;
+
+$context['selected_orgs'] = isset($orgs) ? $orgs : null;
+$context['selected_sectors'] = isset($sector) ? $sector : null;
+$context['selected_countries'] = isset($country) ? $country : null;
+$context['selected_org_types'] = isset($type) ? $type : null;
+$context['selected_regions'] = isset($region) ? $region : null;
+
+$context['reporting_orgs'] = reporting_orgs();
+$context['countries'] = get_countries();
+$context['regions'] = get_regions();
+$context['org_types'] = get_org_types();
+$context['sector_categories'] = get_sector_categories();
+
+echo $twig->render('index.html', $context);
 ?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8'> 
-    <title>IATI Data Store CSV Query Builder (Alpha Version)</title>
-    <link href='style.css' type='text/css' rel='stylesheet'>
-  </head>
-<body dir="ltr" class="ss-base-body">
-  <div itemscope itemtype="http://schema.org/CreativeWork/FormObject">
-    <div class="ss-form-container">
-      <div class="ss-top-of-page">
-        <div class="ss-form-heading">
-          <h1 class="ss-form-title" dir="ltr">IATI Data Store CSV Query Builder (Alpha Version)</h1>
-          <p class="guide">Please read the <a href="http://datastore.iatistandard.org/docs/user-guide/">User Guide</a></p>
-          <hr class="ss-email-break" style="display:none;">
-          <?php
-            if (isset($api_link)) {
-          ?>
-          <div class="url">
-            <p>Your link:<br/>
-              <a href="<?php echo $api_link; ?>"><?php echo htmlspecialchars($api_link); ?></a>
-            </p>
-            <?php if (isset($notice_message)) { echo $notice_message; } ?>
-          </div>
-          <?php
-           } elseif (isset($error_message)) {
-          ?>
-          <div class="errorbox-bad">
-            <?php echo $error_message; ?>
-          </div>
-           <?php
-           } 
-          ?>
-          <div class="ss-required-asterisk">*Required</div>
-        </div>
-      </div>
-      <div class="ss-form">
-        <form action="index.php" method="POST" id="ss-form" target="_self" onsubmit="">
-          <div class="errorbox-good">
-            <div dir="ltr" class="ss-item ss-item-required ss-radio">
-              <div class="ss-form-entry-top">
-                <label class="ss-q-item-label" for="entry_1689841214">
-                  <div class="ss-q-title">Choose Format
-                    <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
-                      <span class="ss-required-asterisk">*</span></div>
-                    </label>
-                    <ul class="ss-choices">
-                      <li class="ss-choice-item">
-                        <label>
-                          <input type="radio" name="entry.1085079344" value="activity" id="group_1085079344_1" class="ss-q-radio" aria-label="Activity" <?php if (isset($dataset) && $dataset == "activity") { echo 'checked="checked"'; } ?>>
-                            <span class="ss-choice-label">One Activity per row</span>
-                          </label>
-                        </li>
-                        <li class="ss-choice-item">
-                          <label>
-                            <input type="radio" name="entry.1085079344" value="transaction" id="group_1085079344_2" class="ss-q-radio" aria-label="Transaction" <?php if (isset($dataset) && $dataset == "transaction") { echo 'checked="checked"'; } ?>>
-                            <span class="ss-choice-label">One Transaction per row</span>
-                          </label>
-                        </li>
-                        <li class="ss-choice-item">
-                          <label>
-                            <input type="radio" name="entry.1085079344" value="budgets" id="group_1085079344_3" class="ss-q-radio" aria-label="Budgets" <?php if (isset($dataset) && $dataset == "budgets") { echo 'checked="checked"'; } ?>>
-                            <span class="ss-choice-label">One Budget per row</span>
-                          </label>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div> 
-                <div class="errorbox-good">
-                  <div dir="ltr" class="ss-item ss-item-required ss-radio">
-                    <div class="ss-form-entry-top">
-                      <label class="ss-q-item-label" for="entry_1948547450">
-                        <div class="ss-q-title">Repeat Rows?
-                          <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
-                          <span class="ss-required-asterisk">*</span>
-                        </div>
-                      </label>
-                      <ul class="ss-choices">
-                        <li class="ss-choice-item">
-                          <label>
-                            <input type="radio" name="entry.71167035" value="summary" id="group_71167035_1" class="ss-q-radio" aria-label="Summary" <?php if (isset($format) && $format == "summary") { echo 'checked="checked"'; } ?>>
-                            <span class="ss-choice-label">No</span>
-                          </label>
-                        </li>
-                        <li class="ss-choice-item">
-                          <label>
-                            <input type="radio" name="entry.71167035" value="by_sector" id="group_71167035_2" class="ss-q-radio" aria-label="By Sector" <?php if (isset($format) && $format == "by_sector") { echo 'checked="checked"'; } ?>>
-                            <span class="ss-choice-label">Multi-Sector expansion</span>
-                          </label>
-                        </li>
-                        <li class="ss-choice-item">
-                          <label>
-                            <input type="radio" name="entry.71167035" value="by_country" id="group_71167035_3" class="ss-q-radio" aria-label="By Country" <?php if (isset($format) && $format == "by_country") { echo 'checked="checked"'; } ?>>
-                            <span class="ss-choice-label">Multi-Country expansion</span>
-                          </label>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="errorbox-good">
-                <div dir="ltr" class="ss-item ss-item-required ss-radio">
-                    <div class="ss-form-entry-top">
-                      <label class="ss-q-item-label" for="entry_1414120858">
-                        <div class="ss-q-title">Choose Sample Size
-                          <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
-                          <span class="ss-required-asterisk">*</span>
-                        </div>
-                      </label>
-                      <ul class="ss-choices">
-                        <li class="ss-choice-item">
-                          <label>
-                            <input type="radio" name="entry.1352830161" value="50 rows" id="group_1352830161_1" class="ss-q-radio" aria-label="50 rows" <?php if (isset($size) && $size == "50 rows") { echo 'checked="checked"'; } ?>>
-                            <span class="ss-choice-label">50 rows</span>
-                          </label>
-                        </li>
-                        <li class="ss-choice-item">
-                          <label>
-                            <input type="radio" name="entry.1352830161" value="Entire selection" id="group_1352830161_2" class="ss-q-radio" aria-label="Entire selection" <?php if (isset($size) && $size == "stream=True") { echo 'checked="checked"'; } ?>>
-                            <span class="ss-choice-label">Entire selection</span>
-                          </label>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="errorbox-good">
-                  <div dir="ltr" class="ss-item  ss-text">
-                    <div class="ss-form-entry">
-                      <label class="ss-q-item-label" for="entry_1922375458">
-                        <div class="ss-q-title">Select Reporting Organisation (eg UK DFID = GB-1)</div>
-                        <div class="ss-q-help ss-secondary-text" dir="ltr"></div>
-                      </label>
-                      <select multiple name="entry.1922375458[]" size="6" value="" class="ss-q-short" id="entry_1922375458[]">
-                        <?php include("include/reporting_org.php"); ?>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="errorbox-good">
-                  <div dir="ltr" class="ss-item  ss-text">
-                    <div class="ss-form-entry">
-                      <label class="ss-q-item-label" for="entry_18398991">
-                        <div class="ss-q-title">Select Type of Reporting Organisation (eg. INGO = 21)</div>
-                      </label>
-                      <select multiple name="entry.18398991[]" size="6" value="" class="ss-q-short" id="entry_18398991[]">
-                        <?php include("include/reporting_org_type.php"); ?>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="errorbox-good">
-                <div dir="ltr" class="ss-item  ss-text">
-                  <div class="ss-form-entry">
-                    <label class="ss-q-item-label" for="entry_1954968791">
-                      <div class="ss-q-title">Select Sector (eg Basic Health Care = 12220)</div>
-                    </label>
-                      <select multiple name="entry.1954968791[]" size="10" value="" class="ss-q-short" id="entry_1954968791[]">
-                        <?php include("include/sector.php"); ?>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <fieldset>
-                  <legend>Select EITHER a country OR a region</legend>
-                  <div class="errorbox-good">
-                    <div dir="ltr" class="ss-item  ss-text">
-                      <div class="ss-form-entry">
-                        <label class="ss-q-item-label" for="entry_605980212">
-                          <div class="ss-q-title">Select Country (eg DRC = CD)</div>
-                        </label>
-                        <select multiple name="entry.605980212[]" size="6"value="" class="ss-q-short" id="entry_605980212[]">
-                          <?php include("include/country.php"); ?>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="errorbox-good">
-                    <div dir="ltr" class="ss-item  ss-text">
-                      <div class="ss-form-entry">
-                        <label class="ss-q-item-label" for="entry_1179181326">
-                          <div class="ss-q-title">Select Region (eg South Asia = 679)</div>
-                        </label>
-
-                        <select multiple name="entry.1179181326[]" size="6" value="" class="ss-q-short" id="entry_1179181326[]" >
-                          <?php include("include/region.php"); ?>
-                        </select>
-                        </div>
-                      </div>
-                    </div>
-                  </fieldset>
-                  <!--<input type="hidden" name="draftResponse" value="[]">
-                  <input type="hidden" name="pageHistory" value="0">-->
-
-
-                  <div class="ss-item ss-navigate">
-                    <div class="ss-form-entry">
-                      <input type="submit" name="submit" value="Submit" id="ss-submit">
-                    </div>
-                    <div class="ss-form-entry">
-                      <input type="submit" name="reset" value="Reset" id="reset">
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div class="ss-footer">
-                <div class="ss-attribution"></div>
-                <div class="ss-legal">
-                  <div class="disclaimer-separator">
-                    <p>IATI Query Builder is Free Software licenced under the GNU General Public License<br/>
-                    <a href="https://github.com/IATI/IATI-Query-Builder">IATI Query Builder on GitHub</a> <br/>
-                    Please report problems to our <a href="https://github.com/IATI/IATI-Query-Builder/issues">issues list</a>.</br>
-                    Datastore documentation: <a href="http://datastore.iatistandard.org/">http://datastore.iatistandard.org</a>
-                    </p>
-                    </div>
-                  <div class="disclaimer">
-                    <div class="powered-by-logo"></div>
-                    <div class="ss-terms"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </body>
-      </html>

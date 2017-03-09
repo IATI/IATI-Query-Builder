@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>IATI Data Store CSV Query Builder (Alpha Version)</title>
+    <link href='style.css' type='text/css' rel='stylesheet'>
+  </head>
+<body dir="ltr" class="ss-base-body">
+  <div itemscope itemtype="http://schema.org/CreativeWork/FormObject">
+    <div class="ss-form-container">
+      <div class="ss-top-of-page">
+        <div class="ss-form-heading">
+          <h1 class="ss-form-title" dir="ltr">IATI Data Store CSV Query Builder (Alpha Version)</h1>
+          <p class="guide">Please read the <a href="http://datastore.iatistandard.org/docs/user-guide/">User Guide</a></p>
+          <hr class="ss-email-break" style="display:none;">
+
+          {% if (api_link) %}
+          <div class="url">
+            <p>Your link:<br/>
+              <a href="{{ api_link }}">{{ api_link|escape }}</a>
+            </p>
+            {% if (notice_message) %}
+              {{ notice_message }}
+            {% endif %}
+          </div>
+          {% elseif (error_message) %}
+          <div class="errorbox-bad">
+            {{ error_message }}
+          </div>
+          {% endif %}
+          <div class="ss-required-asterisk">*Required</div>
+        </div>
+      </div>
+      <div class="ss-form">
+        <form action="index.php" method="POST" id="ss-form" target="_self" onsubmit="">
+          <div class="errorbox-good">
+            <div dir="ltr" class="ss-item ss-item-required ss-radio">
+              <div class="ss-form-entry-top">
+                <label class="ss-q-item-label" for="entry_1689841214">
+                  <div class="ss-q-title">Choose Format
+                    <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
+                      <span class="ss-required-asterisk">*</span></div>
+                    </label>
+                    <ul class="ss-choices">
+                      <li class="ss-choice-item">
+                        <label>
+                          <input type="radio" name="entry.1085079344" value="activity" id="group_1085079344_1" class="ss-q-radio" aria-label="Activity"
+                          {% if (dataset and dataset == "activity") %}
+                            checked="checked"
+                          {% endif %}>
+                            <span class="ss-choice-label">One Activity per row</span>
+                          </label>
+                        </li>
+                        <li class="ss-choice-item">
+                          <label>
+                            <input type="radio" name="entry.1085079344" value="transaction" id="group_1085079344_2" class="ss-q-radio" aria-label="Transaction"
+                            {% if (dataset and dataset == "transaction") %}
+                              checked="checked"
+                            {% endif %}
+                            >
+                            <span class="ss-choice-label">One Transaction per row</span>
+                          </label>
+                        </li>
+                        <li class="ss-choice-item">
+                          <label>
+                            <input type="radio" name="entry.1085079344" value="budgets" id="group_1085079344_3" class="ss-q-radio" aria-label="Budgets"
+                            {% if (dataset and dataset == "budgets") %}
+                              checked="checked"
+                            {% endif %}
+                            >
+                            <span class="ss-choice-label">One Budget per row</span>
+                          </label>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="errorbox-good">
+                  <div dir="ltr" class="ss-item ss-item-required ss-radio">
+                    <div class="ss-form-entry-top">
+                      <label class="ss-q-item-label" for="entry_1948547450">
+                        <div class="ss-q-title">Repeat Rows?
+                          <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
+                          <span class="ss-required-asterisk">*</span>
+                        </div>
+                      </label>
+                      <ul class="ss-choices">
+                        <li class="ss-choice-item">
+                          <label>
+                            <input type="radio" name="entry.71167035" value="summary" id="group_71167035_1" class="ss-q-radio" aria-label="Summary"
+                            {% if (format and format == "summary") %}
+                              checked="checked"
+                            {% endif %}
+                            >
+                            <span class="ss-choice-label">No</span>
+                          </label>
+                        </li>
+                        <li class="ss-choice-item">
+                          <label>
+                            <input type="radio" name="entry.71167035" value="by_sector" id="group_71167035_2" class="ss-q-radio" aria-label="By Sector"
+                            {% if (format and format == "by_sector") %}
+                              checked="checked"
+                            {% endif %}
+                            >
+                            <span class="ss-choice-label">Multi-Sector expansion</span>
+                          </label>
+                        </li>
+                        <li class="ss-choice-item">
+                          <label>
+                            <input type="radio" name="entry.71167035" value="by_country" id="group_71167035_3" class="ss-q-radio" aria-label="By Country"
+                            {% if (format and format == "by_country") %}
+                              checked="checked"
+                            {% endif %}
+                            >
+                            <span class="ss-choice-label">Multi-Country expansion</span>
+                          </label>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="errorbox-good">
+                <div dir="ltr" class="ss-item ss-item-required ss-radio">
+                    <div class="ss-form-entry-top">
+                      <label class="ss-q-item-label" for="entry_1414120858">
+                        <div class="ss-q-title">Choose Sample Size
+                          <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
+                          <span class="ss-required-asterisk">*</span>
+                        </div>
+                      </label>
+                      <ul class="ss-choices">
+                        <li class="ss-choice-item">
+                          <label>
+                            <input type="radio" name="entry.1352830161" value="50 rows" id="group_1352830161_1" class="ss-q-radio" aria-label="50 rows"
+                            {% if (size and size == "50 rows") %}
+                              checked="checked"
+                            {% endif %}
+                            >
+                            <span class="ss-choice-label">50 rows</span>
+                          </label>
+                        </li>
+                        <li class="ss-choice-item">
+                          <label>
+                            <input type="radio" name="entry.1352830161" value="Entire selection" id="group_1352830161_2" class="ss-q-radio" aria-label="Entire selection"
+                            {% if (size and size == "stream=True") %}
+                              checked="checked"
+                            {% endif %}
+                            >
+                            <span class="ss-choice-label">Entire selection</span>
+                          </label>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="errorbox-good">
+                  <div dir="ltr" class="ss-item  ss-text">
+                    <div class="ss-form-entry">
+                      <label class="ss-q-item-label" for="entry_1922375458">
+                        <div class="ss-q-title">Select Reporting Organisation (eg UK DFID = GB-1)</div>
+                        <div class="ss-q-help ss-secondary-text" dir="ltr"></div>
+                      </label>
+                      <select multiple name="entry.1922375458[]" size="6" value="" class="ss-q-short" id="entry_1922375458[]">
+                        {{ include('include/reporting_org.html') }}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="errorbox-good">
+                  <div dir="ltr" class="ss-item  ss-text">
+                    <div class="ss-form-entry">
+                      <label class="ss-q-item-label" for="entry_18398991">
+                        <div class="ss-q-title">Select Type of Reporting Organisation (eg. INGO = 21)</div>
+                      </label>
+                      <select multiple name="entry.18398991[]" size="6" value="" class="ss-q-short" id="entry_18398991[]">
+                        {{ include('include/reporting_org_type.html') }}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="errorbox-good">
+                <div dir="ltr" class="ss-item  ss-text">
+                  <div class="ss-form-entry">
+                    <label class="ss-q-item-label" for="entry_1954968791">
+                      <div class="ss-q-title">Select Sector (eg Basic Health Care = 12220)</div>
+                    </label>
+                      <select multiple name="entry.1954968791[]" size="10" value="" class="ss-q-short" id="entry_1954968791[]">
+                        {{ include('include/sector.html') }}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <fieldset>
+                  <legend>Select EITHER a country OR a region</legend>
+                  <div class="errorbox-good">
+                    <div dir="ltr" class="ss-item  ss-text">
+                      <div class="ss-form-entry">
+                        <label class="ss-q-item-label" for="entry_605980212">
+                          <div class="ss-q-title">Select Country (eg DRC = CD)</div>
+                        </label>
+                        <select multiple name="entry.605980212[]" size="6"value="" class="ss-q-short" id="entry_605980212[]">
+                          {{ include('include/country.html') }}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="errorbox-good">
+                    <div dir="ltr" class="ss-item  ss-text">
+                      <div class="ss-form-entry">
+                        <label class="ss-q-item-label" for="entry_1179181326">
+                          <div class="ss-q-title">Select Region (eg South Asia = 679)</div>
+                        </label>
+
+                        <select multiple name="entry.1179181326[]" size="6" value="" class="ss-q-short" id="entry_1179181326[]" >
+                          {{ include('include/region.html') }}
+                        </select>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <!--<input type="hidden" name="draftResponse" value="[]">
+                  <input type="hidden" name="pageHistory" value="0">-->
+
+
+                  <div class="ss-item ss-navigate">
+                    <div class="ss-form-entry">
+                      <input type="submit" name="submit" value="Submit" id="ss-submit">
+                    </div>
+                    <div class="ss-form-entry">
+                      <input type="submit" name="reset" value="Reset" id="reset">
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="ss-footer">
+                <div class="ss-attribution"></div>
+                <div class="ss-legal">
+                  <div class="disclaimer-separator">
+                    <p>IATI Query Builder is Free Software licenced under the GNU General Public License<br/>
+                    <a href="https://github.com/IATI/IATI-Query-Builder">IATI Query Builder on GitHub</a> <br/>
+                    Please report problems to our <a href="https://github.com/IATI/IATI-Query-Builder/issues">issues list</a>.</br>
+                    Datastore documentation: <a href="http://datastore.iatistandard.org/">http://datastore.iatistandard.org</a>
+                    </p>
+                    </div>
+                  <div class="disclaimer">
+                    <div class="powered-by-logo"></div>
+                    <div class="ss-terms"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </body>
+      </html>
