@@ -14,16 +14,16 @@
             <p class="guide">Please read the <a href="http://datastore.iatistandard.org/docs/user-guide/">User Guide</a></p>
             <hr class="ss-email-break" style="display:none;">
 
-            {% if (api_link) %}
+            {% if api_link %}
             <div class="url">
               <p>Your link:<br />
                 <a href="{{ api_link }}">{{ api_link|escape }}</a>
               </p>
-              {% if (notice_message) %}
+              {% if notice_message %}
                 {{ notice_message }}
               {% endif %}
             </div>
-            {% elseif (error_message) %}
+            {% elseif error_message %}
             <div class="errorbox-bad">
               {{ error_message }}
             </div>
@@ -46,7 +46,7 @@
                     <li class="ss-choice-item">
                       <label>
                         <input type="radio" name="entry.1085079344" value="activity" id="group_1085079344_1" class="ss-q-radio" aria-label="Activity"
-                        {% if (dataset and dataset == "activity") %}
+                        {% if dataset and dataset == "activity" %}
                           checked="checked"
                         {% endif %}
                         />
@@ -56,7 +56,7 @@
                     <li class="ss-choice-item">
                       <label>
                         <input type="radio" name="entry.1085079344" value="transaction" id="group_1085079344_2" class="ss-q-radio" aria-label="Transaction"
-                        {% if (dataset and dataset == "transaction") %}
+                        {% if dataset and dataset == "transaction" %}
                           checked="checked"
                         {% endif %}
                         />
@@ -66,7 +66,7 @@
                     <li class="ss-choice-item">
                       <label>
                         <input type="radio" name="entry.1085079344" value="budgets" id="group_1085079344_3" class="ss-q-radio" aria-label="Budgets"
-                        {% if (dataset and dataset == "budgets") %}
+                        {% if dataset and dataset == "budgets" %}
                           checked="checked"
                         {% endif %}
                         />
@@ -90,7 +90,7 @@
                     <li class="ss-choice-item">
                       <label>
                         <input type="radio" name="entry.71167035" value="summary" id="group_71167035_1" class="ss-q-radio" aria-label="Summary"
-                        {% if (format and format == "summary") %}
+                        {% if format and format == "summary" %}
                           checked="checked"
                         {% endif %}
                         />
@@ -100,7 +100,7 @@
                     <li class="ss-choice-item">
                       <label>
                         <input type="radio" name="entry.71167035" value="by_sector" id="group_71167035_2" class="ss-q-radio" aria-label="By Sector"
-                        {% if (format and format == "by_sector") %}
+                        {% if format and format == "by_sector" %}
                           checked="checked"
                         {% endif %}
                         />
@@ -110,7 +110,7 @@
                     <li class="ss-choice-item">
                       <label>
                         <input type="radio" name="entry.71167035" value="by_country" id="group_71167035_3" class="ss-q-radio" aria-label="By Country"
-                        {% if (format and format == "by_country") %}
+                        {% if format and format == "by_country" %}
                           checked="checked"
                         {% endif %}
                         />
@@ -134,7 +134,7 @@
                     <li class="ss-choice-item">
                       <label>
                         <input type="radio" name="entry.1352830161" value="50 rows" id="group_1352830161_1" class="ss-q-radio" aria-label="50 rows"
-                        {% if (size and size == "50 rows") %}
+                        {% if size and size == "50 rows" %}
                           checked="checked"
                         {% endif %}
                         />
@@ -144,7 +144,7 @@
                     <li class="ss-choice-item">
                       <label>
                         <input type="radio" name="entry.1352830161" value="Entire selection" id="group_1352830161_2" class="ss-q-radio" aria-label="Entire selection"
-                        {% if (size and size == "stream=True") %}
+                        {% if size and size == "stream=True" %}
                           checked="checked"
                         {% endif %}
                         />
