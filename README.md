@@ -19,12 +19,18 @@ A webserver running php and php-curl.
 Installation
 ============
 
-Place all the files on your server and visit `index.php`.
-
 ```
 # Clone the repository and enter into the root folder
 git clone https://github.com/IATI/IATI-Query-Builder.git
 cd IATI-Query-Builder
+
+# If running for the first time, prepare the helper script that enables you to get data for current IATI publishers
+# This involves copying the file to a filename of your choice and uncommenting the code
+cp helpers/refresh_group_data.example.php helpers/YOUR_FILENAME.php
+nano helpers/YOUR_FILENAME.php
+
+# Run the script to get data for current IATI publishers using the CKAN API
+php helpers/YOUR_FILENAME.php
 
 # You may wish to ensure that the included codelists are up-to-date (optional)
 ./update-codelists.sh
@@ -36,14 +42,19 @@ php -S localhost:8000
 ```
 
 
-Helpers
--------
-The /helpers directory has a script `refresh_group_data.example.php` that you should modify for your needs.
-Running this script will generate a .json file of groups in use on the IATI registry, and this in turn will populate the group drop down of the form.
+Helper scripts
+--------------
 
+### Getting the latest IATI publishers
+The `/helpers` directory has a script `refresh_group_data.example.php` that will enable you to get data relating to current IATI publishers.
+
+Running this script will generate a `.json` file of 'groups' (i.e. publishers) in use on the IATI registry, and this in turn will populate the 'Reporting Organisation' multi-select element in the form.
+
+### Getting the latest IATI publishers
 The script `update-codelists.sh` will re-download latest versions of the required codelists.
 
-You could set these up as a cron job on your server.
+### Automating updates
+To automate regular updates, you could set-up both of these scripts as a cron job on your server.
 
 
 Licence
