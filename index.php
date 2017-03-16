@@ -13,7 +13,7 @@ if (isset($_POST["reset"])) {
   }
 if (isset($_POST) && $_POST != NULL) {
   
-  $allowed_datasets = array("activity","transaction","budgets");
+  $allowed_datasets = array("activity","transaction","budget");
   if (isset($_POST["entry_1085079344"])) { //dataset
     $requested_dataset = filter_var($_POST["entry_1085079344"], FILTER_SANITIZE_STRING);
     if (in_array($requested_dataset, $allowed_datasets)) {
