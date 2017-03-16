@@ -11,7 +11,7 @@ See it in action here - http://datastore.iatistandard.org/query/index.php
 
 ## Requirements
 
-A webserver running php and php-curl.
+A webserver running php and php-curl.  PHP dependencies are managed using [Composer](http://culttt.com/2013/01/07/what-is-php-composer/).
 
 
 ## Installation
@@ -20,6 +20,9 @@ A webserver running php and php-curl.
 # Clone the repository and enter into the root folder
 git clone https://github.com/IATI/IATI-Query-Builder.git
 cd IATI-Query-Builder
+
+# Install dependencies
+composer install
 
 # If running for the first time, prepare the helper script that enables you to get data for current IATI publishers
 # This involves copying the file to a filename of your choice and uncommenting the code
