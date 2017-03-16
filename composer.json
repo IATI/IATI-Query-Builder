@@ -1,0 +1,7 @@
+{
+    "name": "iati/iati-query-builder",
+    "type": "project",
+    "require": {
+        "twig/twig": "*"
+    }
+}
