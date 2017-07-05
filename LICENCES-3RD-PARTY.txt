@@ -14,4 +14,4 @@ PHP Markdown
 
 Ckan_client.php includes a copy of Michel Fortin's PHP Markdown (copyright (c) 2004-2009 Michel Fortin http://michelf.com/. All rights reserved.) which is based on on Markdown (copyright (c) 2003-2006 John Gruber http://daringfireball.net/. All rights reserved.).
 
-Read Me: ./lib/php_markdown/PHP Markdown Readme.text License: ./lib/php_markdown/License.text
+Read Me: `helpers/CKAN_Code/lib/php_markdown/PHP%20Markdown%20Readme.text` Markdown Readme.text License: `helpers/CKAN_Code/lib/php_markdown/License.text`
