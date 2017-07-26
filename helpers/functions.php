@@ -59,7 +59,7 @@ function reporting_orgs() {
     }
   }
 
-  ksort($reporting_orgs, SORT_NATURAL | SORT_FLAG_CASE);
+  uksort($reporting_orgs, "strcasecmp");
 
   return $reporting_orgs;
 }
