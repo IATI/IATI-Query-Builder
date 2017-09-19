@@ -37,114 +37,114 @@
           {% endif %}
         </div>
 
-        <form action="index.php" method="post" id="ss-form" target="_self" onsubmit="">
+        <form action="index.php" method="post" target="_self" onsubmit="">
 
           <div class="form-row">
             <div class="col">
-              <label class="ss-q-item-label" for="entry_1689841214">
-                <div class="ss-q-title">Choose Format
+              <label for="entry_1689841214">
+                <div>Choose Format
                   <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                 </div>
               </label>
-              <ul class="ss-choices">
-                <li class="ss-choice-item">
+              <ul>
+                <li>
                   <label>
-                    <input type="radio" name="entry.1085079344" value="activity" id="group_1085079344_1" class="ss-q-radio" aria-label="Activity"
+                    <input type="radio" name="entry.1085079344" value="activity" id="group_1085079344_1" aria-label="Activity"
                     {% if not dataset or (dataset and dataset == "activity") %}
                       checked="checked"
                     {% endif %}
                     />
-                    <span class="ss-choice-label">One Activity per row</span>
+                    <span>One Activity per row</span>
                   </label>
                 </li>
-                <li class="ss-choice-item">
+                <li>
                   <label>
-                    <input type="radio" name="entry.1085079344" value="transaction" id="group_1085079344_2" class="ss-q-radio" aria-label="Transaction"
+                    <input type="radio" name="entry.1085079344" value="transaction" id="group_1085079344_2" aria-label="Transaction"
                     {% if dataset and dataset == "transaction" %}
                       checked="checked"
                     {% endif %}
                     />
-                    <span class="ss-choice-label">One Transaction per row</span>
+                    <span>One Transaction per row</span>
                   </label>
                 </li>
-                <li class="ss-choice-item">
+                <li>
                   <label>
-                    <input type="radio" name="entry.1085079344" value="budget" id="group_1085079344_3" class="ss-q-radio" aria-label="Budget"
+                    <input type="radio" name="entry.1085079344" value="budget" id="group_1085079344_3" aria-label="Budget"
                     {% if dataset and dataset == "budget" %}
                       checked="checked"
                     {% endif %}
                     />
-                    <span class="ss-choice-label">One Budget per row</span>
+                    <span>One Budget per row</span>
                   </label>
                 </li>
               </ul>
             </div>
 
             <div class="col">
-              <label class="ss-q-item-label" for="entry_1948547450">
-                <div class="ss-q-title">Repeat Rows?
+              <label for="entry_1948547450">
+                <div>Repeat Rows?
                   <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                 </div>
               </label>
-              <ul class="ss-choices">
-                <li class="ss-choice-item">
+              <ul>
+                <li>
                   <label>
-                    <input type="radio" name="entry.71167035" value="summary" id="group_71167035_1" class="ss-q-radio" aria-label="Summary"
+                    <input type="radio" name="entry.71167035" value="summary" id="group_71167035_1" aria-label="Summary"
                     {% if not format or (format and format == "summary") %}
                       checked="checked"
                     {% endif %}
                     />
-                    <span class="ss-choice-label">No</span>
+                    <span>No</span>
                   </label>
                 </li>
-                <li class="ss-choice-item">
+                <li>
                   <label>
-                    <input type="radio" name="entry.71167035" value="by_sector" id="group_71167035_2" class="ss-q-radio" aria-label="By Sector"
+                    <input type="radio" name="entry.71167035" value="by_sector" id="group_71167035_2" aria-label="By Sector"
                     {% if format and format == "by_sector" %}
                       checked="checked"
                     {% endif %}
                     />
-                    <span class="ss-choice-label">Multi-Sector expansion</span>
+                    <span>Multi-Sector expansion</span>
                   </label>
                 </li>
-                <li class="ss-choice-item">
+                <li>
                   <label>
-                    <input type="radio" name="entry.71167035" value="by_country" id="group_71167035_3" class="ss-q-radio" aria-label="By Country"
+                    <input type="radio" name="entry.71167035" value="by_country" id="group_71167035_3" aria-label="By Country"
                     {% if format and format == "by_country" %}
                       checked="checked"
                     {% endif %}
                     />
-                    <span class="ss-choice-label">Multi-Country expansion</span>
+                    <span>Multi-Country expansion</span>
                   </label>
                 </li>
               </ul>
             </div>
 
             <div class="col">
-              <label class="ss-q-item-label" for="entry_1414120858">
-                <div class="ss-q-title">Choose Sample Size
+              <label for="entry_1414120858">
+                <div>Choose Sample Size
                   <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                 </div>
               </label>
-              <ul class="ss-choices">
-                <li class="ss-choice-item">
+              <ul>
+                <li>
                   <label>
-                    <input type="radio" name="entry.1352830161" value="50 rows" id="group_1352830161_1" class="ss-q-radio" aria-label="50 rows"
+                    <input type="radio" name="entry.1352830161" value="50 rows" id="group_1352830161_1" aria-label="50 rows"
                     {% if not size or (size and size == "50 rows") %}
                       checked="checked"
                     {% endif %}
                     />
-                    <span class="ss-choice-label">50 rows</span>
+                    <span>50 rows</span>
                   </label>
                 </li>
-                <li class="ss-choice-item">
+                <li>
                   <label>
-                    <input type="radio" name="entry.1352830161" value="Entire selection" id="group_1352830161_2" class="ss-q-radio" aria-label="Entire selection"
+                    <input type="radio" name="entry.1352830161" value="Entire selection" id="group_1352830161_2" aria-label="Entire selection"
                     {% if size and size == "stream=True" %}
                       checked="checked"
                     {% endif %}
                     />
-                    <span class="ss-choice-label">Entire selection</span>
+                    <span>Entire selection</span>
                   </label>
                 </li>
               </ul>
@@ -152,29 +152,29 @@
           </div>
 
           <div class="row form-control">
-            <label class="ss-q-item-label" for="entry_1922375458">
-              <div class="ss-q-title">Select Reporting Organisation (eg UK DFID = GB-GOV-1)</div>
+            <label for="entry_1922375458">
+              <div>Select Reporting Organisation (eg UK DFID = GB-GOV-1)</div>
               <div class="ss-q-help ss-secondary-text" dir="ltr"></div>
             </label>
-            <select multiple="multiple" name="entry.1922375458[]" size="6" value="" class="ss-q-short" id="entry_1922375458[]">
+            <select multiple="multiple" name="entry.1922375458[]" size="6" value="" id="entry_1922375458[]">
               {{ include('include/reporting_org.html') }}
             </select>
           </div>
 
           <div class="row form-control">
-            <label class="ss-q-item-label" for="entry_18398991">
-              <div class="ss-q-title">Select Type of Reporting Organisation (eg. INGO = 21)</div>
+            <label for="entry_18398991">
+              <div>Select Type of Reporting Organisation (eg. INGO = 21)</div>
             </label>
-            <select multiple="multiple" name="entry.18398991[]" size="6" value="" class="ss-q-short" id="entry_18398991[]">
+            <select multiple="multiple" name="entry.18398991[]" size="6" value="" id="entry_18398991[]">
               {{ include('include/reporting_org_type.html') }}
             </select>
           </div>
 
           <div class="row form-control">
-            <label class="ss-q-item-label" for="entry_1954968791">
-              <div class="ss-q-title">Select Sector (eg Basic Health Care = 12220)</div>
+            <label for="entry_1954968791">
+              <div>Select Sector (eg Basic Health Care = 12220)</div>
             </label>
-            <select multiple="multiple" name="entry.1954968791[]" size="10" value="" class="ss-q-short" id="entry_1954968791[]">
+            <select multiple="multiple" name="entry.1954968791[]" size="10" value="" id="entry_1954968791[]">
               {{ include('include/sector.html') }}
             </select>
           </div>
@@ -184,11 +184,11 @@
               <legend>Select EITHER a country OR a region</legend>
               <div class="errorbox-good">
                 <div dir="ltr" class="ss-item  ss-text">
-                  <div class="ss-form-entry">
-                    <label class="ss-q-item-label" for="entry_605980212">
-                      <div class="ss-q-title">Select Country (eg DRC = CD)</div>
+                  <div>
+                    <label for="entry_605980212">
+                      <div>Select Country (eg DRC = CD)</div>
                     </label>
-                    <select multiple="multiple" name="entry.605980212[]" size="6"value="" class="ss-q-short" id="entry_605980212[]">
+                    <select multiple="multiple" name="entry.605980212[]" size="6"value="" id="entry_605980212[]">
                       {{ include('include/country.html') }}
                     </select>
                   </div>
@@ -196,12 +196,12 @@
               </div>
               <div class="errorbox-good">
                 <div dir="ltr" class="ss-item  ss-text">
-                  <div class="ss-form-entry">
-                    <label class="ss-q-item-label" for="entry_1179181326">
-                      <div class="ss-q-title">Select Region (eg South Asia = 679)</div>
+                  <div>
+                    <label for="entry_1179181326">
+                      <div>Select Region (eg South Asia = 679)</div>
                     </label>
 
-                    <select multiple="multiple" name="entry.1179181326[]" size="6" value="" class="ss-q-short" id="entry_1179181326[]" >
+                    <select multiple="multiple" name="entry.1179181326[]" size="6" value="" id="entry_1179181326[]" >
                       {{ include('include/region.html') }}
                     </select>
                   </div>
