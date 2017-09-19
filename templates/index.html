@@ -19,20 +19,18 @@
         <div class="row"><!-- result -->
           {% if api_link %}
             <div class="alert alert-success" role="alert">
-              <p>Your link:<br />
-                <a href="{{ api_link }}">{{ api_link|escape }}</a>
-              </p>
+              <p><strong>Your link:</strong> <a href="{{ api_link }}">{{ api_link|escape }}</a></p>
             </div>
 
             {% if notice_message %}
               <div class="alert alert-warning" role="alert">
-                {{ notice_message }}
+                <p><strong>Warning:</strong> {{ notice_message }}</p>
               </div>
             {% endif %}
 
           {% elseif error_message %}
             <div class="alert alert-danger" role="alert">
-              {{ error_message }}
+              <p><strong>Error:</strong> {{ error_message }}</p>
             </div>
           {% endif %}
         </div>
