@@ -1,11 +1,14 @@
+body { background-color: #e8eef7; }
+.container { background-color: #fff; margin-top: 20px; margin-bottom: 20px; border: 1px solid #ccc; padding: 20px; }
+.header { margin-bottom: 40px; }
+.footer { margin-top: 40px; }
+
+.alert { margin-left: 10px; margin-right: 10px; width: 100%; }
+
+ul { list-style-type: none; margin: 0; padding: 0; }
+
 .form-control { margin: 10px 0px 0px 0px; }
+
 label { font-weight: bold; }
 li label { font-weight: normal; }
 select { display: block; }
-ul { list-style-type: none; margin: 0; padding: 0; }
-.alert { margin-left: 10px; margin-right: 10px; width: 100%; }
-.header { margin-bottom: 40px; }
-.footer { margin-top: 40px; }
-body { background-color: #e8eef7; }
-.container { background-color: #fff; margin-top: 20px; margin-bottom: 20px; border: 1px solid #ccc;
-    padding: 20px; }
