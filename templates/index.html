@@ -5,6 +5,7 @@
     <title>IATI Data Store CSV Query Builder (Alpha Version)</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="custom.css" type="text/css" rel="stylesheet">
+    <link href="chosen.css" type="text/css" rel="stylesheet">
   </head>
   <body dir="ltr">
     <div class="container">
@@ -154,7 +155,8 @@
               <div>Select Reporting Organisation (eg UK DFID = GB-GOV-1)</div>
               <div dir="ltr"></div>
             </label>
-            <select multiple="multiple" name="entry.1922375458[]" size="6" value="" id="entry_1922375458[]">
+            <div class="clearfix"></div>
+            <select data-placeholder="Choose a Reporting organisation..." multiple class="chosen-select" id="entry_1922375458[]" name="entry.1922375458[]">
               {{ include('include/reporting_org.html') }}
             </select>
           </div>
@@ -163,7 +165,8 @@
             <label for="entry_18398991">
               <div>Select Type of Reporting Organisation (eg. INGO = 21)</div>
             </label>
-            <select multiple="multiple" name="entry.18398991[]" size="6" value="" id="entry_18398991[]">
+            <div class="clearfix"></div>
+            <select data-placeholder="Choose a reporting organisation type..." multiple class="chosen-select" id="entry_18398991[]" name="entry.18398991[]">
               {{ include('include/reporting_org_type.html') }}
             </select>
           </div>
@@ -172,7 +175,8 @@
             <label for="entry_1954968791">
               <div>Select Sector (eg Basic Health Care = 12220)</div>
             </label>
-            <select multiple="multiple" name="entry.1954968791[]" size="10" value="" id="entry_1954968791[]">
+            <div class="clearfix"></div>
+            <select data-placeholder="Choose a Sector..." multiple class="chosen-select" id="entry_1954968791[]" name="entry.1954968791[]">
               {{ include('include/sector.html') }}
             </select>
           </div>
@@ -184,9 +188,10 @@
                 <div dir="ltr">
                   <div>
                     <label for="entry_605980212">
-                      <div>Select Country (eg DRC = CD)</div>
+                      <div>Select Country</div>
                     </label>
-                    <select multiple="multiple" name="entry.605980212[]" size="6"value="" id="entry_605980212[]">
+                    <div class="clearfix"></div>
+                    <select data-placeholder="Choose a Country..." multiple class="chosen-select" id="entry_605980212[]" name="entry.605980212[]">
                       {{ include('include/country.html') }}
                     </select>
                   </div>
@@ -198,8 +203,8 @@
                     <label for="entry_1179181326">
                       <div>Select Region (eg South Asia = 679)</div>
                     </label>
-
-                    <select multiple="multiple" name="entry.1179181326[]" size="6" value="" id="entry_1179181326[]" >
+                    <div class="clearfix"></div>
+                    <select data-placeholder="Choose a Region..." multiple class="chosen-select" id="entry_1179181326[]" name="entry.1179181326[]">
                       {{ include('include/region.html') }}
                     </select>
                   </div>
@@ -238,5 +243,9 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script src="js/chosen.jquery.js" type="text/javascript"></script>
+    <script>
+      $(".chosen-select").chosen()
+    </script>
   </body>
 </html>
