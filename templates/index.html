@@ -41,7 +41,7 @@
           <div class="form-row">
             <div class="col">
               <label for="entry_1689841214">
-                <div>Choose Format
+                <div>Choose format
                   <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                 </div>
               </label>
@@ -53,7 +53,7 @@
                       checked="checked"
                     {% endif %}
                     />
-                    <span>One Activity per row</span>
+                    <span>One activity per row</span>
                   </label>
                 </li>
                 <li>
@@ -63,7 +63,7 @@
                       checked="checked"
                     {% endif %}
                     />
-                    <span>One Transaction per row</span>
+                    <span>One transaction per row</span>
                   </label>
                 </li>
                 <li>
@@ -73,7 +73,7 @@
                       checked="checked"
                     {% endif %}
                     />
-                    <span>One Budget per row</span>
+                    <span>One budget per row</span>
                   </label>
                 </li>
               </ul>
@@ -81,7 +81,7 @@
 
             <div class="col">
               <label for="entry_1948547450">
-                <div>Repeat Rows?
+                <div>Repeat rows?
                   <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                 </div>
               </label>
@@ -103,7 +103,7 @@
                       checked="checked"
                     {% endif %}
                     />
-                    <span>Multi-Sector expansion</span>
+                    <span>Multi-sector expansion</span>
                   </label>
                 </li>
                 <li>
@@ -113,7 +113,7 @@
                       checked="checked"
                     {% endif %}
                     />
-                    <span>Multi-Country expansion</span>
+                    <span>Multi-country expansion</span>
                   </label>
                 </li>
               </ul>
@@ -121,7 +121,7 @@
 
             <div class="col">
               <label for="entry_1414120858">
-                <div>Choose Sample Size
+                <div>Choose sample size
                   <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                 </div>
               </label>
@@ -152,18 +152,18 @@
 
           <div class="row form-group">
             <label for="entry_1922375458">
-              <div>Select Reporting Organisation (eg UK DFID = GB-GOV-1)</div>
+              <div>Select reporting organisation (eg UK DFID = GB-GOV-1)</div>
               <div dir="ltr"></div>
             </label>
             <div class="clearfix"></div>
-            <select data-placeholder="Choose a Reporting organisation..." multiple class="chosen-select form-control" id="entry_1922375458[]" name="entry.1922375458[]">
+            <select data-placeholder="Choose a reporting organisation..." multiple class="chosen-select form-control" id="entry_1922375458[]" name="entry.1922375458[]">
               {{ include('include/reporting_org.html') }}
             </select>
           </div>
 
           <div class="row form-group">
             <label for="entry_18398991">
-              <div>Select Type of Reporting Organisation (eg. INGO = 21)</div>
+              <div>Select type of reporting organisation (eg. INGO = 21)</div>
             </label>
             <div class="clearfix"></div>
             <select data-placeholder="Choose a reporting organisation type..." multiple class="chosen-select form-control" id="entry_18398991[]" name="entry.18398991[]">
@@ -173,10 +173,10 @@
 
           <div class="row form-group">
             <label for="entry_1954968791">
-              <div>Select Sector (eg Basic Health Care = 12220)</div>
+              <div>Select sector (eg Basic Health Care = 12220)</div>
             </label>
             <div class="clearfix"></div>
-            <select data-placeholder="Choose a Sector..." multiple class="chosen-select form-control" id="entry_1954968791[]" name="entry.1954968791[]">
+            <select data-placeholder="Choose a sector..." multiple class="chosen-select form-control" id="entry_1954968791[]" name="entry.1954968791[]">
               {{ include('include/sector.html') }}
             </select>
           </div>
@@ -188,10 +188,10 @@
                 <div dir="ltr">
                   <div>
                     <label for="entry_605980212">
-                      <div>Select Country</div>
+                      <div>Select recipient country</div>
                     </label>
                     <div class="clearfix"></div>
-                    <select data-placeholder="Choose a Country..." multiple class="chosen-select form-control" id="entry_605980212[]" name="entry.605980212[]">
+                    <select data-placeholder="Choose a country..." multiple class="chosen-select form-control" id="entry_605980212[]" name="entry.605980212[]">
                       {{ include('include/country.html') }}
                     </select>
                   </div>
@@ -201,10 +201,10 @@
                 <div dir="ltr">
                   <div>
                     <label for="entry_1179181326">
-                      <div>Select Region (eg South Asia = 679)</div>
+                      <div>Select region (eg South Asia = 679)</div>
                     </label>
                     <div class="clearfix"></div>
-                    <select data-placeholder="Choose a Region..." multiple class="chosen-select form-control" id="entry_1179181326[]" name="entry.1179181326[]">
+                    <select data-placeholder="Choose a region..." multiple class="chosen-select form-control" id="entry_1179181326[]" name="entry.1179181326[]">
                       {{ include('include/region.html') }}
                     </select>
                   </div>
