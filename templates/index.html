@@ -40,7 +40,7 @@
 
           <div class="form-row">
             <div class="col">
-              <label for="dataset">
+              <label for="format">
                 <div>Choose format
                   <span aria-label="(Required field)"></span>
                 </div>
@@ -48,8 +48,8 @@
               <ul id="qb-format-list">
                 <li>
                   <label>
-                    <input type="radio" name="dataset" value="activity" id="dataset-1" aria-label="Activity"
-                    {% if not dataset or (dataset and dataset == "activity") %}
+                    <input type="radio" name="format" value="activity" id="format-1" aria-label="Activity"
+                    {% if not format or (format and format == "activity") %}
                       checked="checked"
                     {% endif %}
                     />
@@ -58,8 +58,8 @@
                 </li>
                 <li>
                   <label>
-                    <input type="radio" name="dataset" value="transaction" id="dataset-2" aria-label="Transaction"
-                    {% if dataset and dataset == "transaction" %}
+                    <input type="radio" name="format" value="transaction" id="format-2" aria-label="Transaction"
+                    {% if format and format == "transaction" %}
                       checked="checked"
                     {% endif %}
                     />
@@ -68,8 +68,8 @@
                 </li>
                 <li>
                   <label>
-                    <input type="radio" name="dataset" value="budget" id="dataset-3" aria-label="Budget"
-                    {% if dataset and dataset == "budget" %}
+                    <input type="radio" name="format" value="budget" id="format-3" aria-label="Budget"
+                    {% if format and format == "budget" %}
                       checked="checked"
                     {% endif %}
                     />
@@ -80,7 +80,7 @@
             </div>
 
             <div class="col">
-              <label for="format">
+              <label for="grouping">
                 <div>Repeat rows?
                   <span aria-label="(Required field)"></span>
                 </div>
@@ -88,8 +88,8 @@
               <ul id="qb-grouping-list">
                 <li>
                   <label>
-                    <input type="radio" name="format" value="summary" id="format-1" aria-label="Summary"
-                    {% if not format or (format and format == "summary") %}
+                    <input type="radio" name="grouping" value="summary" id="grouping-1" aria-label="Summary"
+                    {% if not grouping or (grouping and grouping == "summary") %}
                       checked="checked"
                     {% endif %}
                     />
@@ -98,8 +98,8 @@
                 </li>
                 <li>
                   <label>
-                    <input type="radio" name="format" value="by_sector" id="format-2" aria-label="By Sector"
-                    {% if format and format == "by_sector" %}
+                    <input type="radio" name="grouping" value="by_sector" id="grouping-2" aria-label="By Sector"
+                    {% if grouping and grouping == "by_sector" %}
                       checked="checked"
                     {% endif %}
                     />
@@ -108,8 +108,8 @@
                 </li>
                 <li>
                   <label>
-                    <input type="radio" name="format" value="by_country" id="format-3" aria-label="By Country"
-                    {% if format and format == "by_country" %}
+                    <input type="radio" name="grouping" value="by_country" id="grouping-3" aria-label="By Country"
+                    {% if grouping and grouping == "by_country" %}
                       checked="checked"
                     {% endif %}
                     />

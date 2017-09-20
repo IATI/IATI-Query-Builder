@@ -13,19 +13,19 @@ if (isset($_POST["reset"])) {
   }
 if (isset($_POST) && $_POST != NULL) {
   
-  $allowed_datasets = array("activity","transaction","budget");
-  if (isset($_POST["dataset"])) {
-    $requested_dataset = filter_var($_POST["dataset"], FILTER_SANITIZE_STRING);
-    if (in_array($requested_dataset, $allowed_datasets)) {
-      $dataset = $requested_dataset;
-    }
-  }
-  
-  $allowed_formats = array("summary","by_sector","by_country");
+  $allowed_formats = array("activity","transaction","budget");
   if (isset($_POST["format"])) {
     $requested_format = filter_var($_POST["format"], FILTER_SANITIZE_STRING);
     if (in_array($requested_format, $allowed_formats)) {
       $format = $requested_format;
+    }
+  }
+
+  $allowed_groupings = array("summary","by_sector","by_country");
+  if (isset($_POST["grouping"])) {
+    $requested_grouping = filter_var($_POST["grouping"], FILTER_SANITIZE_STRING);
+    if (in_array($requested_grouping, $allowed_groupings)) {
+      $grouping = $requested_grouping;
     }
   }
   $allowed_sizes = array("50 rows","Entire selection");
@@ -100,13 +100,13 @@ if (isset($_POST) && $_POST != NULL) {
     unset($country);
     $notice_message = "** You cannot select both a country and a region **";
   }
-  if (isset($dataset) && isset($format) && isset($size)) {
+  if (isset($format) && isset($grouping) && isset($size)) {
    //&& isset($org) && isset($type) && isset($sector) && (isset($country) || isset($region)) ) {
     $api_link = "http://datastore.iatistandard.org/";
     $api_link .= "api/1/access/";
-    $api_link .= $dataset;
-    if (isset($format) && $format == "by_sector" || $format == "by_country") {
-      $api_link .= "/" . $format;
+    $api_link .= $format;
+    if (isset($grouping) && $grouping == "by_sector" || $grouping == "by_country") {
+      $api_link .= "/" . $grouping;
     }
     $api_link .= ".csv";
    //echo $api_link;
@@ -140,8 +140,8 @@ if (isset($_POST) && $_POST != NULL) {
 }
 /*DEBUG
 echo  "<br/>";
-echo $dataset . "<br/>";
 echo $format . "<br/>";
+echo $grouping . "<br/>";
 echo $requested_size . "<br/>";
 echo $org . "<br/>";
 echo $type . "<br/>";
@@ -156,8 +156,8 @@ $context['api_link'] = isset($api_link) ? $api_link : null;
 $context['notice_message'] = isset($notice_message) ? $notice_message : null;
 $context['error_message'] = isset($error_message) ? $error_message : null;
 
-$context['dataset'] = isset($dataset) ? $dataset : null;
 $context['format'] = isset($format) ? $format : null;
+$context['grouping'] = isset($grouping) ? $grouping : null;
 $context['size'] = isset($size) ? $size : null;
 
 $context['selected_orgs'] = isset($orgs) ? $orgs : null;
