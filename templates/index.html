@@ -380,6 +380,13 @@ QueryBuilder.Preview.createLink = function(){
   var unescapedLink = QueryBuilder.LinkGen.createLink('.xml');
   var previewBaseURL = 'http://preview.iatistandard.org/index.php?url=';
 
+  // ensure it's only a Preview and not the full set of data being viewed
+  var sampleSize = QueryBuilder.LinkGen.getSampleSize();
+  console.log(sampleSize, unescapedLink);
+  if(sampleSize.length > 0){
+    unescapedLink = unescapedLink.replace(sampleSize, '');
+  }
+
   return previewBaseURL + encodeURIComponent(unescapedLink);
 };
 
