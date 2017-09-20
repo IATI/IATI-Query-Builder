@@ -261,21 +261,19 @@ QueryBuilder.LinkGen = QueryBuilder.LinkGen || {};
   Obtain the format.
 */
 QueryBuilder.LinkGen.getFormat = function(){
-  return $('#qb-format-list input:checked').attr('aria-label').toLowerCase();
+  return $('#qb-format-list input:checked').val();
 };
 
 /*
   Obtain the grouping.
 */
 QueryBuilder.LinkGen.getGrouping = function(){
-  var grouping =$('#qb-grouping-list input:checked').attr('aria-label');
+  var grouping = $('#qb-grouping-list input:checked').val();
 
-  if(grouping === 'By Sector'){
-    return '/by_sector';
-  } else if(grouping === 'By Country'){
-    return '/by_country';
-  } else {
+  if(grouping === 'summary'){
     return '';
+  } else {
+    return '/' + grouping;
   }
 };
 
@@ -283,7 +281,7 @@ QueryBuilder.LinkGen.getGrouping = function(){
   Obtain the sample size
 */
 QueryBuilder.LinkGen.getSampleSize = function(){
-  var sampleSize = $('#qb-sample-size input:checked').attr('aria-label');
+  var sampleSize = $('#qb-sample-size input:checked').val();
 
   if(sampleSize === '50 rows'){
     return '';
