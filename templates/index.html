@@ -382,7 +382,7 @@ QueryBuilder.Preview.createLink = function(){
 
   // ensure it's only a Preview and not the full set of data being viewed
   var sampleSize = QueryBuilder.LinkGen.getSampleSize();
-  console.log(sampleSize, unescapedLink);
+
   if(sampleSize.length > 0){
     unescapedLink = unescapedLink.replace(sampleSize, '');
   }
