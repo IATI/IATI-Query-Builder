@@ -79,9 +79,9 @@
   .chosen-container .chosen-results-scroll-down {
     bottom: 0; }
     .chosen-container .chosen-results-scroll-down span {
-      background: url("chosen-sprite.png") no-repeat -4px -3px; }
+      background: url("../img/chosen-sprite.png") no-repeat -4px -3px; }
   .chosen-container .chosen-results-scroll-up span {
-    background: url("chosen-sprite.png") no-repeat -22px -3px; }
+    background: url("../img/chosen-sprite.png") no-repeat -22px -3px; }
 
 .chosen-container-single .chosen-single {
   background-color: #fff;
@@ -110,7 +110,7 @@
     text-overflow: ellipsis;
     white-space: nowrap; }
   .chosen-container-single .chosen-single abbr {
-    background: url("chosen-sprite.png") right top no-repeat;
+    background: url("../img/chosen-sprite.png") right top no-repeat;
     display: block;
     font-size: 1px;
     height: 10px;
@@ -130,7 +130,7 @@
     right: 0;
     width: 18px; }
     .chosen-container-single .chosen-single div b {
-      background: url("chosen-sprite.png") no-repeat 0 7px;
+      background: url("../img/chosen-sprite.png") no-repeat 0 7px;
       display: block;
       height: 100%;
       width: 100%; }
@@ -143,7 +143,7 @@
   white-space: nowrap;
   z-index: 1000; }
   .chosen-container-single .chosen-search input[type="text"] {
-    background: url("chosen-sprite.png") no-repeat 100% -20px, #fff;
+    background: url("../img/chosen-sprite.png") no-repeat 100% -20px, #fff;
     border: 1px solid #ccc;
     border-top-right-radius: 0.25rem;
     border-top-left-radius: 0.25rem;
@@ -215,7 +215,7 @@
     padding: 5px 20px 5px 5px;
     position: relative; }
     .chosen-container-multi .chosen-choices .search-choice .search-choice-close {
-      background: url("chosen-sprite.png") right top no-repeat;
+      background: url("../img/chosen-sprite.png") right top no-repeat;
       display: block;
       font-size: 1px;
       height: 10px;
@@ -302,7 +302,7 @@
   .chosen-rtl.chosen-container-active.chosen-with-drop .chosen-single div {
     border-right: none; }
   .chosen-rtl .chosen-search input[type="text"] {
-    background: url("chosen-sprite.png") no-repeat -28px -20px, #fff;
+    background: url("../img/chosen-sprite.png") no-repeat -28px -20px, #fff;
     direction: rtl;
     padding: 4px 5px 4px 20px; }
 
@@ -314,6 +314,6 @@
   .chosen-container-multi .chosen-choices .search-choice .search-choice-close,
   .chosen-container .chosen-results-scroll-down span,
   .chosen-container .chosen-results-scroll-up span {
-    background-image: url("chosen-sprite@2x.png") !important;
+    background-image: url("../img/chosen-sprite@2x.png") !important;
     background-size: 52px 37px !important;
     background-repeat: no-repeat !important; } }
