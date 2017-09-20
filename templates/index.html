@@ -44,7 +44,7 @@
                   <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                 </div>
               </label>
-              <ul>
+              <ul id="qb-format-list">
                 <li>
                   <label>
                     <input type="radio" name="entry.1085079344" value="activity" id="group_1085079344_1" aria-label="Activity"
@@ -84,7 +84,7 @@
                   <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                 </div>
               </label>
-              <ul>
+              <ul id="qb-grouping-list">
                 <li>
                   <label>
                     <input type="radio" name="entry.71167035" value="summary" id="group_71167035_1" aria-label="Summary"
@@ -243,15 +243,86 @@
 var QueryBuilder = QueryBuilder || {};
 QueryBuilder.LinkGen = QueryBuilder.LinkGen || {};
 
-var count = 0;
+/*
+  Obtain the format.
+*/
+QueryBuilder.LinkGen.getFormat = function(){
+  return document.querySelector('#qb-format-list input:checked').getAttribute('aria-label').toLowerCase();
+};
+
+/*
+  Obtain the grouping.
+*/
+QueryBuilder.LinkGen.getGrouping = function(){
+  var grouping = document.querySelector('#qb-grouping-list input:checked').getAttribute('aria-label');
+
+  if(grouping === 'By Sector'){
+    return '/by_sector';
+  } else if(grouping === 'By Country'){
+    return '/by_country';
+  } else {
+    return '';
+  }
+};
+
+/*
+  Obtain info for a multi-select.
+*/
+QueryBuilder.LinkGen.getMultiSelectInfo = function(id, name){
+  var separator = '%7C';
+  var multiSelect = document.getElementById(id);
+  var selectedOptions = multiSelect.querySelectorAll('option:checked');
+  var values = [];
+
+  // have to use forEach because querySelectorAll is a NodeList which doesn't have a `map()` function
+  selectedOptions.forEach(function(option){
+    var value = option.getAttribute('value');
+
+    // do not include the 'None' values
+    if(value !== ''){
+      values.push(value);
+    }
+  });
+
+  if(values.length === 0){
+    return '';
+  }
+
+  return name + '=' + values.join(separator);
+};
+
+QueryBuilder.LinkGen.createQueryString = function(sections){
+  var filteredSections = sections.filter(function(section){
+    return section !== '';
+  });
+
+  if(filteredSections.length === 0){
+    return '';
+  }
+
+  console.log(filteredSections);
+
+  return '?' + filteredSections.join('&');
+};
+
 /*
   Generate the link from the page.
 */
 QueryBuilder.LinkGen.createLink = function(){
-  count++;
-  return 'hello' + count;
-};
+  var baseURL = 'http://datastore.iatistandard.org/api/1/access/';
+  var format = QueryBuilder.LinkGen.getFormat();
+  var grouping = QueryBuilder.LinkGen.getGrouping();
+  var fileType = '.csv'
+  var reportingOrgs = QueryBuilder.LinkGen.getMultiSelectInfo('entry_1922375458[]', 'reporting-org');
+  var reportingOrgTypes = QueryBuilder.LinkGen.getMultiSelectInfo('entry_18398991[]', 'reporting-org.type');
+  var sectors = QueryBuilder.LinkGen.getMultiSelectInfo('entry_1954968791[]', 'sector');
+  var recipientCountries = QueryBuilder.LinkGen.getMultiSelectInfo('entry_605980212[]', 'recipient-country');
+  var recipientRegions = QueryBuilder.LinkGen.getMultiSelectInfo('entry_1179181326[]', 'recipient-region');
 
+  var queryString = QueryBuilder.LinkGen.createQueryString([reportingOrgs, reportingOrgTypes, sectors, recipientCountries, recipientRegions]);
+
+  return baseURL + format + grouping + fileType + queryString;
+};
 
 /*
   Update the link displayed on the page.
@@ -285,8 +356,8 @@ QueryBuilder.LinkGen.SetupEventListeners = function(){
   Initialise the client-side link generation.
 */
 QueryBuilder.LinkGen.Init = function(){
-  console.log('hi');
   QueryBuilder.LinkGen.SetupEventListeners();
+  QueryBuilder.LinkGen.updateLink();
 };
 
 /*
