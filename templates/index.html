@@ -301,7 +301,7 @@ QueryBuilder.LinkGen.getMultiSelectInfo = function(id, name){
 
   // have to use forEach because querySelectorAll is a NodeList which doesn't have a `map()` function
   selectedOptions.each(function(){
-    var value = $(this).attr('value');
+    var value = $(this).val();
 
     // do not include the 'None' values
     if(value !== ''){
