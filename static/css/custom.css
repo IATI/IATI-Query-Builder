@@ -5,6 +5,23 @@ body { background-color: #e8eef7; }
 
 .alert { margin-left: 10px; margin-right: 10px; width: 100%; }
 
+.step-section { margin-top:25px; margin-bottom:25px; padding: 20px; border: #e8eef7 4px solid; }
+.step-section .title h3 { float: left; margin-top: -3px; margin-left: 10px; }
+span.step {
+  background: #cccccc;
+  border-radius: 0.8em;
+  -moz-border-radius: 0.8em;
+  -webkit-border-radius: 0.8em;
+  color: #ffffff;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1.6em;
+  margin-right: 5px;
+  text-align: center;
+  width: 1.6em;
+  float: left;
+}
+
 ul { list-style-type: none; margin: 0; padding: 0; }
 
 .form-group { margin: 10px 0px 0px 0px; }
