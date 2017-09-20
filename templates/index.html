@@ -218,7 +218,7 @@
         </form>
 
         <div class="alert alert-success" id="js-query-link" role="alert">
-          <p><strong>Your link:</strong> <a id="query-link" href="http://datastore.iatistandard.org/api/1/access/activity.csv">http://datastore.iatistandard.org/api/1/access/activity.csv</a> (<a id="preview-link" href="http://preview.iatistandard.org/" target="_blank" rel="noopener noreferrer">Preview</a>)</p>
+          <p><strong>Your link:</strong> <a id="query-link" href="http://datastore.iatistandard.org/api/1/access/activity.csv">http://datastore.iatistandard.org/api/1/access/activity.csv</a> <span id="preview-link-wrapper">(<a id="preview-link" href="http://preview.iatistandard.org/" target="_blank" rel="noopener noreferrer">Preview</a>)</span></p>
         </div>
 
       </div><!-- end class="query-builder"-->
@@ -374,6 +374,23 @@ QueryBuilder.Preview.updateLink = function(){
   var previewButtonElement = $('#preview-link');
 
   previewButtonElement.attr('href', QueryBuilder.Preview.createLink());
+  QueryBuilder.Preview.updateVisibility();
+};
+
+/*
+  Changes the Preview link visibility based on whether the data can be viewed using the Preview Tool.
+*/
+QueryBuilder.Preview.updateVisibility = function(){
+  var format = QueryBuilder.LinkGen.getFormat();
+  var grouping = QueryBuilder.LinkGen.getGrouping();
+  var canPreview = (format === 'activity') && (grouping === '');
+  var previewWrapper = $('#preview-link-wrapper');
+
+  if(canPreview){
+    previewWrapper.show();
+  } else {
+    previewWrapper.hide();
+  }
 };
 
 /*
