@@ -7,7 +7,7 @@ body { background-color: #e8eef7; }
 
 ul { list-style-type: none; margin: 0; padding: 0; }
 
-.form-control { margin: 10px 0px 0px 0px; }
+.form-group { margin: 10px 0px 0px 0px; }
 
 label { font-weight: bold; }
 li label { font-weight: normal; }
