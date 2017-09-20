@@ -14,26 +14,26 @@ if (isset($_POST["reset"])) {
 if (isset($_POST) && $_POST != NULL) {
   
   $allowed_datasets = array("activity","transaction","budget");
-  if (isset($_POST["entry_1085079344"])) { //dataset
-    $requested_dataset = filter_var($_POST["entry_1085079344"], FILTER_SANITIZE_STRING);
+  if (isset($_POST["dataset"])) {
+    $requested_dataset = filter_var($_POST["dataset"], FILTER_SANITIZE_STRING);
     if (in_array($requested_dataset, $allowed_datasets)) {
       $dataset = $requested_dataset;
     }
   }
   
   $allowed_formats = array("summary","by_sector","by_country");
-  if (isset($_POST["entry_71167035"])) { //format
-    $requested_format = filter_var($_POST["entry_71167035"], FILTER_SANITIZE_STRING);
+  if (isset($_POST["format"])) {
+    $requested_format = filter_var($_POST["format"], FILTER_SANITIZE_STRING);
     if (in_array($requested_format, $allowed_formats)) {
       $format = $requested_format;
     }
   }
   $allowed_sizes = array("50 rows","Entire selection");
-  if (isset($_POST["entry_1352830161"])) { //sample size
-    $requested_size = filter_var($_POST["entry_1352830161"], FILTER_SANITIZE_STRING);
+  if (isset($_POST["sample-size"])) {
+    $requested_size = filter_var($_POST["sample-size"], FILTER_SANITIZE_STRING);
     if (in_array($requested_size, $allowed_sizes)) {
       $size = $requested_size;
-    if ($size == "Entire selection" ) {
+      if ($size == "Entire selection" ) {
         $size = "stream=True";
       }
     }
@@ -60,8 +60,8 @@ if (isset($_POST) && $_POST != NULL) {
     }
   }
   //print_r($allowed_orgs);
-  if (isset($_POST["entry_1922375458"])) { //organisations
-    $requested_orgs = filter_var_array($_POST["entry_1922375458"], FILTER_SANITIZE_STRING);
+  if (isset($_POST["reporting-org"])) {
+    $requested_orgs = filter_var_array($_POST["reporting-org"], FILTER_SANITIZE_STRING);
     foreach ($requested_orgs as $requested_org) {
       if (in_array($requested_org, $allowed_orgs) && !empty($requested_org) ) { //!!!!FIX ME!!!!
         $orgs[] = $requested_org;
@@ -70,28 +70,28 @@ if (isset($_POST) && $_POST != NULL) {
   }
 
   //$allowed_types = array();
-  if (isset($_POST["entry_18398991"])) { //types
-    $requested_type = filter_var_array($_POST["entry_18398991"], FILTER_SANITIZE_STRING);
+  if (isset($_POST["reporting-org.type"])) {
+    $requested_type = filter_var_array($_POST["reporting-org.type"], FILTER_SANITIZE_STRING);
     $type = build_sanitised_multi_select_values("codelists/OrganisationType.csv",$requested_type); //returns Null if 'none is selected
     //print_r($type);
   }
 
   //$allowed_sectors = array();
-  if (isset($_POST["entry_1954968791"])) { //sectors
-    $requested_sector = filter_var_array($_POST["entry_1954968791"], FILTER_SANITIZE_STRING);
+  if (isset($_POST["sector"])) {
+    $requested_sector = filter_var_array($_POST["sector"], FILTER_SANITIZE_STRING);
     $sector = build_sanitised_multi_select_values("codelists/Sector.csv",$requested_sector); //returns Null if 'none is selected
   }
 
 
-  if (isset($_POST["entry_605980212"])) { //countries
-    $requested_countries = filter_var_array($_POST["entry_605980212"], FILTER_SANITIZE_STRING);
+  if (isset($_POST["recipient-country"])) { //countries
+    $requested_countries = filter_var_array($_POST["recipient-country"], FILTER_SANITIZE_STRING);
     $country = build_sanitised_multi_select_values("codelists/Country.csv", $requested_countries); //returns Null if 'none is selected
   }
 
   
   //$allowed_regions = array();
-  if (isset($_POST["entry_1179181326"])) { //organisations
-    $requested_region = filter_var_array($_POST["entry_1179181326"], FILTER_SANITIZE_STRING);
+  if (isset($_POST["recipient-region"])) { //organisations
+    $requested_region = filter_var_array($_POST["recipient-region"], FILTER_SANITIZE_STRING);
     $region = build_sanitised_multi_select_values("codelists/Region.csv",$requested_region); //returns Null if 'none is selected
   }
   
