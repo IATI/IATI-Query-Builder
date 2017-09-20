@@ -295,6 +295,9 @@ QueryBuilder.LinkGen.getMultiSelectInfo = function(id, name){
   return name + '=' + values.join(separator);
 };
 
+/*
+  Convert an array of query string sections into a query string.
+*/
 QueryBuilder.LinkGen.createQueryString = function(sections){
   var filteredSections = sections.filter(function(section){
     return section !== '';
