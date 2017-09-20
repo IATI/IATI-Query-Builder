@@ -20,18 +20,18 @@
         <div class="row"><!-- result -->
           {% if api_link %}
             <div class="alert alert-success" role="alert">
-              <p><strong>Your link:</strong> <a href="{{ api_link }}">{{ api_link|escape }}</a></p>
+              <strong>Your link:</strong> <a href="{{ api_link }}">{{ api_link|escape }}</a>
             </div>
 
             {% if notice_message %}
               <div class="alert alert-warning" role="alert">
-                <p><strong>Warning:</strong> {{ notice_message }}</p>
+                <strong>Warning:</strong> {{ notice_message }}
               </div>
             {% endif %}
 
           {% elseif error_message %}
             <div class="alert alert-danger" role="alert">
-              <p><strong>Error:</strong> {{ error_message }}</p>
+              <strong>Error:</strong> {{ error_message }}
             </div>
           {% endif %}
         </div>
@@ -150,38 +150,38 @@
             </div>
           </div>
 
-          <div class="row form-control">
+          <div class="row form-group">
             <label for="entry_1922375458">
               <div>Select Reporting Organisation (eg UK DFID = GB-GOV-1)</div>
               <div dir="ltr"></div>
             </label>
             <div class="clearfix"></div>
-            <select data-placeholder="Choose a Reporting organisation..." multiple class="chosen-select" id="entry_1922375458[]" name="entry.1922375458[]">
+            <select data-placeholder="Choose a Reporting organisation..." multiple class="chosen-select form-control" id="entry_1922375458[]" name="entry.1922375458[]">
               {{ include('include/reporting_org.html') }}
             </select>
           </div>
 
-          <div class="row form-control">
+          <div class="row form-group">
             <label for="entry_18398991">
               <div>Select Type of Reporting Organisation (eg. INGO = 21)</div>
             </label>
             <div class="clearfix"></div>
-            <select data-placeholder="Choose a reporting organisation type..." multiple class="chosen-select" id="entry_18398991[]" name="entry.18398991[]">
+            <select data-placeholder="Choose a reporting organisation type..." multiple class="chosen-select form-control" id="entry_18398991[]" name="entry.18398991[]">
               {{ include('include/reporting_org_type.html') }}
             </select>
           </div>
 
-          <div class="row form-control">
+          <div class="row form-group">
             <label for="entry_1954968791">
               <div>Select Sector (eg Basic Health Care = 12220)</div>
             </label>
             <div class="clearfix"></div>
-            <select data-placeholder="Choose a Sector..." multiple class="chosen-select" id="entry_1954968791[]" name="entry.1954968791[]">
+            <select data-placeholder="Choose a Sector..." multiple class="chosen-select form-control" id="entry_1954968791[]" name="entry.1954968791[]">
               {{ include('include/sector.html') }}
             </select>
           </div>
 
-          <div class="row form-control">
+          <div class="row form-group">
             <fieldset>
               <legend>Select EITHER a country OR a region</legend>
               <div class="errorbox-good">
@@ -191,7 +191,7 @@
                       <div>Select Country</div>
                     </label>
                     <div class="clearfix"></div>
-                    <select data-placeholder="Choose a Country..." multiple class="chosen-select" id="entry_605980212[]" name="entry.605980212[]">
+                    <select data-placeholder="Choose a Country..." multiple class="chosen-select form-control" id="entry_605980212[]" name="entry.605980212[]">
                       {{ include('include/country.html') }}
                     </select>
                   </div>
@@ -204,7 +204,7 @@
                       <div>Select Region (eg South Asia = 679)</div>
                     </label>
                     <div class="clearfix"></div>
-                    <select data-placeholder="Choose a Region..." multiple class="chosen-select" id="entry_1179181326[]" name="entry.1179181326[]">
+                    <select data-placeholder="Choose a Region..." multiple class="chosen-select form-control" id="entry_1179181326[]" name="entry.1179181326[]">
                       {{ include('include/region.html') }}
                     </select>
                   </div>
