@@ -111,7 +111,7 @@ if (isset($_POST) && $_POST != NULL) {
     $api_link .= ".csv";
    //echo $api_link;
    //print_r($orgs);
-    if ( isset($orgs) || isset($type) || isset($sector) || isset($country) || isset($region) ) {
+    if ( isset($orgs) || isset($type) || isset($sector) || isset($country) || isset($region) || isset($size)) {
       $api_link .= "?";
       $api_link_parameters = array();
       if (isset($orgs)) {
