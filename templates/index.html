@@ -124,7 +124,7 @@
                   <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                 </div>
               </label>
-              <ul>
+              <ul id="qb-sample-size">
                 <li>
                   <label>
                     <input type="radio" name="entry.1352830161" value="50 rows" id="group_1352830161_1" aria-label="50 rows"
@@ -270,6 +270,19 @@ QueryBuilder.LinkGen.getGrouping = function(){
 };
 
 /*
+  Obtain the sample size
+*/
+QueryBuilder.LinkGen.getSampleSize = function(){
+  var sampleSize = document.querySelector('#qb-sample-size input:checked').getAttribute('aria-label');
+
+  if(sampleSize === '50 rows'){
+    return '';
+  } else {
+    return 'stream=True'
+  }
+};
+
+/*
   Obtain info for a multi-select.
 */
 QueryBuilder.LinkGen.getMultiSelectInfo = function(id, name){
@@ -325,8 +338,9 @@ QueryBuilder.LinkGen.createLink = function(){
   var sectors = QueryBuilder.LinkGen.getMultiSelectInfo('entry_1954968791[]', 'sector');
   var recipientCountries = QueryBuilder.LinkGen.getMultiSelectInfo('entry_605980212[]', 'recipient-country');
   var recipientRegions = QueryBuilder.LinkGen.getMultiSelectInfo('entry_1179181326[]', 'recipient-region');
+  var sampleSize = QueryBuilder.LinkGen.getSampleSize();
 
-  var queryString = QueryBuilder.LinkGen.createQueryString([reportingOrgs, reportingOrgTypes, sectors, recipientCountries, recipientRegions]);
+  var queryString = QueryBuilder.LinkGen.createQueryString([reportingOrgs, reportingOrgTypes, sectors, recipientCountries, recipientRegions, sampleSize]);
 
   return baseURL + format + grouping + fileType + queryString;
 };
