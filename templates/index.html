@@ -261,14 +261,14 @@ QueryBuilder.LinkGen = QueryBuilder.LinkGen || {};
   Obtain the format.
 */
 QueryBuilder.LinkGen.getFormat = function(){
-  return document.querySelector('#qb-format-list input:checked').getAttribute('aria-label').toLowerCase();
+  return $('#qb-format-list input:checked').attr('aria-label').toLowerCase();
 };
 
 /*
   Obtain the grouping.
 */
 QueryBuilder.LinkGen.getGrouping = function(){
-  var grouping = document.querySelector('#qb-grouping-list input:checked').getAttribute('aria-label');
+  var grouping =$('#qb-grouping-list input:checked').attr('aria-label');
 
   if(grouping === 'By Sector'){
     return '/by_sector';
@@ -283,7 +283,7 @@ QueryBuilder.LinkGen.getGrouping = function(){
   Obtain the sample size
 */
 QueryBuilder.LinkGen.getSampleSize = function(){
-  var sampleSize = document.querySelector('#qb-sample-size input:checked').getAttribute('aria-label');
+  var sampleSize = $('#qb-sample-size input:checked').attr('aria-label');
 
   if(sampleSize === '50 rows'){
     return '';
@@ -297,13 +297,13 @@ QueryBuilder.LinkGen.getSampleSize = function(){
 */
 QueryBuilder.LinkGen.getMultiSelectInfo = function(id, name){
   var separator = '%7C';
-  var multiSelect = document.getElementById(id);
-  var selectedOptions = multiSelect.querySelectorAll('option:checked');
+  var multiSelect = $('[name*="' + id + '"]');
+  var selectedOptions = $('[name*="' + id + '"] option:checked');
   var values = [];
 
   // have to use forEach because querySelectorAll is a NodeList which doesn't have a `map()` function
-  selectedOptions.forEach(function(option){
-    var value = option.getAttribute('value');
+  selectedOptions.each(function(){
+    var value = $(this).attr('value');
 
     // do not include the 'None' values
     if(value !== ''){
@@ -330,8 +330,6 @@ QueryBuilder.LinkGen.createQueryString = function(sections){
     return '';
   }
 
-  console.log(filteredSections);
-
   return '?' + filteredSections.join('&');
 };
 
@@ -343,13 +341,12 @@ QueryBuilder.LinkGen.createLink = function(){
   var format = QueryBuilder.LinkGen.getFormat();
   var grouping = QueryBuilder.LinkGen.getGrouping();
   var fileType = '.csv'
-  var reportingOrgs = QueryBuilder.LinkGen.getMultiSelectInfo('entry_1922375458[]', 'reporting-org');
-  var reportingOrgTypes = QueryBuilder.LinkGen.getMultiSelectInfo('entry_18398991[]', 'reporting-org.type');
-  var sectors = QueryBuilder.LinkGen.getMultiSelectInfo('entry_1954968791[]', 'sector');
-  var recipientCountries = QueryBuilder.LinkGen.getMultiSelectInfo('entry_605980212[]', 'recipient-country');
-  var recipientRegions = QueryBuilder.LinkGen.getMultiSelectInfo('entry_1179181326[]', 'recipient-region');
+  var reportingOrgs = QueryBuilder.LinkGen.getMultiSelectInfo('1922375458', 'reporting-org');
+  var reportingOrgTypes = QueryBuilder.LinkGen.getMultiSelectInfo('18398991', 'reporting-org.type');
+  var sectors = QueryBuilder.LinkGen.getMultiSelectInfo('1954968791', 'sector');
+  var recipientCountries = QueryBuilder.LinkGen.getMultiSelectInfo('605980212', 'recipient-country');
+  var recipientRegions = QueryBuilder.LinkGen.getMultiSelectInfo('1179181326', 'recipient-region');
   var sampleSize = QueryBuilder.LinkGen.getSampleSize();
-
   var queryString = QueryBuilder.LinkGen.createQueryString([reportingOrgs, reportingOrgTypes, sectors, recipientCountries, recipientRegions, sampleSize]);
 
   return baseURL + format + grouping + fileType + queryString;
@@ -359,28 +356,21 @@ QueryBuilder.LinkGen.createLink = function(){
   Update the link displayed on the page.
 */
 QueryBuilder.LinkGen.updateLink = function(){
-  var linkElement = document.querySelector('#js-query-link a');
+  var linkElement = $('#js-query-link a');
   var linkLocation = QueryBuilder.LinkGen.createLink();
 
   // update the link
-  linkElement.setAttribute('href', linkLocation);
-  linkElement.innerText = linkLocation;
+  linkElement.attr('href', linkLocation);
+  linkElement.text(linkLocation);
 };
 
 /*
   Set the event listeners.
 */
 QueryBuilder.LinkGen.SetupEventListeners = function(){
-  var multiSelectBoxes = document.querySelectorAll('select');
-  var radioButtons = document.querySelectorAll('input[type=radio')
+  var formElements = $('select, input[type=radio]');
 
-  multiSelectBoxes.forEach(function(element){
-    element.addEventListener('input', QueryBuilder.LinkGen.updateLink);
-  });
-
-  radioButtons.forEach(function(element){
-    element.addEventListener('click', QueryBuilder.LinkGen.updateLink);
-  });
+  formElements.change(QueryBuilder.LinkGen.updateLink);
 };
 
 /*
