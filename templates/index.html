@@ -218,7 +218,7 @@
         </form>
 
         <div class="alert alert-success" id="js-query-link" role="alert">
-          <p><strong>Your link:</strong> <a href="http://datastore.iatistandard.org/api/1/access/activity.csv">http://datastore.iatistandard.org/api/1/access/activity.csv</a></p>
+          <p><strong>Your link:</strong> <a id="query-link" href="http://datastore.iatistandard.org/api/1/access/activity.csv">http://datastore.iatistandard.org/api/1/access/activity.csv</a> (<a id="preview-link" href="http://preview.iatistandard.org/" target="_blank" rel="noopener noreferrer">Preview</a>)</p>
         </div>
 
       </div><!-- end class="query-builder"-->
@@ -246,6 +246,7 @@
 <script type="text/javascript">
 var QueryBuilder = QueryBuilder || {};
 QueryBuilder.LinkGen = QueryBuilder.LinkGen || {};
+QueryBuilder.Preview = QueryBuilder.Preview || {};
 
 /*
   Obtain the format.
@@ -310,11 +311,10 @@ QueryBuilder.LinkGen.createQueryString = function(sections){
 /*
   Generate the link from the page.
 */
-QueryBuilder.LinkGen.createLink = function(){
+QueryBuilder.LinkGen.createLink = function(fileType){
   var baseURL = 'http://datastore.iatistandard.org/api/1/access/';
   var format = QueryBuilder.LinkGen.getFormat();
   var grouping = QueryBuilder.LinkGen.getGrouping();
-  var fileType = '.csv'
   var reportingOrgs = QueryBuilder.LinkGen.getMultiSelectInfo('1922375458', 'reporting-org');
   var reportingOrgTypes = QueryBuilder.LinkGen.getMultiSelectInfo('18398991', 'reporting-org.type');
   var sectors = QueryBuilder.LinkGen.getMultiSelectInfo('1954968791', 'sector');
@@ -323,6 +323,8 @@ QueryBuilder.LinkGen.createLink = function(){
 
   var queryString = QueryBuilder.LinkGen.createQueryString([reportingOrgs, reportingOrgTypes, sectors, recipientCountries, recipientRegions]);
 
+  fileType = fileType || '.csv';
+
   return baseURL + format + grouping + fileType + queryString;
 };
 
@@ -330,7 +332,7 @@ QueryBuilder.LinkGen.createLink = function(){
   Update the link displayed on the page.
 */
 QueryBuilder.LinkGen.updateLink = function(){
-  var linkElement = $('#js-query-link a');
+  var linkElement = $('#query-link');
   var linkLocation = QueryBuilder.LinkGen.createLink();
 
   // update the link
@@ -339,7 +341,7 @@ QueryBuilder.LinkGen.updateLink = function(){
 };
 
 /*
-  Set the event listeners.
+  Set the event listeners for the generated link.
 */
 QueryBuilder.LinkGen.SetupEventListeners = function(){
   var formElements = $('select, input[type=radio]');
@@ -356,10 +358,47 @@ QueryBuilder.LinkGen.Init = function(){
 };
 
 /*
+  Generate the link to the Preview tool.
+*/
+QueryBuilder.Preview.createLink = function(){
+  var unescapedLink = QueryBuilder.LinkGen.createLink('.xml');
+  var previewBaseURL = 'http://preview.iatistandard.org/index.php?url=';
+
+  return previewBaseURL + encodeURIComponent(unescapedLink);
+};
+
+/*
+  Update the integration with the Preview tool.
+*/
+QueryBuilder.Preview.updateLink = function(){
+  var previewButtonElement = $('#preview-link');
+
+  previewButtonElement.attr('href', QueryBuilder.Preview.createLink());
+};
+
+/*
+  Set the event listeners for the preview integration
+*/
+QueryBuilder.Preview.SetupEventListeners = function(){
+  var formElements = $('select, input[type=radio]');
+
+  formElements.change(QueryBuilder.Preview.updateLink);
+};
+
+/*
+  Initialise the preview integration.
+*/
+QueryBuilder.Preview.Init = function(){
+  QueryBuilder.Preview.SetupEventListeners();
+  QueryBuilder.Preview.updateLink();
+};
+
+/*
   Initialise the Query Builder JS.
 */
 QueryBuilder.Init = function(){
   QueryBuilder.LinkGen.Init();
+  QueryBuilder.Preview.Init();
 };
 
 QueryBuilder.Init();
