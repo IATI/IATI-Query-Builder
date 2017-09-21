@@ -256,6 +256,10 @@
 
   // initialise chosen
   $(".chosen-select").chosen();
+
+  $('button[type="reset"]').on('click', function() {
+    $(".chosen-select").val('').trigger("chosen:updated");
+  });
 </script>
 
 <script type="text/javascript">
