@@ -5,7 +5,7 @@
     <title>IATI Datastore CSV Query Builder (Alpha Version)</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="static/css/custom.css" type="text/css" rel="stylesheet">
-    <link href="static/css/chosen.css" type="text/css" rel="stylesheet">
+    <link href="static/css/bootstrap-chosen.css" type="text/css" rel="stylesheet">
   </head>
   <body dir="ltr">
     <div class="container">
@@ -174,7 +174,7 @@
                     <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                   </div>
                 </label>
-                <ul>
+                <ul id="qb-format-list">
                   <li>
                     <label>
                       <input type="radio" name="entry.1085079344" value="activity" id="group_1085079344_1" aria-label="Activity"
@@ -220,7 +220,7 @@
                     <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                   </div>
                 </label>
-                <ul>
+                <ul id="qb-grouping-list">
                   <li>
                     <label>
                       <input type="radio" name="entry.71167035" value="summary" id="group_71167035_1" aria-label="Summary"
@@ -266,7 +266,7 @@
                     <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                   </div>
                 </label>
-                <ul>
+                <ul id="qb-sample-size">
                   <li>
                     <label>
                       <input type="radio" name="entry.1352830161" value="50 rows" id="group_1352830161_1" aria-label="50 rows"
@@ -299,12 +299,16 @@
 
           <div class="form-row">
             <div class="col">
-              <button class="btn btn-primary" type="submit">Build Query</button>
+              <noscript><button class="btn btn-primary" type="submit">Build Query</button></noscript>
               <button class="btn btn-secondary" type="reset">Reset</button>
             </div>
           </div>
 
         </form>
+
+        <div class="alert alert-success" id="js-query-link" role="alert">
+          <p><strong>Your link:</strong> <a href="http://datastore.iatistandard.org/api/1/access/activity.csv">http://datastore.iatistandard.org/api/1/access/activity.csv</a></p>
+        </div>
 
       </div><!-- end class="query-builder"-->
 
@@ -330,11 +334,147 @@
     <script src="static/js/chosen.jquery.js" type="text/javascript"></script>
     <script>
       $(".chosen-select").chosen()
-    </script>
-    <script>
+
       $(document).ready(function(){
           $('[data-toggle="tooltip"]').tooltip();
       });
     </script>
+
+<script type="text/javascript">
+var QueryBuilder = QueryBuilder || {};
+QueryBuilder.LinkGen = QueryBuilder.LinkGen || {};
+
+/*
+  Obtain the format.
+*/
+QueryBuilder.LinkGen.getFormat = function(){
+  return $('#qb-format-list input:checked').val();
+};
+
+/*
+  Obtain the grouping.
+*/
+QueryBuilder.LinkGen.getGrouping = function(){
+  var grouping = $('#qb-grouping-list input:checked').val();
+
+  if(grouping === 'summary'){
+    return '';
+  } else {
+    return '/' + grouping;
+  }
+};
+
+/*
+  Obtain the sample size
+*/
+QueryBuilder.LinkGen.getSampleSize = function(){
+  var sampleSize = $('#qb-sample-size input:checked').val();
+
+  if(sampleSize === '50 rows'){
+    return '';
+  } else {
+    return 'stream=True'
+  }
+};
+
+/*
+  Obtain info for a multi-select.
+*/
+QueryBuilder.LinkGen.getMultiSelectInfo = function(id, name){
+  var separator = '%7C';
+  var multiSelect = $('[name*="' + id + '"]');
+  var selectedOptions = $('[name*="' + id + '"] option:checked');
+  var values = [];
+
+  // have to use forEach because querySelectorAll is a NodeList which doesn't have a `map()` function
+  selectedOptions.each(function(){
+    var value = $(this).val();
+
+    // do not include the 'None' values
+    if(value !== ''){
+      values.push(value);
+    }
+  });
+
+  if(values.length === 0){
+    return '';
+  }
+
+  return name + '=' + values.join(separator);
+};
+
+/*
+  Convert an array of query string sections into a query string.
+*/
+QueryBuilder.LinkGen.createQueryString = function(sections){
+  var filteredSections = sections.filter(function(section){
+    return section !== '';
+  });
+
+  if(filteredSections.length === 0){
+    return '';
+  }
+
+  return '?' + filteredSections.join('&');
+};
+
+/*
+  Generate the link from the page.
+*/
+QueryBuilder.LinkGen.createLink = function(){
+  var baseURL = 'http://datastore.iatistandard.org/api/1/access/';
+  var format = QueryBuilder.LinkGen.getFormat();
+  var grouping = QueryBuilder.LinkGen.getGrouping();
+  var fileType = '.csv'
+  var reportingOrgs = QueryBuilder.LinkGen.getMultiSelectInfo('1922375458', 'reporting-org');
+  var reportingOrgTypes = QueryBuilder.LinkGen.getMultiSelectInfo('18398991', 'reporting-org.type');
+  var sectors = QueryBuilder.LinkGen.getMultiSelectInfo('1954968791', 'sector');
+  var recipientCountries = QueryBuilder.LinkGen.getMultiSelectInfo('605980212', 'recipient-country');
+  var recipientRegions = QueryBuilder.LinkGen.getMultiSelectInfo('1179181326', 'recipient-region');
+  var sampleSize = QueryBuilder.LinkGen.getSampleSize();
+  var queryString = QueryBuilder.LinkGen.createQueryString([reportingOrgs, reportingOrgTypes, sectors, recipientCountries, recipientRegions, sampleSize]);
+
+  return baseURL + format + grouping + fileType + queryString;
+};
+
+/*
+  Update the link displayed on the page.
+*/
+QueryBuilder.LinkGen.updateLink = function(){
+  var linkElement = $('#js-query-link a');
+  var linkLocation = QueryBuilder.LinkGen.createLink();
+
+  // update the link
+  linkElement.attr('href', linkLocation);
+  linkElement.text(linkLocation);
+};
+
+/*
+  Set the event listeners.
+*/
+QueryBuilder.LinkGen.SetupEventListeners = function(){
+  var formElements = $('select, input[type=radio]');
+
+  formElements.change(QueryBuilder.LinkGen.updateLink);
+};
+
+/*
+  Initialise the client-side link generation.
+*/
+QueryBuilder.LinkGen.Init = function(){
+  QueryBuilder.LinkGen.SetupEventListeners();
+  QueryBuilder.LinkGen.updateLink();
+};
+
+/*
+  Initialise the Query Builder JS.
+*/
+QueryBuilder.Init = function(){
+  QueryBuilder.LinkGen.Init();
+};
+
+QueryBuilder.Init();
+</script>
+
   </body>
 </html>
