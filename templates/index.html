@@ -250,7 +250,12 @@
     <script src="static/js/chosen.jquery.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-  $(".chosen-select").chosen()
+  // remove '- None -' values from selects
+  // (they don't play nicely with chosen)
+  $('select option[value=""]').remove();
+
+  // initialise chosen
+  $(".chosen-select").chosen();
 </script>
 
 <script type="text/javascript">
