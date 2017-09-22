@@ -214,46 +214,48 @@
             </fieldset>
           </div>
 
-          <div class="row form-group">
-            <label>
-              <div>Select start date</div>
-            </label for="start_date">
-            <div class="clearfix"></div>
-            <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
-              <input placeholder="yyyy-mm-dd" type="date" class="form-control" id="start_date" name="start_date">
-                <div class="input-group-addon"/>
-              </input>
+          <div class="form-row">
+            <div class="col">
+              <label>
+                <div>Select start date</div>
+              </label for="start_date">
+              <div class="clearfix"></div>
+              <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-primary active">
+                  <input type="radio" name="before_start" id="before_start" value="on" checked> before
+                </label>
+                <label class="btn btn-primary">
+                  <input type="radio" name="before_start" id="before_end_start" value=""> after
+                </label>
+              </div>
+              <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                <input placeholder="yyyy-mm-dd" type="date" id="start_date" name="start_date">
+                  <div class="input-group-addon"/>
+                </input>
+              </div>
+             </div>
             </div>
-           </div>
-           <div class="btn-group" data-toggle="buttons">
-              <label class="btn btn-primary active">
-                <input type="radio" name="before_start" id="before_start" value="on" checked> Select activity dates before this date
-              </label>
-              <label class="btn btn-primary">
-                <input type="radio" name="before_start" id="before_end_start" value=""> Select activity dates after this date
-              </label>
-            </div>
-          </div>
 
-          <div class="row form-group">
+          <div class="col">
             <label>
               <div>Select end date</div>
             </label for="end_date">
             <div class="clearfix"></div>
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-primary active">
+                <input type="radio" name="before_end" id="before_end" value="on" checked> before
+              </label>
+              <label class="btn btn-primary">
+                <input type="radio" name="before_end" id="before_end" value=""> after
+              </label>
+            </div>
             <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
-              <input placeholder="yyyy-mm-dd" type="date" class="form-control" id="end_date" name="end_date">
+              <input placeholder="yyyy-mm-dd" type="date" id="end_date" name="end_date">
                 <div class="input-group-addon"/></div>
               </input>
             </div>
-            <div class="btn-group" data-toggle="buttons">
-              <label class="btn btn-primary active">
-                <input type="radio" name="before_end" id="before_end" value="on" onchecked> Select activity dates before this date
-              </label>
-              <label class="btn btn-primary">
-                <input type="radio" name="before_end" id="before_end" value=""> Select activity dates after this date
-              </label>
-            </div>
           </div>
+        </div>
 
           <div class="row form-group">
             <label for="transaction_provider_org">
@@ -262,6 +264,16 @@
             <div class="clearfix"></div>
             <select data-placeholder="Choose a transaction provider organisation..." multiple class="chosen-select form-control" id="transaction_provider_org" name="transaction_provider_org[]">
               {{ include('include/transaction_provider_org.html') }}
+            </select>
+          </div>
+
+          <div class="row form-group">
+            <label for="participating_org">
+              <div>Select participating organisation</div>
+            </label>
+            <div class="clearfix"></div>
+            <select data-placeholder="Choose a participating organisation..." multiple class="chosen-select form-control" id="participating_org" name="participating_org[]">
+              {{ include('include/participating_org.html') }}
             </select>
           </div>
 

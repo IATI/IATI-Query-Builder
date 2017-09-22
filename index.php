@@ -38,19 +38,24 @@ if (isset($_POST) && $_POST != NULL) {
       }
     }
   }
-
+  $non_allowed_values = array("");
   if (isset($_POST["start_date"])) {
-    $start_date[] = filter_var($_POST["start_date"], FILTER_SANITIZE_STRING);
+    $requested_date = filter_var($_POST["start_date"], FILTER_SANITIZE_STRING);
+    if (!in_array($requested_date, $non_allowed_values)) {
+      $start_date[] = $requested_date;
+    }
   }
   if (isset($_POST["before_start"])) {
     $requested_range = filter_var($_POST["before_start"], FILTER_SANITIZE_STRING);
     if ($requested_range == "on") {
-      $before_start = $requested_range;
+      $before_start[] = $requested_range;
     }
   }
-
   if (isset($_POST["end_date"])) {
-    $end_date[] = filter_var($_POST["end_date"], FILTER_SANITIZE_STRING);
+    $requested_date = filter_var($_POST["end_date"], FILTER_SANITIZE_STRING);
+    if (!in_array($requested_date, $non_allowed_values)) {
+      $end_date[] = $requested_date;
+    }
   }
   if (isset($_POST["before_end"])) {
     $requested_range = filter_var($_POST["before_end"], FILTER_SANITIZE_STRING);
@@ -93,7 +98,14 @@ if (isset($_POST) && $_POST != NULL) {
     foreach ($requested_orgs as $requested_org) {
       if (in_array($requested_org, $allowed_orgs) && !empty($requested_org) ) { //!!!!FIX ME!!!!I would but I don't know how you're broken good sir...
         $provider_orgs[] = $requested_org;
-        print_r($_POST);
+      }
+    }
+  }
+  if (isset($_POST["participating_org"])) {
+    $requested_orgs = filter_var_array($_POST["participating_org"], FILTER_SANITIZE_STRING);
+    foreach ($requested_orgs as $requested_org) {
+      if (in_array($requested_org, $allowed_orgs) && !empty($requested_org) ) { //!!!!FIX ME!!!!I would but I don't know how you're broken good sir...
+        $participating_orgs[] = $requested_org;
       }
     }
   }
@@ -104,6 +116,7 @@ if (isset($_POST) && $_POST != NULL) {
     $type = build_sanitised_multi_select_values("codelists/OrganisationType.csv",$requested_type); //returns Null if 'none is selected
     //print_r($type);
   }
+
 
   //$allowed_sectors = array();
   if (isset($_POST["entry_1954968791"])) { //sectors
@@ -140,7 +153,7 @@ if (isset($_POST) && $_POST != NULL) {
     $api_link .= ".csv";
    //echo $api_link;
    //print_r($orgs);
-    if ( isset($orgs) || isset($type) || isset($sector) || isset($country) || isset($region) || isset($provider_orgs) || isset($start_date) || isset($end_date)) {
+    if ( isset($orgs) || isset($type) || isset($participating_orgs)|| isset($sector) || isset($country) || isset($region) || isset($provider_orgs) || isset($start_date) || isset($end_date)) {
       $api_link .= "?";
       $api_link_parameters = array();
       if (isset($orgs)) {
@@ -148,6 +161,9 @@ if (isset($_POST) && $_POST != NULL) {
       }
       if (isset($type)) {
         $api_link_parameters ["reporting-org.type"] = implode('|',$type);
+      }
+      if (isset($participating_orgs)) {
+        $api_link_parameters ["participating-org"] = implode('|',$participating_orgs);
       }
       if (isset($sector)) {
         $api_link_parameters ["sector"] = implode('|',$sector);
@@ -209,6 +225,7 @@ $context['selected_provider_orgs'] = isset($provider_orgs) ? $provider_orgs : nu
 $context['selected_sectors'] = isset($sector) ? $sector : null;
 $context['selected_countries'] = isset($country) ? $country : null;
 $context['selected_org_types'] = isset($type) ? $type : null;
+$context['selected_participating_orgs'] = isset($participating_org) ? $participating_org : null;
 $context['selected_regions'] = isset($region) ? $region : null;
 $context['selected_date'] = isset($date) ? $date : null;
 
