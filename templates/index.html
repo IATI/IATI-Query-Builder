@@ -158,7 +158,7 @@
             </label>
             <div class="clearfix"></div>
             <select data-placeholder="Choose a reporting organisation..." multiple class="chosen-select form-control" id="entry_1922375458[]" name="entry.1922375458[]">
-              {{ include('include/reporting_org.html') }}
+              {{ include ('include/reporting_org.html') }}
             </select>
           </div>
 
@@ -217,37 +217,52 @@
           <div class="row form-group">
             <label>
               <div>Select start date</div>
-            </label for="start-date">
+            </label for="start_date">
             <div class="clearfix"></div>
-            <div class="input-group date" data-provide="datepicker" data-date-format="dd-mm-yyyy">
-              <input placeholder="dd-mm-yyyy" type="text" class="form-control" id="start-date" name="start-date">
+            <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+              <input placeholder="yyyy-mm-dd" type="date" class="form-control" id="start_date" name="start_date">
                 <div class="input-group-addon"/>
               </input>
             </div>
            </div>
+           <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-primary active">
+                <input type="radio" name="before_start" id="before_start" value="on" checked> Select activity dates before this date
+              </label>
+              <label class="btn btn-primary">
+                <input type="radio" name="before_start" id="before_end_start" value=""> Select activity dates after this date
+              </label>
+            </div>
           </div>
 
           <div class="row form-group">
             <label>
               <div>Select end date</div>
-            </label for="end-date">
+            </label for="end_date">
             <div class="clearfix"></div>
-            <div class="input-group date" data-provide="datepicker" data-date-format="dd-mm-yyyy">
-              <input placeholder="dd-mm-yyyy" type="text" class="form-control" id="end-date" name="end-date">
-                <div class="input-group-addon"/>
+            <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+              <input placeholder="yyyy-mm-dd" type="date" class="form-control" id="end_date" name="end_date">
+                <div class="input-group-addon"/></div>
               </input>
             </div>
-           </div>
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-primary active">
+                <input type="radio" name="before_end" id="before_end" value="on" onchecked> Select activity dates before this date
+              </label>
+              <label class="btn btn-primary">
+                <input type="radio" name="before_end" id="before_end" value=""> Select activity dates after this date
+              </label>
+            </div>
           </div>
 
           <div class="row form-group">
-            <label for="transaction-provider-org">
+            <label for="transaction_provider_org">
               <div>Select transaction provider org</div>
             </label>
             <div class="clearfix"></div>
-              <select data-placeholder="Choose a transaction provider organisation..." multiple class="chosen-select form-control" id="transaction-provider-org" name="transaction-provider-org">
-                {{ include('include/reporting_org.html') }}
-              </select>
+            <select data-placeholder="Choose a transaction provider organisation..." multiple class="chosen-select form-control" id="transaction_provider_org" name="transaction_provider_org[]">
+              {{ include('include/transaction_provider_org.html') }}
+            </select>
           </div>
 
           <br/>

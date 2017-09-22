@@ -39,6 +39,25 @@ if (isset($_POST) && $_POST != NULL) {
     }
   }
 
+  if (isset($_POST["start_date"])) {
+    $start_date[] = filter_var($_POST["start_date"], FILTER_SANITIZE_STRING);
+  }
+  if (isset($_POST["before_start"])) {
+    $requested_range = filter_var($_POST["before_start"], FILTER_SANITIZE_STRING);
+    if ($requested_range == "on") {
+      $before_start = $requested_range;
+    }
+  }
+
+  if (isset($_POST["end_date"])) {
+    $end_date[] = filter_var($_POST["end_date"], FILTER_SANITIZE_STRING);
+  }
+  if (isset($_POST["before_end"])) {
+    $requested_range = filter_var($_POST["before_end"], FILTER_SANITIZE_STRING);
+    if ($requested_range == "on") {
+      $before_end[] = $requested_range;
+    }
+  }
   //The rest of the values can be multiselect values so they are all passed as arrays!
 
   $allowed_orgs = array();
@@ -69,15 +88,16 @@ if (isset($_POST) && $_POST != NULL) {
     }
   }
   //print_r($allowed_orgs);
-  if (isset($_POST["transaction_provider_orgs"])) { //transaction provider organisations
-    $requested_orgs = filter_var_array($_POST["transaction_provider_orgs"], FILTER_SANITIZE_STRING);
+  if (isset($_POST["transaction_provider_org"])) { //organisations
+    $requested_orgs = filter_var_array($_POST["transaction_provider_org"], FILTER_SANITIZE_STRING);
     foreach ($requested_orgs as $requested_org) {
-      if (in_array($requested_org, $allowed_orgs) && !empty($requested_org) ) {
-        $orgs[] = $requested_org;
+      if (in_array($requested_org, $allowed_orgs) && !empty($requested_org) ) { //!!!!FIX ME!!!!I would but I don't know how you're broken good sir...
+        $provider_orgs[] = $requested_org;
+        print_r($_POST);
       }
     }
   }
-
+  //print_r($allowed_orgs);
   //$allowed_types = array();
   if (isset($_POST["entry_18398991"])) { //types
     $requested_type = filter_var_array($_POST["entry_18398991"], FILTER_SANITIZE_STRING);
@@ -120,7 +140,7 @@ if (isset($_POST) && $_POST != NULL) {
     $api_link .= ".csv";
    //echo $api_link;
    //print_r($orgs);
-    if ( isset($orgs) || isset($type) || isset($sector) || isset($country) || isset($region) ) {
+    if ( isset($orgs) || isset($type) || isset($sector) || isset($country) || isset($region) || isset($provider_orgs) || isset($start_date) || isset($end_date)) {
       $api_link .= "?";
       $api_link_parameters = array();
       if (isset($orgs)) {
@@ -132,14 +152,26 @@ if (isset($_POST) && $_POST != NULL) {
       if (isset($sector)) {
         $api_link_parameters ["sector"] = implode('|',$sector);
       }
-      if (isset($transaction_provider_orgs)) {
-        $api_link_parameters ["transaction_provider-org"] = implode('|',$orgs);
+      if (isset($provider_orgs)) {
+        $api_link_parameters ["transaction_provider-org"] = implode('|',$provider_orgs);
       }
       if (isset($country) && !isset($region)) {
         $api_link_parameters ["recipient-country"] = implode('|',$country);
       }
       if (isset($region) && !isset($country)) {
         $api_link_parameters ["recipient-region"] = implode('|',$region);
+      }
+      if (isset($start_date) && isset($before_start)) {
+        $api_link_parameters ["start-date__lt"] = implode('|',$start_date);
+      }
+      if (isset($start_date) && !isset($before_start)) {
+        $api_link_parameters ["start-date__gt"] = implode('|',$start_date);
+      }
+      if (isset($end_date) && isset($before_end)) {
+        $api_link_parameters ["end-date__lt"] = implode('|',$end_date);
+      }
+      if (isset($end_date) && !isset($before_end)) {
+        $api_link_parameters ["end-date__gt"] = implode('|',$end_date);
       }
       if ($size == "stream=True") {
         $api_link_parameters ["stream"] = "True";
@@ -173,18 +205,18 @@ $context['format'] = isset($format) ? $format : null;
 $context['size'] = isset($size) ? $size : null;
 
 $context['selected_orgs'] = isset($orgs) ? $orgs : null;
+$context['selected_provider_orgs'] = isset($provider_orgs) ? $provider_orgs : null;
 $context['selected_sectors'] = isset($sector) ? $sector : null;
 $context['selected_countries'] = isset($country) ? $country : null;
 $context['selected_org_types'] = isset($type) ? $type : null;
 $context['selected_regions'] = isset($region) ? $region : null;
-$context['selected_transaction_provider_orgs'] = isset($orgs) ? $orgs : null;
+$context['selected_date'] = isset($date) ? $date : null;
 
 $context['reporting_orgs'] = reporting_orgs();
 $context['countries'] = get_countries();
 $context['regions'] = get_regions();
 $context['org_types'] = get_org_types();
 $context['sector_categories'] = get_sector_categories();
-$context['transaction_provider_orgs'] = reporting_orgs();
 
 echo $twig->render('index.html', $context);
 ?>
