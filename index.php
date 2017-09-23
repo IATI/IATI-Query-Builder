@@ -134,6 +134,8 @@ if (isset($_POST) && $_POST != NULL) {
       }
       $api_link .= http_build_query($api_link_parameters);
     }
+    header("Location:" . $api_link);
+    return;
   } else {
     $error_message = "You must select something from each of the 3 required fields";
   }
