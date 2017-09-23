@@ -222,10 +222,6 @@
 
         </form>
 
-        <div class="alert alert-success" id="js-query-link" role="alert">
-          <p><strong>Your link:</strong> <a href="http://datastore.iatistandard.org/api/1/access/activity.csv">http://datastore.iatistandard.org/api/1/access/activity.csv</a></p>
-        </div>
-
       </div><!-- end class="query-builder"-->
 
 
@@ -359,7 +355,6 @@ QueryBuilder.LinkGen.updateLink = function(){
 
   // update the link
   linkElement.attr('href', linkLocation);
-  linkElement.text(linkLocation);
 };
 
 /*
@@ -375,6 +370,7 @@ QueryBuilder.LinkGen.SetupEventListeners = function(){
   Initialise the client-side link generation.
 */
 QueryBuilder.LinkGen.Init = function(){
+  $('#js-query-link').prepend('<a class="btn btn-primary">Download</a>');
   QueryBuilder.LinkGen.SetupEventListeners();
   QueryBuilder.LinkGen.updateLink();
 };
