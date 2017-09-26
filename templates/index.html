@@ -250,208 +250,206 @@
     <script src="static/js/chosen.jquery.js" type="text/javascript"></script>
 
 <script type="text/javascript">
+$(function() {
   $(".chosen-select").chosen()
-</script>
 
-<script type="text/javascript">
-var QueryBuilder = QueryBuilder || {};
-QueryBuilder.LinkGen = QueryBuilder.LinkGen || {};
-QueryBuilder.Preview = QueryBuilder.Preview || {};
+  var QueryBuilder = QueryBuilder || {};
+  QueryBuilder.LinkGen = QueryBuilder.LinkGen || {};
+  QueryBuilder.Preview = QueryBuilder.Preview || {};
 
-/*
+  /*
   Obtain the format.
-*/
-QueryBuilder.LinkGen.getFormat = function(){
-  return $('#qb-format-list input:checked').attr('aria-label').toLowerCase();
-};
+  */
+  QueryBuilder.LinkGen.getFormat = function(){
+    return $('#qb-format-list input:checked').val();
+  };
 
-/*
+  /*
   Obtain the grouping.
-*/
-QueryBuilder.LinkGen.getGrouping = function(){
-  var grouping =$('#qb-grouping-list input:checked').attr('aria-label');
+  */
+  QueryBuilder.LinkGen.getGrouping = function(){
+    var grouping = $('#qb-grouping-list input:checked').val();
 
-  if(grouping === 'By Sector'){
-    return '/by_sector';
-  } else if(grouping === 'By Country'){
-    return '/by_country';
-  } else {
-    return '';
-  }
-};
-
-/*
-  Obtain the sample size
-*/
-QueryBuilder.LinkGen.getSampleSize = function(){
-  var sampleSize = $('#qb-sample-size input:checked').attr('aria-label');
-
-  if(sampleSize === '50 rows'){
-    return '';
-  } else {
-    return 'stream=True'
-  }
-};
-
-/*
-  Obtain info for a multi-select.
-*/
-QueryBuilder.LinkGen.getMultiSelectInfo = function(id, name){
-  var separator = '%7C';
-  var multiSelect = $('[name*="' + id + '"]');
-  var selectedOptions = $('[name*="' + id + '"] option:checked');
-  var values = [];
-
-  // have to use forEach because querySelectorAll is a NodeList which doesn't have a `map()` function
-  selectedOptions.each(function(){
-    var value = $(this).attr('value');
-
-    // do not include the 'None' values
-    if(value !== ''){
-      values.push(value);
+    if(grouping === 'summary'){
+      return '';
+      } else {
+        return '/' + grouping;
     }
-  });
+  };
 
-  if(values.length === 0){
-    return '';
-  }
+  /*
+  Obtain the sample size
+  */
+  QueryBuilder.LinkGen.getSampleSize = function(){
+    var sampleSize = $('#qb-sample-size input:checked').val();
 
-  return name + '=' + values.join(separator);
-};
+    if(sampleSize === '50 rows'){
+      return '';
+    } else {
+      return 'stream=True'
+    }
+  };
 
-/*
+  /*
+  Obtain info for a multi-select.
+  */
+  QueryBuilder.LinkGen.getMultiSelectInfo = function(id, name){
+    var separator = '%7C';
+    var multiSelect = $('[name*="' + id + '"]');
+    var selectedOptions = $('[name*="' + id + '"] option:checked');
+    var values = [];
+
+    // have to use forEach because querySelectorAll is a NodeList which doesn't have a `map()` function
+    selectedOptions.each(function(){
+        var value = $(this).val();
+
+      // do not include the 'None' values
+      if(value !== ''){
+        values.push(value);
+      }
+    });
+
+    if(values.length === 0){
+      return '';
+    }
+
+    return name + '=' + values.join(separator);
+  };
+
+  /*
   Convert an array of query string sections into a query string.
-*/
-QueryBuilder.LinkGen.createQueryString = function(sections){
-  var filteredSections = sections.filter(function(section){
-    return section !== '';
-  });
+  */
+  QueryBuilder.LinkGen.createQueryString = function(sections){
+    var filteredSections = sections.filter(function(section){
+      return section !== '';
+    });
 
-  if(filteredSections.length === 0){
-    return '';
-  }
+    if(filteredSections.length === 0){
+      return '';
+    }
 
-  return '?' + filteredSections.join('&');
-};
+    return '?' + filteredSections.join('&');
+  };
 
-/*
+  /*
   Generate the link from the page.
-*/
-QueryBuilder.LinkGen.createLink = function(fileType){
-  var baseURL = 'http://datastore.iatistandard.org/api/1/access/';
-  var format = QueryBuilder.LinkGen.getFormat();
-  var grouping = QueryBuilder.LinkGen.getGrouping();
-  var reportingOrgs = QueryBuilder.LinkGen.getMultiSelectInfo('1922375458', 'reporting-org');
-  var reportingOrgTypes = QueryBuilder.LinkGen.getMultiSelectInfo('18398991', 'reporting-org.type');
-  var sectors = QueryBuilder.LinkGen.getMultiSelectInfo('1954968791', 'sector');
-  var recipientCountries = QueryBuilder.LinkGen.getMultiSelectInfo('605980212', 'recipient-country');
-  var recipientRegions = QueryBuilder.LinkGen.getMultiSelectInfo('1179181326', 'recipient-region');
-  var sampleSize = QueryBuilder.LinkGen.getSampleSize();
-  var queryString = QueryBuilder.LinkGen.createQueryString([reportingOrgs, reportingOrgTypes, sectors, recipientCountries, recipientRegions, sampleSize]);
+  */
+  QueryBuilder.LinkGen.createLink = function(fileType){
+    var baseURL = 'http://datastore.iatistandard.org/api/1/access/';
+    var format = QueryBuilder.LinkGen.getFormat();
+    var grouping = QueryBuilder.LinkGen.getGrouping();
+    var reportingOrgs = QueryBuilder.LinkGen.getMultiSelectInfo('1922375458', 'reporting-org');
+    var reportingOrgTypes = QueryBuilder.LinkGen.getMultiSelectInfo('18398991', 'reporting-org.type');
+    var sectors = QueryBuilder.LinkGen.getMultiSelectInfo('1954968791', 'sector');
+    var recipientCountries = QueryBuilder.LinkGen.getMultiSelectInfo('605980212', 'recipient-country');
+    var recipientRegions = QueryBuilder.LinkGen.getMultiSelectInfo('1179181326', 'recipient-region');
+    var sampleSize = QueryBuilder.LinkGen.getSampleSize();
+    var queryString = QueryBuilder.LinkGen.createQueryString([reportingOrgs, reportingOrgTypes, sectors, recipientCountries, recipientRegions, sampleSize]);
 
-  fileType = fileType || '.csv';
+    fileType = fileType || '.csv';
 
-  return baseURL + format + grouping + fileType + queryString;
-};
+    return baseURL + format + grouping + fileType + queryString;
+  };
 
-/*
+  /*
   Update the link displayed on the page.
-*/
-QueryBuilder.LinkGen.updateLink = function(){
-  var linkElement = $('#query-link');
-  var linkLocation = QueryBuilder.LinkGen.createLink();
+  */
+  QueryBuilder.LinkGen.updateLink = function(){
+    var linkElement = $('#query-link');
+    var linkLocation = QueryBuilder.LinkGen.createLink();
 
-  // update the link
-  linkElement.attr('href', linkLocation);
-  linkElement.text(linkLocation);
-};
+    // update the link
+    linkElement.attr('href', linkLocation);
+    linkElement.text(linkLocation);
+  };
 
-/*
-  Set the event listeners for the generated link.
-*/
-QueryBuilder.LinkGen.SetupEventListeners = function(){
-  var formElements = $('select, input[type=radio]');
+  /*
+    Set the event listeners for the generated link.
+  */
+  QueryBuilder.LinkGen.SetupEventListeners = function(){
+    var formElements = $('select, input[type=radio]');
 
-  formElements.change(QueryBuilder.LinkGen.updateLink);
-};
+    formElements.change(QueryBuilder.LinkGen.updateLink);
+    };
 
-/*
-  Initialise the client-side link generation.
-*/
-QueryBuilder.LinkGen.Init = function(){
-  QueryBuilder.LinkGen.SetupEventListeners();
-  QueryBuilder.LinkGen.updateLink();
-};
+    /*
+    Initialise the client-side link generation.
+    */
+    QueryBuilder.LinkGen.Init = function(){
+    QueryBuilder.LinkGen.SetupEventListeners();
+    QueryBuilder.LinkGen.updateLink();
+  };
 
-/*
-  Generate the link to the Preview tool.
-*/
-QueryBuilder.Preview.createLink = function(){
-  var unescapedLink = QueryBuilder.LinkGen.createLink('.xml');
-  var previewBaseURL = 'http://preview.iatistandard.org/index.php?url=';
+  /*
+    Generate the link to the Preview tool.
+  */
+  QueryBuilder.Preview.createLink = function(){
+    var unescapedLink = QueryBuilder.LinkGen.createLink('.xml');
+    var previewBaseURL = 'http://preview.iatistandard.org/index.php?url=';
 
-  // ensure it's only a Preview and not the full set of data being viewed
-  var sampleSize = QueryBuilder.LinkGen.getSampleSize();
+    // ensure it's only a Preview and not the full set of data being viewed
+    var sampleSize = QueryBuilder.LinkGen.getSampleSize();
 
-  if(sampleSize.length > 0){
-    unescapedLink = unescapedLink.replace(sampleSize, '');
-  }
+    if(sampleSize.length > 0){
+      unescapedLink = unescapedLink.replace(sampleSize, '');
+    }
 
-  return previewBaseURL + encodeURIComponent(unescapedLink);
-};
+    return previewBaseURL + encodeURIComponent(unescapedLink);
+  };
 
-/*
-  Update the integration with the Preview tool.
-*/
-QueryBuilder.Preview.updateLink = function(){
-  var previewButtonElement = $('#preview-link');
+  /*
+    Update the integration with the Preview tool.
+  */
+  QueryBuilder.Preview.updateLink = function(){
+    var previewButtonElement = $('#preview-link');
 
-  previewButtonElement.attr('href', QueryBuilder.Preview.createLink());
-  QueryBuilder.Preview.updateVisibility();
-};
+    previewButtonElement.attr('href', QueryBuilder.Preview.createLink());
+    QueryBuilder.Preview.updateVisibility();
+  };
 
-/*
-  Changes the Preview link visibility based on whether the data can be viewed using the Preview Tool.
-*/
-QueryBuilder.Preview.updateVisibility = function(){
-  var format = QueryBuilder.LinkGen.getFormat();
-  var grouping = QueryBuilder.LinkGen.getGrouping();
-  var canPreview = (format === 'activity') && (grouping === '');
-  var previewWrapper = $('#preview-link-wrapper');
+  /*
+    Changes the Preview link visibility based on whether the data can be viewed using the Preview Tool.
+  */
+  QueryBuilder.Preview.updateVisibility = function(){
+    var format = QueryBuilder.LinkGen.getFormat();
+    var grouping = QueryBuilder.LinkGen.getGrouping();
+    var canPreview = (format === 'activity') && (grouping === '');
+    var previewWrapper = $('#preview-link-wrapper');
 
-  if(canPreview){
-    previewWrapper.show();
-  } else {
-    previewWrapper.hide();
-  }
-};
+    if(canPreview){
+      previewWrapper.show();
+    } else {
+      previewWrapper.hide();
+    }
+  };
 
-/*
-  Set the event listeners for the preview integration
-*/
-QueryBuilder.Preview.SetupEventListeners = function(){
-  var formElements = $('select, input[type=radio]');
+  /*
+    Set the event listeners for the preview integration
+  */
+  QueryBuilder.Preview.SetupEventListeners = function(){
+    var formElements = $('select, input[type=radio]');
 
-  formElements.change(QueryBuilder.Preview.updateLink);
-};
+    formElements.change(QueryBuilder.Preview.updateLink);
+  };
 
-/*
-  Initialise the preview integration.
-*/
-QueryBuilder.Preview.Init = function(){
-  QueryBuilder.Preview.SetupEventListeners();
-  QueryBuilder.Preview.updateLink();
-};
+  /*
+    Initialise the preview integration.
+  */
+  QueryBuilder.Preview.Init = function(){
+    QueryBuilder.Preview.SetupEventListeners();
+    QueryBuilder.Preview.updateLink();
+  };
 
-/*
+  /*
   Initialise the Query Builder JS.
-*/
-QueryBuilder.Init = function(){
-  QueryBuilder.LinkGen.Init();
-  QueryBuilder.Preview.Init();
-};
+  */
+  QueryBuilder.Init = function(){
+    QueryBuilder.LinkGen.Init();
+    QueryBuilder.Preview.Init();
+  };
 
-QueryBuilder.Init();
+  QueryBuilder.Init();
+});
 </script>
 
   </body>
