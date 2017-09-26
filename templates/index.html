@@ -18,18 +18,13 @@
 
       <div class="query-builder">
         <div class="row"><!-- result -->
-          {% if api_link %}
-            <div class="alert alert-success" role="alert">
-              <strong>Your link:</strong> <a href="{{ api_link }}">{{ api_link|escape }}</a>
+          {% if notice_message %}
+            <div class="alert alert-warning" role="alert">
+              <strong>Warning:</strong> {{ notice_message }}
             </div>
+          {% endif %}
 
-            {% if notice_message %}
-              <div class="alert alert-warning" role="alert">
-                <strong>Warning:</strong> {{ notice_message }}
-              </div>
-            {% endif %}
-
-          {% elseif error_message %}
+          {% if error_message %}
             <div class="alert alert-danger" role="alert">
               <strong>Error:</strong> {{ error_message }}
             </div>
@@ -214,17 +209,13 @@
           </div>
 
           <div class="form-row">
-            <div class="col">
-              <noscript><button class="btn btn-primary" type="submit">Submit</button></noscript>
+            <div class="col" id="js-query-link">
+              <noscript><button class="btn btn-primary" type="submit">Download</button></noscript>
               <button class="btn btn-secondary" type="reset">Reset</button>
             </div>
           </div>
 
         </form>
-
-        <div class="alert alert-success" id="js-query-link" role="alert">
-          <p><strong>Your link:</strong> <a id="query-link" href="http://datastore.iatistandard.org/api/1/access/activity.csv">http://datastore.iatistandard.org/api/1/access/activity.csv</a> <span id="preview-link-wrapper">(<a id="preview-link" href="http://preview.iatistandard.org/" target="_blank" rel="noopener noreferrer">Preview as XML</a>)</span></p>
-        </div>
 
       </div><!-- end class="query-builder"-->
 
@@ -360,7 +351,6 @@ $(function() {
 
     // update the link
     linkElement.attr('href', linkLocation);
-    linkElement.text(linkLocation);
   };
 
   /*
@@ -375,6 +365,8 @@ $(function() {
     /*
     Initialise the client-side link generation.
     */
+  QueryBuilder.LinkGen.Init = function(){
+    $('#js-query-link').prepend('<a class="btn btn-primary">Download</a>');
     QueryBuilder.LinkGen.Init = function(){
     QueryBuilder.LinkGen.SetupEventListeners();
     QueryBuilder.LinkGen.updateLink();
