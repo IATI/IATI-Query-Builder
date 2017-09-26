@@ -432,6 +432,19 @@ $(function() {
   };
 
   /*
+    Obtain the calendar date
+  */
+  QueryBuilder.LinkGen.getCalendarDate = function(id, name){
+    var calendarDate = $('#' + id).val();
+
+    if(calendarDate.trim() === ''){
+      return '';
+    } else {
+      return name + '=' + calendarDate;
+    }
+  };
+
+  /*
     Obtain info for a multi-select.
   */
   QueryBuilder.LinkGen.getMultiSelectInfo = function(id, name){
@@ -484,8 +497,27 @@ $(function() {
     var sectors = QueryBuilder.LinkGen.getMultiSelectInfo('1954968791', 'sector');
     var recipientCountries = QueryBuilder.LinkGen.getMultiSelectInfo('605980212', 'recipient-country');
     var recipientRegions = QueryBuilder.LinkGen.getMultiSelectInfo('1179181326', 'recipient-region');
+    var start_date__lt = QueryBuilder.LinkGen.getCalendarDate('start_date__lt', 'start-date__lt');
+    var start_date__gt = QueryBuilder.LinkGen.getCalendarDate('start_date__gt', 'start-date__gt');
+    var end_date__lt = QueryBuilder.LinkGen.getCalendarDate('end_date__lt', 'end-date__lt');
+    var end_date__gt = QueryBuilder.LinkGen.getCalendarDate('end_date__gt', 'end-date__gt');
+    var transactionProviderOrg = QueryBuilder.LinkGen.getMultiSelectInfo('transaction_provider_org', 'transaction_provider-org');
+    var participating_org = QueryBuilder.LinkGen.getMultiSelectInfo('participating_org', 'participating_org');
     var sampleSize = QueryBuilder.LinkGen.getSampleSize();
-    var queryString = QueryBuilder.LinkGen.createQueryString([reportingOrgs, reportingOrgTypes, sectors, recipientCountries, recipientRegions, sampleSize]);
+    var queryString = QueryBuilder.LinkGen.createQueryString([
+      reportingOrgs,
+      reportingOrgTypes,
+      sectors,
+      recipientCountries,
+      recipientRegions,
+      start_date__lt,
+      start_date__gt,
+      end_date__lt,
+      end_date__gt,
+      transactionProviderOrg,
+      participating_org,
+      sampleSize
+    ]);
 
     fileType = fileType || '.csv';
 
@@ -508,7 +540,7 @@ $(function() {
     Set the event listeners for the generated link.
   */
   QueryBuilder.LinkGen.SetupEventListeners = function(){
-    var formElements = $('select, input[type=radio]');
+    var formElements = $('select, input[type=date], input[type=radio]');
 
     formElements.change(QueryBuilder.LinkGen.updateLink);
     };
@@ -568,7 +600,7 @@ $(function() {
     Set the event listeners for the preview integration
   */
   QueryBuilder.Preview.SetupEventListeners = function(){
-    var formElements = $('select, input[type=radio]');
+    var formElements = $('select, input[type=date], input[type=radio]');
 
     formElements.change(QueryBuilder.Preview.updateLink);
   };
