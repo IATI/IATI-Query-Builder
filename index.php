@@ -87,7 +87,7 @@ if (isset($_POST) && $_POST != NULL) {
   if (isset($_POST["entry_1922375458"])) { //organisations
     $requested_orgs = filter_var_array($_POST["entry_1922375458"], FILTER_SANITIZE_STRING);
     foreach ($requested_orgs as $requested_org) {
-      if (in_array($requested_org, $allowed_orgs) && !empty($requested_org) ) { //!!!!FIX ME!!!!I would but I don't know how you're broken good sir...
+      if (in_array($requested_org, $allowed_orgs) && !empty($requested_org) ) { 
         $orgs[] = $requested_org;
       }
     }
@@ -96,7 +96,7 @@ if (isset($_POST) && $_POST != NULL) {
   if (isset($_POST["transaction_provider_org"])) { //organisations
     $requested_orgs = filter_var_array($_POST["transaction_provider_org"], FILTER_SANITIZE_STRING);
     foreach ($requested_orgs as $requested_org) {
-      if (in_array($requested_org, $allowed_orgs) && !empty($requested_org) ) { 
+      if (in_array($requested_org, $allowed_orgs) && !empty($requested_org) ) {
         $provider_orgs[] = $requested_org;
       }
     }
