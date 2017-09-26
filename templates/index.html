@@ -333,23 +333,10 @@
 
 <script type="text/javascript">
 $(function() {
-  // remove '- None -' values from selects (they don't play nicely with chosen)
-  $('select option[value=""]').remove();
-
-  // initialise chosen
-  $(".chosen-select").chosen();
-
-  $('button[type="reset"]').on('click', function() {
-    $(".chosen-select").val('').trigger("chosen:updated");
-  });
-
-  // init tooltips
-  $('[data-toggle="tooltip"]').tooltip();
-
-  // do link building things
   var QueryBuilder = QueryBuilder || {};
   QueryBuilder.LinkGen = QueryBuilder.LinkGen || {};
   QueryBuilder.Preview = QueryBuilder.Preview || {};
+  QueryBuilder.Plugins = QueryBuilder.Plugins || {};
 
   /*
     Obtain the format.
@@ -535,11 +522,30 @@ $(function() {
   };
 
   /*
+    Initialise plugins and 3rd party code.
+  */
+  QueryBuilder.Plugins.Init = function(){
+    // remove '- None -' values from selects (they don't play nicely with chosen)
+    $('select option[value=""]').remove();
+
+    // initialise chosen
+    $(".chosen-select").chosen();
+
+    $('button[type="reset"]').on('click', function() {
+      $(".chosen-select").val('').trigger("chosen:updated");
+    });
+
+    // init tooltips
+    $('[data-toggle="tooltip"]').tooltip();
+  };
+
+  /*
     Initialise the Query Builder JS.
   */
   QueryBuilder.Init = function(){
     QueryBuilder.LinkGen.Init();
     QueryBuilder.Preview.Init();
+    QueryBuilder.Plugins.Init();
   };
 
   QueryBuilder.Init();
