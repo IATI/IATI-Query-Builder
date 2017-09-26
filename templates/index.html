@@ -168,32 +168,56 @@
             <div class="row form-group">
               <div class="col-auto">
                 <label>
-                  <div>Select start date</div>
+                  <div>
+                    <span class="tooltip-ui" data-toggle="tooltip" title="Specify the range of activity start dates that you are looking for (defaults to all).">
+                      Select start date
+                    </span>
+                  </div>
                 </label for="start_date">
                 <div class="clearfix"></div>
                 <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
-                  <div class="input-group-addon">Before</div>
+                  <div class="input-group-addon">
+                    <span class="tooltip-ui" data-toggle="tooltip" title="Identify activities with start dates before the specified date.">
+                      Before
+                    </span>
+                  </div>
                   <input class="form-control" placeholder="yyyy-mm-dd" type="date" id="start_date__lt" name="start_date__lt" value="{{ start_date__lt }}">
                   </input>
                 </div>
                 <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
-                  <div class="input-group-addon">After</div>
+                  <div class="input-group-addon">
+                    <span class="tooltip-ui" data-toggle="tooltip" title="Identify activities with start dates after the specified date.">
+                      After
+                    </span>
+                  </div>
                   <input class="form-control" placeholder="yyyy-mm-dd" type="date" id="start_date__gt" name="start_date__gt" value="{{ start_date__gt }}">
                   </input>
                 </div>
               </div>
               <div class="col-auto">
                 <label>
-                  <div>Select end date</div>
+                  <div>
+                    <span class="tooltip-ui" data-toggle="tooltip" title="Specify the range of activity end dates that you are looking for (defaults to all).">
+                      Select end date
+                    </span>
+                  </div>
                 </label for="end_date">
                 <div class="clearfix"></div>
                 <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
-                  <div class="input-group-addon">Before</div>
+                  <div class="input-group-addon">
+                    <span class="tooltip-ui" data-toggle="tooltip" title="Identify activities with end dates before the specified date.">
+                      Before
+                    </span>
+                  </div>
                   <input class="form-control" placeholder="yyyy-mm-dd" type="date" id="end_date__lt" name="end_date__lt" value="{{ end_date__lt }}">
                   </input>
                 </div>
                 <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
-                  <div class="input-group-addon"/>After</div>
+                  <div class="input-group-addon"/>
+                    <span class="tooltip-ui" data-toggle="tooltip" title="Identify activities with end dates after the specified date.">
+                      After
+                    </span>
+                  </div>
                   <input class="form-control" placeholder="yyyy-mm-dd" type="date" id="end_date__gt" name="end_date__gt" value="{{ end_date__gt }}">
                   </input>
                 </div>
@@ -202,7 +226,11 @@
 
             <div class="row form-group">
               <label for="transaction_provider_org">
-                <div>Select transaction provider org</div>
+                <div>
+                  <span class="tooltip-ui" data-toggle="tooltip" title="Find activities where at least one transaction is funded by the specified entity.">
+                    Select transaction provider org
+                  </span>
+                </div>
               </label>
               <div class="clearfix"></div>
               <select data-placeholder="Choose a transaction provider organisation..." multiple class="chosen-select form-control" id="transaction_provider_org" name="transaction_provider_org[]">
@@ -212,7 +240,11 @@
 
             <div class="row form-group">
               <label for="participating_org">
-                <div>Select participating organisation</div>
+                <div>
+                  <span class="tooltip-ui" data-toggle="tooltip" title="Find activities where the speficied entity is listed as a participating organisation.">
+                    Select participating organisation
+                  </span>
+                </div>
               </label>
               <div class="clearfix"></div>
               <select data-placeholder="Choose a participating organisation..." multiple class="chosen-select form-control" id="participating_org" name="participating_org[]">
