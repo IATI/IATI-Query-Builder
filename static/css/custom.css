@@ -29,7 +29,7 @@ ul { list-style-type: none; margin: 0; padding: 0; }
 label { font-weight: bold; }
 li label { font-weight: normal; }
 select { display: block; }
-a.tooltip-ui { color: #555; border-bottom: 1px dashed #555; }
+span.tooltip-ui { color: #555; border-bottom: 1px dashed #555; }
 
 .explaination-text { font-size: 80%; }
 .tooltip-inner { min-width: 100px; max-width: 80%; }
