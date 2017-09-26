@@ -111,28 +111,28 @@ if (isset($_POST) && $_POST != NULL) {
     $api_link .= ".csv";
    //echo $api_link;
    //print_r($orgs);
-    if ( isset($orgs) || isset($type) || isset($sector) || isset($country) || isset($region) || isset($size)) {
-      $api_link .= "?";
-      $api_link_parameters = array();
-      if (isset($orgs)) {
-        $api_link_parameters ["reporting-org"] = implode('|',$orgs);
-      }
-      if (isset($type)) {
-        $api_link_parameters ["reporting-org.type"] = implode('|',$type);
-      }
-      if (isset($sector)) {
-        $api_link_parameters ["sector"] = implode('|',$sector);
-      }
-      if (isset($country) && !isset($region)) {
-        $api_link_parameters ["recipient-country"] = implode('|',$country);
-      }
-      if (isset($region) && !isset($country)) {
-        $api_link_parameters ["recipient-region"] = implode('|',$region);
-      }
-      if ($size == "stream=True") {
-        $api_link_parameters ["stream"] = "True";
-      }
-      $api_link .= http_build_query($api_link_parameters);
+    $api_link_parameters = array();
+    if (isset($orgs)) {
+      $api_link_parameters ["reporting-org"] = implode('|',$orgs);
+    }
+    if (isset($type)) {
+      $api_link_parameters ["reporting-org.type"] = implode('|',$type);
+    }
+    if (isset($sector)) {
+      $api_link_parameters ["sector"] = implode('|',$sector);
+    }
+    if (isset($country) && !isset($region)) {
+      $api_link_parameters ["recipient-country"] = implode('|',$country);
+    }
+    if (isset($region) && !isset($country)) {
+      $api_link_parameters ["recipient-region"] = implode('|',$region);
+    }
+    if ($size == "stream=True") {
+      $api_link_parameters ["stream"] = "True";
+    }
+    $query_string = http_build_query($api_link_parameters);
+    if ($query_string) {
+      $api_link .= "?" . $query_string;
     }
   } else {
     $error_message = "You must select something from each of the 3 required fields";
