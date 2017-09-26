@@ -337,6 +337,7 @@ $(function() {
   QueryBuilder.LinkGen = QueryBuilder.LinkGen || {};
   QueryBuilder.Preview = QueryBuilder.Preview || {};
   QueryBuilder.Plugins = QueryBuilder.Plugins || {};
+  QueryBuilder.UI = QueryBuilder.UI || {};
 
   /*
     Obtain the format.
@@ -531,12 +532,20 @@ $(function() {
     // initialise chosen
     $(".chosen-select").chosen();
 
-    $('button[type="reset"]').on('click', function() {
-      $(".chosen-select").val('').trigger("chosen:updated");
-    });
+    $('button[type="reset"]').on('click', QueryBuilder.UI.resetSelection);
 
     // init tooltips
     $('[data-toggle="tooltip"]').tooltip();
+  };
+
+  /*
+    Reset the values selected in the form.
+  */
+  QueryBuilder.UI.resetSelection = function(){
+    $(".chosen-select").val('').trigger("chosen:updated");
+
+    QueryBuilder.LinkGen.updateLink();
+    QueryBuilder.Preview.updateLink();
   };
 
   /*
