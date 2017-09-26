@@ -4,6 +4,7 @@ body { background-color: #e8eef7; }
 .footer { margin-top: 40px; }
 
 .alert { margin-left: 10px; margin-right: 10px; width: 100%; }
+#js-query-link { margin-left: 0; margin-right: 0; }
 
 .step-section { margin-top:25px; margin-bottom:25px; padding: 20px; border: #e8eef7 4px solid; }
 .step-section .title h3 { float: left; margin-top: -3px; margin-left: 10px; }
