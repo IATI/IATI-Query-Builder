@@ -542,10 +542,12 @@ $(function() {
     Reset the values selected in the form.
   */
   QueryBuilder.UI.resetSelection = function(){
-    $(".chosen-select").val('').trigger("chosen:updated");
+    setTimeout(function(){
+      $(".chosen-select").trigger("chosen:updated");
 
-    QueryBuilder.LinkGen.updateLink();
-    QueryBuilder.Preview.updateLink();
+      QueryBuilder.LinkGen.updateLink();
+      QueryBuilder.Preview.updateLink();
+    }, 0);
   };
 
   /*
