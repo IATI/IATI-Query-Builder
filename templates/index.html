@@ -251,7 +251,12 @@
 
 <script type="text/javascript">
 $(function() {
-  $(".chosen-select").chosen()
+  // remove '- None -' values from selects
+  // (they don't play nicely with chosen)
+  $('select option[value=""]').remove();
+
+  // initialise chosen
+  $(".chosen-select").chosen();
 
   var QueryBuilder = QueryBuilder || {};
   QueryBuilder.LinkGen = QueryBuilder.LinkGen || {};
