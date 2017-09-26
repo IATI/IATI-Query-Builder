@@ -18,18 +18,18 @@
 
       <div class="query-builder">
         <div class="row"><!-- result -->
-          {% if api_link %}
-            <div class="alert alert-success" role="alert">
-              <strong>Your link:</strong> <a href="{{ api_link }}">{{ api_link|escape }}</a>
+          <div class="alert alert-success {% if not api_link %}d-none{% endif %}" id="js-query-link" role="alert">
+            <strong>Your link:</strong> <a id="query-link" href="{{ api_link }}">{{ api_link|escape }}</a>
+            <span id="preview-link-wrapper">(<a id="preview-link" href="http://preview.iatistandard.org/" target="_blank" rel="noopener noreferrer">Preview as XML</a>)</span>
+          </div>
+
+          {% if notice_message %}
+            <div class="alert alert-warning" role="alert">
+              <strong>Warning:</strong> {{ notice_message }}
             </div>
+          {% endif %}
 
-            {% if notice_message %}
-              <div class="alert alert-warning" role="alert">
-                <strong>Warning:</strong> {{ notice_message }}
-              </div>
-            {% endif %}
-
-          {% elseif error_message %}
+          {% if error_message %}
             <div class="alert alert-danger" role="alert">
               <strong>Error:</strong> {{ error_message }}
             </div>
@@ -222,10 +222,6 @@
 
         </form>
 
-        <div class="alert alert-success" id="js-query-link" role="alert">
-          <p><strong>Your link:</strong> <a id="query-link" href="http://datastore.iatistandard.org/api/1/access/activity.csv">http://datastore.iatistandard.org/api/1/access/activity.csv</a> <span id="preview-link-wrapper">(<a id="preview-link" href="http://preview.iatistandard.org/" target="_blank" rel="noopener noreferrer">Preview as XML</a>)</span></p>
-        </div>
-
       </div><!-- end class="query-builder"-->
 
 
@@ -355,12 +351,16 @@ $(function() {
   Update the link displayed on the page.
   */
   QueryBuilder.LinkGen.updateLink = function(){
+    var alertElement = $('#js-query-link');
     var linkElement = $('#query-link');
     var linkLocation = QueryBuilder.LinkGen.createLink();
 
     // update the link
     linkElement.attr('href', linkLocation);
     linkElement.text(linkLocation);
+
+    // ensure the alert is visible
+    alertElement.removeClass('d-none');
   };
 
   /*
