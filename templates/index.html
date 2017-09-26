@@ -181,7 +181,7 @@
                       Before
                     </span>
                   </div>
-                  <input class="form-control" placeholder="yyyy-mm-dd" type="date" id="start_date__lt" name="start_date__lt" value="{{ start_date__lt }}">
+                  <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="start_date__lt" name="start_date__lt" value="{{ start_date__lt }}">
                   </input>
                 </div>
                 <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
@@ -190,7 +190,7 @@
                       After
                     </span>
                   </div>
-                  <input class="form-control" placeholder="yyyy-mm-dd" type="date" id="start_date__gt" name="start_date__gt" value="{{ start_date__gt }}">
+                  <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="start_date__gt" name="start_date__gt" value="{{ start_date__gt }}">
                   </input>
                 </div>
               </div>
@@ -209,7 +209,7 @@
                       Before
                     </span>
                   </div>
-                  <input class="form-control" placeholder="yyyy-mm-dd" type="date" id="end_date__lt" name="end_date__lt" value="{{ end_date__lt }}">
+                  <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="end_date__lt" name="end_date__lt" value="{{ end_date__lt }}">
                   </input>
                 </div>
                 <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
@@ -218,7 +218,7 @@
                       After
                     </span>
                   </div>
-                  <input class="form-control" placeholder="yyyy-mm-dd" type="date" id="end_date__gt" name="end_date__gt" value="{{ end_date__gt }}">
+                  <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="end_date__gt" name="end_date__gt" value="{{ end_date__gt }}">
                   </input>
                 </div>
               </div>
@@ -582,7 +582,7 @@ $(function() {
     Set the event listeners for the generated link.
   */
   QueryBuilder.LinkGen.SetupEventListeners = function(){
-    var formElements = $('select, input[type=date], input[type=radio]');
+    var formElements = $('select, input[type=text], input[type=radio]');
 
     formElements.change(QueryBuilder.LinkGen.updateLink);
     };
@@ -642,7 +642,7 @@ $(function() {
     Set the event listeners for the preview integration
   */
   QueryBuilder.Preview.SetupEventListeners = function(){
-    var formElements = $('select, input[type=date], input[type=radio]');
+    var formElements = $('select, input[type=text], input[type=radio]');
 
     formElements.change(QueryBuilder.Preview.updateLink);
   };
