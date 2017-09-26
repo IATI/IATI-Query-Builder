@@ -11,8 +11,6 @@ body { background-color: #e8eef7; }
 span.step {
   background: #cccccc;
   border-radius: 0.8em;
-  -moz-border-radius: 0.8em;
-  -webkit-border-radius: 0.8em;
   color: #ffffff;
   display: inline-block;
   font-weight: bold;
