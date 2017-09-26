@@ -40,7 +40,7 @@
           {% endif %}
         </div>
 
-        <form action="index.php" method="post" target="_self" onsubmit="">
+        <form id="qb-form" action="index.php" method="post" target="_self" onsubmit="">
 
           <h2>What information are you looking for?</h2>
           <p>These options let you filter the information you are looking for. Additional filters <a href="http://datastore.iatistandard.org/docs/api/#filtering">are available</a> by querying the Datastore manually.</p>
@@ -333,13 +333,11 @@
 
 <script type="text/javascript">
 $(function() {
-  $(".chosen-select").chosen();
-
-  $('[data-toggle="tooltip"]').tooltip();
-
   var QueryBuilder = QueryBuilder || {};
   QueryBuilder.LinkGen = QueryBuilder.LinkGen || {};
   QueryBuilder.Preview = QueryBuilder.Preview || {};
+  QueryBuilder.Plugins = QueryBuilder.Plugins || {};
+  QueryBuilder.UI = QueryBuilder.UI || {};
 
   /*
     Obtain the format.
@@ -525,11 +523,40 @@ $(function() {
   };
 
   /*
+    Initialise plugins and 3rd party code.
+  */
+  QueryBuilder.Plugins.Init = function(){
+    // remove '- None -' values from selects (they don't play nicely with chosen)
+    $('select option[value=""]').remove();
+
+    // initialise chosen
+    $(".chosen-select").chosen();
+
+    $('#qb-form').on('reset', QueryBuilder.UI.resetSelection);
+
+    // init tooltips
+    $('[data-toggle="tooltip"]').tooltip();
+  };
+
+  /*
+    Reset the values selected in the form.
+  */
+  QueryBuilder.UI.resetSelection = function(){
+    setTimeout(function(){
+      $(".chosen-select").trigger("chosen:updated");
+
+      QueryBuilder.LinkGen.updateLink();
+      QueryBuilder.Preview.updateLink();
+    });
+  };
+
+  /*
     Initialise the Query Builder JS.
   */
   QueryBuilder.Init = function(){
     QueryBuilder.LinkGen.Init();
     QueryBuilder.Preview.Init();
+    QueryBuilder.Plugins.Init();
   };
 
   QueryBuilder.Init();
