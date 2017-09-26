@@ -172,7 +172,7 @@
                     <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                   </div>
                 </label>
-                <ul>
+                <ul id="qb-format-list">
                   <li>
                     <label>
                       <input type="radio" name="entry.1085079344" value="activity" id="group_1085079344_1" aria-label="Activity"
@@ -218,7 +218,7 @@
                     <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                   </div>
                 </label>
-                <ul>
+                <ul id="qb-grouping-list">
                   <li>
                     <label>
                       <input type="radio" name="entry.71167035" value="summary" id="group_71167035_1" aria-label="Summary"
@@ -264,7 +264,7 @@
                     <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                   </div>
                 </label>
-                <ul>
+                <ul id="qb-sample-size-list">
                   <li>
                     <label>
                       <input type="radio" name="entry.1352830161" value="50 rows" id="group_1352830161_1" aria-label="50 rows"
@@ -333,21 +333,23 @@
 
 <script type="text/javascript">
 $(function() {
-  $(".chosen-select").chosen()
+  $(".chosen-select").chosen();
+
+  $('[data-toggle="tooltip"]').tooltip();
 
   var QueryBuilder = QueryBuilder || {};
   QueryBuilder.LinkGen = QueryBuilder.LinkGen || {};
   QueryBuilder.Preview = QueryBuilder.Preview || {};
 
   /*
-  Obtain the format.
+    Obtain the format.
   */
   QueryBuilder.LinkGen.getFormat = function(){
     return $('#qb-format-list input:checked').val();
   };
 
   /*
-  Obtain the grouping.
+    Obtain the grouping.
   */
   QueryBuilder.LinkGen.getGrouping = function(){
     var grouping = $('#qb-grouping-list input:checked').val();
@@ -360,10 +362,10 @@ $(function() {
   };
 
   /*
-  Obtain the sample size
+    Obtain the sample size
   */
   QueryBuilder.LinkGen.getSampleSize = function(){
-    var sampleSize = $('#qb-sample-size input:checked').val();
+    var sampleSize = $('#qb-sample-size-list input:checked').val();
 
     if(sampleSize === '50 rows'){
       return '';
@@ -373,7 +375,7 @@ $(function() {
   };
 
   /*
-  Obtain info for a multi-select.
+    Obtain info for a multi-select.
   */
   QueryBuilder.LinkGen.getMultiSelectInfo = function(id, name){
     var separator = '%7C';
@@ -399,7 +401,7 @@ $(function() {
   };
 
   /*
-  Convert an array of query string sections into a query string.
+    Convert an array of query string sections into a query string.
   */
   QueryBuilder.LinkGen.createQueryString = function(sections){
     var filteredSections = sections.filter(function(section){
@@ -414,7 +416,7 @@ $(function() {
   };
 
   /*
-  Generate the link from the page.
+    Generate the link from the page.
   */
   QueryBuilder.LinkGen.createLink = function(fileType){
     var baseURL = 'http://datastore.iatistandard.org/api/1/access/';
@@ -434,7 +436,7 @@ $(function() {
   };
 
   /*
-  Update the link displayed on the page.
+    Update the link displayed on the page.
   */
   QueryBuilder.LinkGen.updateLink = function(){
     var linkElement = $('#query-link');
@@ -454,10 +456,10 @@ $(function() {
     formElements.change(QueryBuilder.LinkGen.updateLink);
     };
 
-    /*
+  /*
     Initialise the client-side link generation.
-    */
-    QueryBuilder.LinkGen.Init = function(){
+  */
+  QueryBuilder.LinkGen.Init = function(){
     QueryBuilder.LinkGen.SetupEventListeners();
     QueryBuilder.LinkGen.updateLink();
   };
@@ -523,7 +525,7 @@ $(function() {
   };
 
   /*
-  Initialise the Query Builder JS.
+    Initialise the Query Builder JS.
   */
   QueryBuilder.Init = function(){
     QueryBuilder.LinkGen.Init();
@@ -532,11 +534,6 @@ $(function() {
 
   QueryBuilder.Init();
 });
-</script>
-<script>
-  $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-  });
 </script>
 
   </body>
