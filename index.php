@@ -39,28 +39,28 @@ if (isset($_POST) && $_POST != NULL) {
     }
   }
   $non_allowed_values = array("");
-  if (isset($_POST["start_date"])) {
-    $requested_date = filter_var($_POST["start_date"], FILTER_SANITIZE_STRING);
+  if (isset($_POST["start_date__lt"])) {
+    $requested_date = filter_var($_POST["start_date__lt"], FILTER_SANITIZE_STRING);
     if (!in_array($requested_date, $non_allowed_values)) {
-      $start_date[] = $requested_date;
+      $start_date__lt[] = $requested_date;
     }
   }
-  if (isset($_POST["before_start"])) {
-    $requested_range = filter_var($_POST["before_start"], FILTER_SANITIZE_STRING);
-    if ($requested_range == "on") {
-      $before_start[] = $requested_range;
-    }
-  }
-  if (isset($_POST["end_date"])) {
-    $requested_date = filter_var($_POST["end_date"], FILTER_SANITIZE_STRING);
+  if (isset($_POST["start_date__gt"])) {
+    $requested_date = filter_var($_POST["start_date__gt"], FILTER_SANITIZE_STRING);
     if (!in_array($requested_date, $non_allowed_values)) {
-      $end_date[] = $requested_date;
+      $start_date__gt[] = $requested_date;
     }
   }
-  if (isset($_POST["before_end"])) {
-    $requested_range = filter_var($_POST["before_end"], FILTER_SANITIZE_STRING);
-    if ($requested_range == "on") {
-      $before_end[] = $requested_range;
+  if (isset($_POST["end_date__lt"])) {
+    $requested_date = filter_var($_POST["end_date__lt"], FILTER_SANITIZE_STRING);
+    if (!in_array($requested_date, $non_allowed_values)) {
+      $end_date__lt[] = $requested_date;
+    }
+  }
+  if (isset($_POST["end_date__gt"])) {
+    $requested_date = filter_var($_POST["end_date__gt"], FILTER_SANITIZE_STRING);
+    if (!in_array($requested_date, $non_allowed_values)) {
+      $end_date__gt[] = $requested_date;
     }
   }
   //The rest of the values can be multiselect values so they are all passed as arrays!
@@ -87,7 +87,7 @@ if (isset($_POST) && $_POST != NULL) {
   if (isset($_POST["entry_1922375458"])) { //organisations
     $requested_orgs = filter_var_array($_POST["entry_1922375458"], FILTER_SANITIZE_STRING);
     foreach ($requested_orgs as $requested_org) {
-      if (in_array($requested_org, $allowed_orgs) && !empty($requested_org) ) { 
+      if (in_array($requested_org, $allowed_orgs) && !empty($requested_org) ) {
         $orgs[] = $requested_org;
       }
     }
@@ -153,7 +153,7 @@ if (isset($_POST) && $_POST != NULL) {
     $api_link .= ".csv";
    //echo $api_link;
    //print_r($orgs);
-    if ( isset($orgs) || isset($type) || isset($participating_orgs)|| isset($sector) || isset($country) || isset($region) || isset($provider_orgs) || isset($start_date) || isset($end_date)) {
+    if ( isset($orgs) || isset($type) || isset($participating_orgs) || isset($sector) || isset($country) || isset($region) || isset($provider_orgs) || isset($start_date__lt) || isset($start_date__gt) || isset($end_date__lt) || isset($end_date__gt) ) {
       $api_link .= "?";
       $api_link_parameters = array();
       if (isset($orgs)) {
@@ -177,17 +177,17 @@ if (isset($_POST) && $_POST != NULL) {
       if (isset($region) && !isset($country)) {
         $api_link_parameters ["recipient-region"] = implode('|',$region);
       }
-      if (isset($start_date) && isset($before_start)) {
-        $api_link_parameters ["start-date__lt"] = implode('|',$start_date);
+      if (isset($start_date__lt)) {
+        $api_link_parameters ["start-date__lt"] = implode('|',$start_date__lt);
       }
-      if (isset($start_date) && !isset($before_start)) {
-        $api_link_parameters ["start-date__gt"] = implode('|',$start_date);
+      if (isset($start_date__gt)) {
+        $api_link_parameters ["start-date__gt"] = implode('|',$start_date__gt);
       }
-      if (isset($end_date) && isset($before_end)) {
-        $api_link_parameters ["end-date__lt"] = implode('|',$end_date);
+      if (isset($end_date__lt)) {
+        $api_link_parameters ["end-date__lt"] = implode('|',$end_date__lt);
       }
-      if (isset($end_date) && !isset($before_end)) {
-        $api_link_parameters ["end-date__gt"] = implode('|',$end_date);
+      if (isset($end_date__gt)) {
+        $api_link_parameters ["end-date__gt"] = implode('|',$end_date__gt);
       }
       if ($size == "stream=True") {
         $api_link_parameters ["stream"] = "True";

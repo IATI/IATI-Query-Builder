@@ -213,49 +213,40 @@
               </div>
             </fieldset>
           </div>
-
-          <div class="form-row">
-            <div class="col">
+          <div class="row form-group">
+            <div class="col-auto">
               <label>
                 <div>Select start date</div>
               </label for="start_date">
               <div class="clearfix"></div>
-              <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-primary active">
-                  <input type="radio" name="before_start" id="before_start" value="on" checked> before
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="before_start" id="before_end_start" value=""> after
-                </label>
-              </div>
               <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
-                <input placeholder="yyyy-mm-dd" type="date" id="start_date" name="start_date">
-                  <div class="input-group-addon"/>
+                <div class="input-group-addon">Before</div>
+                <input class="form-control" placeholder="yyyy-mm-dd" type="date" id="start_date__lt" name="start_date__lt">
                 </input>
               </div>
-             </div>
+              <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                <div class="input-group-addon">After</div>
+                <input class="form-control" placeholder="yyyy-mm-dd" type="date" id="start_date__gt" name="start_date__gt">
+                </input>
+              </div>
             </div>
-
-          <div class="col">
-            <label>
-              <div>Select end date</div>
-            </label for="end_date">
-            <div class="clearfix"></div>
-            <div class="btn-group" data-toggle="buttons">
-              <label class="btn btn-primary active">
-                <input type="radio" name="before_end" id="before_end" value="on" checked> before
-              </label>
-              <label class="btn btn-primary">
-                <input type="radio" name="before_end" id="before_end" value=""> after
-              </label>
-            </div>
-            <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
-              <input placeholder="yyyy-mm-dd" type="date" id="end_date" name="end_date">
-                <div class="input-group-addon"/></div>
-              </input>
+            <div class="col-auto">
+              <label>
+                <div>Select end date</div>
+              </label for="end_date">
+              <div class="clearfix"></div>
+              <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                <div class="input-group-addon">Before</div>
+                <input class="form-control" placeholder="yyyy-mm-dd" type="date" id="end_date__lt" name="end_date__lt">
+                </input>
+              </div>
+              <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                <div class="input-group-addon"/>After</div>
+                <input class="form-control" placeholder="yyyy-mm-dd" type="date" id="end_date__gt" name="end_date__gt">
+                </input>
+              </div>
             </div>
           </div>
-        </div>
 
           <div class="row form-group">
             <label for="transaction_provider_org">
