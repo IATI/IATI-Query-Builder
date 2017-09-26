@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>IATI Data Store CSV Query Builder (Alpha Version)</title>
+    <title>IATI Datastore CSV Query Builder (Alpha Version)</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="static/css/custom.css" type="text/css" rel="stylesheet">
     <link href="static/css/bootstrap-chosen.css" type="text/css" rel="stylesheet">
@@ -11,8 +11,12 @@
     <div class="container">
       <div class="header row">
         <div class="col">
-          <h1 dir="ltr">IATI Data Store CSV Query Builder (Alpha Version)</h1>
-          <p>Please read the <a href="http://datastore.iatistandard.org/docs/user-guide/">user guide</a></p>
+          <h1 dir="ltr">
+            IATI Datastore CSV Query Builder
+            <sup><span class="badge badge-warning">Alpha</span></sup>
+          </h1>
+          <p>This tool allows you to build common queries to obtain data from the <a href="http://datastore.iatistandard.org/docs/">IATI Datastore</a> in CSV format.</p>
+          <p>You may create queries based on who is reporting the information, where the activity is happening, and the sector that the activity occurs in. This may then be configured to show individual activities, transactions or budgets.</p>
         </div>
       </div><!-- end class="header" -->
 
@@ -38,184 +42,262 @@
 
         <form action="index.php" method="post" target="_self" onsubmit="">
 
-          <div class="form-row">
-            <div class="col">
-              <label for="entry_1689841214">
-                <div>Choose format
-                  <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
+          <h2>What information are you looking for?</h2>
+          <p>These options let you filter the information you are looking for. Additional filters <a href="http://datastore.iatistandard.org/docs/api/#filtering">are available</a> by querying the Datastore manually.</p>
+
+          <div class="step-section">
+            <div class="title">
+              <span class="step">1</span>
+              <h3>Select the data source</h3>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="row form-group">
+              <label for="entry_1922375458">
+                <div>
+                  <span class="tooltip-ui" data-toggle="tooltip" title="The reporting organisation is the publisher of the IATI data. You would choose this filter to analyse a particular donor or agency's data. This might typically be used in conjunction with a country and/or a sector.">
+                    Select reporting organisation (eg UK DFID = GB-GOV-1)
+                  </a>
                 </div>
+                <div dir="ltr"></div>
               </label>
-              <ul id="qb-format-list">
-                <li>
-                  <label>
-                    <input type="radio" name="entry.1085079344" value="activity" id="group_1085079344_1" aria-label="Activity"
-                    {% if not dataset or (dataset and dataset == "activity") %}
-                      checked="checked"
-                    {% endif %}
-                    />
-                    <span>One activity per row</span>
-                  </label>
-                </li>
-                <li>
-                  <label>
-                    <input type="radio" name="entry.1085079344" value="transaction" id="group_1085079344_2" aria-label="Transaction"
-                    {% if dataset and dataset == "transaction" %}
-                      checked="checked"
-                    {% endif %}
-                    />
-                    <span>One transaction per row</span>
-                  </label>
-                </li>
-                <li>
-                  <label>
-                    <input type="radio" name="entry.1085079344" value="budget" id="group_1085079344_3" aria-label="Budget"
-                    {% if dataset and dataset == "budget" %}
-                      checked="checked"
-                    {% endif %}
-                    />
-                    <span>One budget per row</span>
-                  </label>
-                </li>
-              </ul>
+              <div class="clearfix"></div>
+              <select data-placeholder="Choose a reporting organisation..." multiple class="chosen-select form-control" id="entry_1922375458[]" name="entry.1922375458[]">
+                {{ include('include/reporting_org.html') }}
+              </select>
+              <p class="explaination-text"><strong>WARNING:</strong> The Datastore contains activities reported by both primary and secondary sources. A secondary source, such as the UNOCHA Financial Tracking Service (FTS), reports data it holds about other agencies’ activities. An agency may well report activities to both IATI and FTS, who in turn reports the same activities to IATI.</p>
             </div>
 
-            <div class="col">
-              <label for="entry_1948547450">
-                <div>Repeat rows?
-                  <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
+            <div class="row form-group">
+              <label for="entry_18398991">
+                <div>
+                  <span class="tooltip-ui" data-toggle="tooltip" title="This allows you to filter by the type of organisation. To access data on NGOs only you would select International NGO and/or National NGO and/or Regional NGO.">
+                    Select type of reporting organisation (eg. INGO = 21)
+                  </a>
                 </div>
               </label>
-              <ul id="qb-grouping-list">
-                <li>
-                  <label>
-                    <input type="radio" name="entry.71167035" value="summary" id="group_71167035_1" aria-label="Summary"
-                    {% if not format or (format and format == "summary") %}
-                      checked="checked"
-                    {% endif %}
-                    />
-                    <span>No</span>
-                  </label>
-                </li>
-                <li>
-                  <label>
-                    <input type="radio" name="entry.71167035" value="by_sector" id="group_71167035_2" aria-label="By Sector"
-                    {% if format and format == "by_sector" %}
-                      checked="checked"
-                    {% endif %}
-                    />
-                    <span>Multi-sector expansion</span>
-                  </label>
-                </li>
-                <li>
-                  <label>
-                    <input type="radio" name="entry.71167035" value="by_country" id="group_71167035_3" aria-label="By Country"
-                    {% if format and format == "by_country" %}
-                      checked="checked"
-                    {% endif %}
-                    />
-                    <span>Multi-country expansion</span>
-                  </label>
-                </li>
-              </ul>
-            </div>
-
-            <div class="col">
-              <label for="entry_1414120858">
-                <div>Choose sample size
-                  <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
-                </div>
-              </label>
-              <ul id="qb-sample-size">
-                <li>
-                  <label>
-                    <input type="radio" name="entry.1352830161" value="50 rows" id="group_1352830161_1" aria-label="50 rows"
-                    {% if not size or (size and size == "50 rows") %}
-                      checked="checked"
-                    {% endif %}
-                    />
-                    <span>50 rows</span>
-                  </label>
-                </li>
-                <li>
-                  <label>
-                    <input type="radio" name="entry.1352830161" value="Entire selection" id="group_1352830161_2" aria-label="Entire selection"
-                    {% if size and size == "stream=True" %}
-                      checked="checked"
-                    {% endif %}
-                    />
-                    <span>Entire selection</span>
-                  </label>
-                </li>
-              </ul>
+              <div class="clearfix"></div>
+              <select data-placeholder="Choose a reporting organisation type..." multiple class="chosen-select form-control" id="entry_18398991[]" name="entry.18398991[]">
+                {{ include('include/reporting_org_type.html') }}
+              </select>
             </div>
           </div>
 
-          <div class="row form-group">
-            <label for="entry_1922375458">
-              <div>Select reporting organisation (eg UK DFID = GB-GOV-1)</div>
-              <div dir="ltr"></div>
-            </label>
+          <div class="step-section">
+            <div class="title">
+              <span class="step">2</span>
+              <h3>Select the sector</h3>
+            </div>
             <div class="clearfix"></div>
-            <select data-placeholder="Choose a reporting organisation..." multiple class="chosen-select form-control" id="entry_1922375458[]" name="entry.1922375458[]">
-              {{ include('include/reporting_org.html') }}
-            </select>
+
+            <div class="row form-group">
+              <label for="entry_1954968791">
+                <div>
+                  <span class="tooltip-ui" data-toggle="tooltip" title="Choose the sector or sectors you are looking for.">
+                    Select sector (eg Basic Health Care = 12220)
+                  </a>
+                </div>
+              </label>
+              <div class="clearfix"></div>
+              <select data-placeholder="Choose a sector..." multiple class="chosen-select form-control" id="entry_1954968791[]" name="entry.1954968791[]">
+                {{ include('include/sector.html') }}
+              </select>
+              <p class="explaination-text">For more detail of what the sectors are, see the <a href="http://iatistandard.org/202/codelists/Sector" rel="noopener noreferrer" target="_blank">DAC 5 Digit Sector</a> codelist.</p>
+            </div>
           </div>
 
-          <div class="row form-group">
-            <label for="entry_18398991">
-              <div>Select type of reporting organisation (eg. INGO = 21)</div>
-            </label>
+          <div class="step-section">
+            <div class="title">
+              <span class="step">3</span>
+              <h3>Select recipient location</h3>
+            </div>
             <div class="clearfix"></div>
-            <select data-placeholder="Choose a reporting organisation type..." multiple class="chosen-select form-control" id="entry_18398991[]" name="entry.18398991[]">
-              {{ include('include/reporting_org_type.html') }}
-            </select>
-          </div>
 
-          <div class="row form-group">
-            <label for="entry_1954968791">
-              <div>Select sector (eg Basic Health Care = 12220)</div>
-            </label>
-            <div class="clearfix"></div>
-            <select data-placeholder="Choose a sector..." multiple class="chosen-select form-control" id="entry_1954968791[]" name="entry.1954968791[]">
-              {{ include('include/sector.html') }}
-            </select>
-          </div>
-
-          <div class="row form-group">
-            <fieldset>
-              <legend>Select EITHER a country OR a region</legend>
-              <div class="errorbox-good">
-                <div dir="ltr">
-                  <div>
-                    <label for="entry_605980212">
-                      <div>Select recipient country</div>
-                    </label>
-                    <div class="clearfix"></div>
-                    <select data-placeholder="Choose a country..." multiple class="chosen-select form-control" id="entry_605980212[]" name="entry.605980212[]">
-                      {{ include('include/country.html') }}
-                    </select>
+            <div class="row form-group">
+              <fieldset>
+                <legend>Select EITHER a country OR a region</legend>
+                <p class="explaination-text">Choosing a Region AND a Country will not return data as most publishers report to either a Country or a Region.</p>
+                <div class="errorbox-good">
+                  <div dir="ltr">
+                    <div>
+                      <label for="entry_605980212">
+                        <div>
+                          <span class="tooltip-ui" data-toggle="tooltip" title="Choose the recipient country or countries you are looking for.">
+                            Select recipient country
+                          </a>
+                        </div>
+                      </label>
+                      <div class="clearfix"></div>
+                      <select data-placeholder="Choose a country..." multiple class="chosen-select form-control" id="entry_605980212[]" name="entry.605980212[]">
+                        {{ include('include/country.html') }}
+                      </select>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="errorbox-good">
-                <div dir="ltr">
-                  <div>
-                    <label for="entry_1179181326">
-                      <div>Select region (eg South Asia = 679)</div>
-                    </label>
-                    <div class="clearfix"></div>
-                    <select data-placeholder="Choose a region..." multiple class="chosen-select form-control" id="entry_1179181326[]" name="entry.1179181326[]">
-                      {{ include('include/region.html') }}
-                    </select>
+                <div class="errorbox-good">
+                  <div dir="ltr">
+                    <div>
+                      <label for="entry_1179181326">
+                        <div>
+                          <span class="tooltip-ui" data-toggle="tooltip" title="Selecting a region will return activities that publishers have been unable to allocate to specific countries.">
+                            Select region (eg South Asia = 679)
+                          </a>
+                        </div>
+                      </label>
+                      <div class="clearfix"></div>
+                      <select data-placeholder="Choose a region..." multiple class="chosen-select form-control" id="entry_1179181326[]" name="entry.1179181326[]">
+                        {{ include('include/region.html') }}
+                      </select>
+                      <p class="explaination-text"><strong>WARNING:</strong> Regions do not automatically contain the countries they are made up of.</p>
+                    </div>
                   </div>
                 </div>
+              </fieldset>
+            </div>
+          </div>
+
+
+          <div class="step-section">
+            <div class="title">
+              <span class="step">4</span>
+              <h3>How would you like to view this information?</h3>
+            </div>
+            <div class="clearfix"></div>
+            <p>These options allow you to configure the way in which your data is disaggregated, making different sorts of analysis possible.</p>
+
+            <div class="form-row">
+              <div class="col">
+                <label for="entry_1689841214">
+                  <div>Choose format
+                    <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
+                  </div>
+                </label>
+                <ul id="qb-format-list">
+                  <li>
+                    <label>
+                      <input type="radio" name="entry.1085079344" value="activity" id="group_1085079344_1" aria-label="Activity"
+                      {% if not dataset or (dataset and dataset == "activity") %}
+                        checked="checked"
+                      {% endif %}
+                      />
+                      <span class="tooltip-ui" data-toggle="tooltip" title="Each row contains a unique activity. Financial information is aggregated. Budget information is excluded. Other potentially repeating fields (such as sectors) are reported in a single cell, delimited by semi-colons.">
+                        One activity per row
+                      </a>
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input type="radio" name="entry.1085079344" value="transaction" id="group_1085079344_2" aria-label="Transaction"
+                      {% if dataset and dataset == "transaction" %}
+                        checked="checked"
+                      {% endif %}
+                      />
+                      <span class="tooltip-ui" data-html="true" data-toggle="tooltip" title="Each row contains a unique financial transaction. The parent activity identifier and other activity-level fields are repeated for each transaction.<br/>If you are looking to analyse activity finances by year you need to select “Transactions” and calculate the year from the transaction date.">
+                        One transaction per row
+                      </a>
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input type="radio" name="entry.1085079344" value="budget" id="group_1085079344_3" aria-label="Budget"
+                      {% if dataset and dataset == "budget" %}
+                        checked="checked"
+                      {% endif %}
+                      />
+                      <span class="tooltip-ui" data-toggle="tooltip" title="Each row contains a budget-period entry. Transaction data is not included. The parent activity identifier and other activity-level fields are repeated for each budget line.">
+                        One budget per row
+                      </a>
+                    </label>
+                  </li>
+                </ul>
               </div>
-            </fieldset>
+
+              <div class="col">
+                <label for="entry_1948547450">
+                  <div>Repeat rows?
+                    <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
+                  </div>
+                </label>
+                <ul id="qb-grouping-list">
+                  <li>
+                    <label>
+                      <input type="radio" name="entry.71167035" value="summary" id="group_71167035_1" aria-label="Summary"
+                      {% if not format or (format and format == "summary") %}
+                        checked="checked"
+                      {% endif %}
+                      />
+                      <span class="tooltip-ui" data-toggle="tooltip" title="Information is not disaggregated, leading to repeated rows.">
+                        No
+                      </a>
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input type="radio" name="entry.71167035" value="by_sector" id="group_71167035_2" aria-label="By Sector"
+                      {% if format and format == "by_sector" %}
+                        checked="checked"
+                      {% endif %}
+                      />
+                      <span class="tooltip-ui" data-toggle="tooltip" title="Each Activity, Transaction or Budget row is repeated for each separate Sector reported. The corresponding percentage for the sector split is reported in a separate column. This allows you to easily add arithmetic to your spreadsheet to calculate values proportionately.">
+                        Multi-sector expansion
+                      </a>
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input type="radio" name="entry.71167035" value="by_country" id="group_71167035_3" aria-label="By Country"
+                      {% if format and format == "by_country" %}
+                        checked="checked"
+                      {% endif %}
+                      />
+                      <span class="tooltip-ui" data-toggle="tooltip" title="Each Activity, Transaction or Budget row is repeated for each separate Country reported. The corresponding percentage for the sector split is reported in a separate column. This allows you to easily add arithmetic to your spreadsheet to calculate values proportionately.">
+                        Multi-country expansion
+                      </a>
+                    </label>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col">
+                <label for="entry_1414120858">
+                  <div>Choose sample size
+                    <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
+                  </div>
+                </label>
+                <ul id="qb-sample-size-list">
+                  <li>
+                    <label>
+                      <input type="radio" name="entry.1352830161" value="50 rows" id="group_1352830161_1" aria-label="50 rows"
+                      {% if not size or (size and size == "50 rows") %}
+                        checked="checked"
+                      {% endif %}
+                      />
+                      <span class="tooltip-ui" data-toggle="tooltip" title="Preview your selection by viewing only the first 50 rows of data.">
+                        50 rows
+                      </a>
+                    </label>
+                  </li>
+                  <li>
+                    <label>
+                      <input type="radio" name="entry.1352830161" value="Entire selection" id="group_1352830161_2" aria-label="Entire selection"
+                      {% if size and size == "stream=True" %}
+                        checked="checked"
+                      {% endif %}
+                      />
+                      <span class="tooltip-ui" data-toggle="tooltip" title="View all of the data matching your query.">
+                        Entire selection
+                      </a>
+                      <p class="explaination-text"><strong>WARNING:</strong> Depending on the query, this may cause the query to take a long time to return your data.</p>
+                    </label>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
 
           <div class="form-row">
             <div class="col">
-              <noscript><button class="btn btn-primary" type="submit">Submit</button></noscript>
+              <noscript><button class="btn btn-primary" type="submit">Build Query</button></noscript>
               <button class="btn btn-secondary" type="reset">Reset</button>
             </div>
           </div>
@@ -223,7 +305,7 @@
         </form>
 
         <div class="alert alert-success" id="js-query-link" role="alert">
-          <p><strong>Your link:</strong> <a href="http://datastore.iatistandard.org/api/1/access/activity.csv">http://datastore.iatistandard.org/api/1/access/activity.csv</a></p>
+          <strong>Your link:</strong> <a id="query-link" href="http://datastore.iatistandard.org/api/1/access/activity.csv">http://datastore.iatistandard.org/api/1/access/activity.csv</a> <span id="preview-link-wrapper">(<a id="preview-link" href="http://preview.iatistandard.org/" target="_blank" rel="noopener noreferrer">Preview as XML</a>)</span>
         </div>
 
       </div><!-- end class="query-builder"-->
@@ -251,8 +333,7 @@
 
 <script type="text/javascript">
 $(function() {
-  // remove '- None -' values from selects
-  // (they don't play nicely with chosen)
+  // remove '- None -' values from selects (they don't play nicely with chosen)
   $('select option[value=""]').remove();
 
   // initialise chosen
@@ -262,8 +343,13 @@ $(function() {
     $(".chosen-select").val('').trigger("chosen:updated");
   });
 
+  // init tooltips
+  $('[data-toggle="tooltip"]').tooltip();
+
+  // do link building things
   var QueryBuilder = QueryBuilder || {};
   QueryBuilder.LinkGen = QueryBuilder.LinkGen || {};
+  QueryBuilder.Preview = QueryBuilder.Preview || {};
 
   /*
     Obtain the format.
@@ -280,8 +366,8 @@ $(function() {
 
     if(grouping === 'summary'){
       return '';
-    } else {
-      return '/' + grouping;
+      } else {
+        return '/' + grouping;
     }
   };
 
@@ -289,7 +375,7 @@ $(function() {
     Obtain the sample size
   */
   QueryBuilder.LinkGen.getSampleSize = function(){
-    var sampleSize = $('#qb-sample-size input:checked').val();
+    var sampleSize = $('#qb-sample-size-list input:checked').val();
 
     if(sampleSize === '50 rows'){
       return '';
@@ -309,7 +395,7 @@ $(function() {
 
     // have to use forEach because querySelectorAll is a NodeList which doesn't have a `map()` function
     selectedOptions.each(function(){
-      var value = $(this).val();
+        var value = $(this).val();
 
       // do not include the 'None' values
       if(value !== ''){
@@ -342,11 +428,10 @@ $(function() {
   /*
     Generate the link from the page.
   */
-  QueryBuilder.LinkGen.createLink = function(){
+  QueryBuilder.LinkGen.createLink = function(fileType){
     var baseURL = 'http://datastore.iatistandard.org/api/1/access/';
     var format = QueryBuilder.LinkGen.getFormat();
     var grouping = QueryBuilder.LinkGen.getGrouping();
-    var fileType = '.csv'
     var reportingOrgs = QueryBuilder.LinkGen.getMultiSelectInfo('1922375458', 'reporting-org');
     var reportingOrgTypes = QueryBuilder.LinkGen.getMultiSelectInfo('18398991', 'reporting-org.type');
     var sectors = QueryBuilder.LinkGen.getMultiSelectInfo('1954968791', 'sector');
@@ -355,6 +440,8 @@ $(function() {
     var sampleSize = QueryBuilder.LinkGen.getSampleSize();
     var queryString = QueryBuilder.LinkGen.createQueryString([reportingOrgs, reportingOrgTypes, sectors, recipientCountries, recipientRegions, sampleSize]);
 
+    fileType = fileType || '.csv';
+
     return baseURL + format + grouping + fileType + queryString;
   };
 
@@ -362,7 +449,7 @@ $(function() {
     Update the link displayed on the page.
   */
   QueryBuilder.LinkGen.updateLink = function(){
-    var linkElement = $('#js-query-link a');
+    var linkElement = $('#query-link');
     var linkLocation = QueryBuilder.LinkGen.createLink();
 
     // update the link
@@ -371,13 +458,13 @@ $(function() {
   };
 
   /*
-    Set the event listeners.
+    Set the event listeners for the generated link.
   */
   QueryBuilder.LinkGen.SetupEventListeners = function(){
     var formElements = $('select, input[type=radio]');
 
     formElements.change(QueryBuilder.LinkGen.updateLink);
-  };
+    };
 
   /*
     Initialise the client-side link generation.
@@ -388,10 +475,71 @@ $(function() {
   };
 
   /*
+    Generate the link to the Preview tool.
+  */
+  QueryBuilder.Preview.createLink = function(){
+    var unescapedLink = QueryBuilder.LinkGen.createLink('.xml');
+    var previewBaseURL = 'http://preview.iatistandard.org/index.php?url=';
+
+    // ensure it's only a Preview and not the full set of data being viewed
+    var sampleSize = QueryBuilder.LinkGen.getSampleSize();
+
+    if(sampleSize.length > 0){
+      unescapedLink = unescapedLink.replace(sampleSize, '');
+    }
+
+    return previewBaseURL + encodeURIComponent(unescapedLink);
+  };
+
+  /*
+    Update the integration with the Preview tool.
+  */
+  QueryBuilder.Preview.updateLink = function(){
+    var previewButtonElement = $('#preview-link');
+
+    previewButtonElement.attr('href', QueryBuilder.Preview.createLink());
+    QueryBuilder.Preview.updateVisibility();
+  };
+
+  /*
+    Changes the Preview link visibility based on whether the data can be viewed using the Preview Tool.
+  */
+  QueryBuilder.Preview.updateVisibility = function(){
+    var format = QueryBuilder.LinkGen.getFormat();
+    var grouping = QueryBuilder.LinkGen.getGrouping();
+    var canPreview = (format === 'activity') && (grouping === '');
+    var previewWrapper = $('#preview-link-wrapper');
+
+    if(canPreview){
+      previewWrapper.show();
+    } else {
+      previewWrapper.hide();
+    }
+  };
+
+  /*
+    Set the event listeners for the preview integration
+  */
+  QueryBuilder.Preview.SetupEventListeners = function(){
+    var formElements = $('select, input[type=radio]');
+
+    formElements.change(QueryBuilder.Preview.updateLink);
+  };
+
+  /*
+    Initialise the preview integration.
+  */
+  QueryBuilder.Preview.Init = function(){
+    QueryBuilder.Preview.SetupEventListeners();
+    QueryBuilder.Preview.updateLink();
+  };
+
+  /*
     Initialise the Query Builder JS.
   */
   QueryBuilder.Init = function(){
     QueryBuilder.LinkGen.Init();
+    QueryBuilder.Preview.Init();
   };
 
   QueryBuilder.Init();
