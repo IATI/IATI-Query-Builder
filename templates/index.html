@@ -304,7 +304,7 @@
 
         </form>
 
-        <div class="alert alert-success" id="js-query-link" role="alert">
+        <div class="alert alert-success d-none" id="js-query-link" role="alert">
           <strong>Your link:</strong> <a id="query-link" href="http://datastore.iatistandard.org/api/1/access/activity.csv">http://datastore.iatistandard.org/api/1/access/activity.csv</a> <span id="preview-link-wrapper">(<a id="preview-link" href="http://preview.iatistandard.org/" target="_blank" rel="noopener noreferrer">Preview as XML</a>)</span>
         </div>
 
@@ -460,6 +460,9 @@ $(function() {
   QueryBuilder.LinkGen.Init = function(){
     QueryBuilder.LinkGen.SetupEventListeners();
     QueryBuilder.LinkGen.updateLink();
+
+    // ensure the alert is visible
+    $('#js-query-link').removeClass('d-none');
   };
 
   /*
