@@ -19,7 +19,8 @@
       <div class="query-builder">
         <div class="row"><!-- result -->
           <div class="alert alert-success {% if not api_link %}d-none{% endif %}" id="js-query-link" role="alert">
-            <strong>Your link:</strong> <a href="{{ api_link }}">{{ api_link|escape }}</a>
+            <strong>Your link:</strong> <a id="query-link" href="{{ api_link }}">{{ api_link|escape }}</a>
+            <span id="preview-link-wrapper">(<a id="preview-link" href="http://preview.iatistandard.org/" target="_blank" rel="noopener noreferrer">Preview as XML</a>)</span>
           </div>
 
           {% if notice_message %}
@@ -250,29 +251,30 @@ $(function() {
 
   var QueryBuilder = QueryBuilder || {};
   QueryBuilder.LinkGen = QueryBuilder.LinkGen || {};
+  QueryBuilder.Preview = QueryBuilder.Preview || {};
 
   /*
-    Obtain the format.
+  Obtain the format.
   */
   QueryBuilder.LinkGen.getFormat = function(){
     return $('#qb-format-list input:checked').val();
   };
 
   /*
-    Obtain the grouping.
+  Obtain the grouping.
   */
   QueryBuilder.LinkGen.getGrouping = function(){
     var grouping = $('#qb-grouping-list input:checked').val();
 
     if(grouping === 'summary'){
       return '';
-    } else {
-      return '/' + grouping;
+      } else {
+        return '/' + grouping;
     }
   };
 
   /*
-    Obtain the sample size
+  Obtain the sample size
   */
   QueryBuilder.LinkGen.getSampleSize = function(){
     var sampleSize = $('#qb-sample-size input:checked').val();
@@ -285,7 +287,7 @@ $(function() {
   };
 
   /*
-    Obtain info for a multi-select.
+  Obtain info for a multi-select.
   */
   QueryBuilder.LinkGen.getMultiSelectInfo = function(id, name){
     var separator = '%7C';
@@ -295,7 +297,7 @@ $(function() {
 
     // have to use forEach because querySelectorAll is a NodeList which doesn't have a `map()` function
     selectedOptions.each(function(){
-      var value = $(this).val();
+        var value = $(this).val();
 
       // do not include the 'None' values
       if(value !== ''){
@@ -311,7 +313,7 @@ $(function() {
   };
 
   /*
-    Convert an array of query string sections into a query string.
+  Convert an array of query string sections into a query string.
   */
   QueryBuilder.LinkGen.createQueryString = function(sections){
     var filteredSections = sections.filter(function(section){
@@ -326,13 +328,12 @@ $(function() {
   };
 
   /*
-    Generate the link from the page.
+  Generate the link from the page.
   */
-  QueryBuilder.LinkGen.createLink = function(){
+  QueryBuilder.LinkGen.createLink = function(fileType){
     var baseURL = 'http://datastore.iatistandard.org/api/1/access/';
     var format = QueryBuilder.LinkGen.getFormat();
     var grouping = QueryBuilder.LinkGen.getGrouping();
-    var fileType = '.csv'
     var reportingOrgs = QueryBuilder.LinkGen.getMultiSelectInfo('1922375458', 'reporting-org');
     var reportingOrgTypes = QueryBuilder.LinkGen.getMultiSelectInfo('18398991', 'reporting-org.type');
     var sectors = QueryBuilder.LinkGen.getMultiSelectInfo('1954968791', 'sector');
@@ -341,15 +342,17 @@ $(function() {
     var sampleSize = QueryBuilder.LinkGen.getSampleSize();
     var queryString = QueryBuilder.LinkGen.createQueryString([reportingOrgs, reportingOrgTypes, sectors, recipientCountries, recipientRegions, sampleSize]);
 
+    fileType = fileType || '.csv';
+
     return baseURL + format + grouping + fileType + queryString;
   };
 
   /*
-    Update the link displayed on the page.
+  Update the link displayed on the page.
   */
   QueryBuilder.LinkGen.updateLink = function(){
     var alertElement = $('#js-query-link');
-    var linkElement = alertElement.find('a');
+    var linkElement = $('#query-link');
     var linkLocation = QueryBuilder.LinkGen.createLink();
 
     // update the link
@@ -361,27 +364,88 @@ $(function() {
   };
 
   /*
-    Set the event listeners.
+    Set the event listeners for the generated link.
   */
   QueryBuilder.LinkGen.SetupEventListeners = function(){
     var formElements = $('select, input[type=radio]');
 
     formElements.change(QueryBuilder.LinkGen.updateLink);
-  };
+    };
 
-  /*
+    /*
     Initialise the client-side link generation.
-  */
-  QueryBuilder.LinkGen.Init = function(){
+    */
+    QueryBuilder.LinkGen.Init = function(){
     QueryBuilder.LinkGen.SetupEventListeners();
     QueryBuilder.LinkGen.updateLink();
   };
 
   /*
-    Initialise the Query Builder JS.
+    Generate the link to the Preview tool.
+  */
+  QueryBuilder.Preview.createLink = function(){
+    var unescapedLink = QueryBuilder.LinkGen.createLink('.xml');
+    var previewBaseURL = 'http://preview.iatistandard.org/index.php?url=';
+
+    // ensure it's only a Preview and not the full set of data being viewed
+    var sampleSize = QueryBuilder.LinkGen.getSampleSize();
+
+    if(sampleSize.length > 0){
+      unescapedLink = unescapedLink.replace(sampleSize, '');
+    }
+
+    return previewBaseURL + encodeURIComponent(unescapedLink);
+  };
+
+  /*
+    Update the integration with the Preview tool.
+  */
+  QueryBuilder.Preview.updateLink = function(){
+    var previewButtonElement = $('#preview-link');
+
+    previewButtonElement.attr('href', QueryBuilder.Preview.createLink());
+    QueryBuilder.Preview.updateVisibility();
+  };
+
+  /*
+    Changes the Preview link visibility based on whether the data can be viewed using the Preview Tool.
+  */
+  QueryBuilder.Preview.updateVisibility = function(){
+    var format = QueryBuilder.LinkGen.getFormat();
+    var grouping = QueryBuilder.LinkGen.getGrouping();
+    var canPreview = (format === 'activity') && (grouping === '');
+    var previewWrapper = $('#preview-link-wrapper');
+
+    if(canPreview){
+      previewWrapper.show();
+    } else {
+      previewWrapper.hide();
+    }
+  };
+
+  /*
+    Set the event listeners for the preview integration
+  */
+  QueryBuilder.Preview.SetupEventListeners = function(){
+    var formElements = $('select, input[type=radio]');
+
+    formElements.change(QueryBuilder.Preview.updateLink);
+  };
+
+  /*
+    Initialise the preview integration.
+  */
+  QueryBuilder.Preview.Init = function(){
+    QueryBuilder.Preview.SetupEventListeners();
+    QueryBuilder.Preview.updateLink();
+  };
+
+  /*
+  Initialise the Query Builder JS.
   */
   QueryBuilder.Init = function(){
     QueryBuilder.LinkGen.Init();
+    QueryBuilder.Preview.Init();
   };
 
   QueryBuilder.Init();
