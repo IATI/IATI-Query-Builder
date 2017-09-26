@@ -172,7 +172,7 @@
                     <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                   </div>
                 </label>
-                <ul>
+                <ul id="qb-format-list">
                   <li>
                     <label>
                       <input type="radio" name="entry.1085079344" value="activity" id="group_1085079344_1" aria-label="Activity"
@@ -218,7 +218,7 @@
                     <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                   </div>
                 </label>
-                <ul>
+                <ul id="qb-grouping-list">
                   <li>
                     <label>
                       <input type="radio" name="entry.71167035" value="summary" id="group_71167035_1" aria-label="Summary"
@@ -264,7 +264,7 @@
                     <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                   </div>
                 </label>
-                <ul>
+                <ul id="qb-sample-size-list">
                   <li>
                     <label>
                       <input type="radio" name="entry.1352830161" value="50 rows" id="group_1352830161_1" aria-label="50 rows"
@@ -333,7 +333,9 @@
 
 <script type="text/javascript">
 $(function() {
-  $(".chosen-select").chosen()
+  $(".chosen-select").chosen();
+
+  $('[data-toggle="tooltip"]').tooltip();
 
   var QueryBuilder = QueryBuilder || {};
   QueryBuilder.LinkGen = QueryBuilder.LinkGen || {};
@@ -363,7 +365,7 @@ $(function() {
   Obtain the sample size
   */
   QueryBuilder.LinkGen.getSampleSize = function(){
-    var sampleSize = $('#qb-sample-size input:checked').val();
+    var sampleSize = $('#qb-sample-size-list input:checked').val();
 
     if(sampleSize === '50 rows'){
       return '';
@@ -532,11 +534,6 @@ $(function() {
 
   QueryBuilder.Init();
 });
-</script>
-<script>
-  $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-  });
 </script>
 
   </body>
