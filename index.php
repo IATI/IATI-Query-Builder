@@ -235,5 +235,10 @@ $context['regions'] = get_regions();
 $context['org_types'] = get_org_types();
 $context['sector_categories'] = get_sector_categories();
 
+$context['start_date__lt'] = isset($start_date__lt) ? $start_date__lt[0] : null;
+$context['start_date__gt'] = isset($start_date__gt) ? $start_date__gt[0] : null;
+$context['end_date__lt'] = isset($end_date__lt) ? $end_date__lt[0] : null;
+$context['end_date__gt'] = isset($end_date__gt) ? $end_date__gt[0] : null;
+
 echo $twig->render('index.html', $context);
 ?>
