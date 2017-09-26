@@ -9,6 +9,8 @@
   </head>
   <body dir="ltr">
     <div class="container">
+      <div id="qb-top"></div>
+
       <div class="header row">
         <div class="col">
           <h1 dir="ltr">
@@ -545,6 +547,8 @@ $(function() {
   */
   QueryBuilder.UI.resetSelection = function(){
     setTimeout(function(){
+      $(window).scrollTop(0);
+
       $(".chosen-select").trigger("chosen:updated");
 
       QueryBuilder.LinkGen.updateLink();
