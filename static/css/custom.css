@@ -30,7 +30,7 @@ label { font-weight: bold; }
 li label { font-weight: normal; }
 select { display: block; }
 span.tooltip-ui { border-bottom: 1px dashed #555; }
-button[type="reset"] { cursor: pointer; }
+.submit-buttons button { cursor: pointer; }
 
 .explaination-text { font-size: 80%; }
 .tooltip-inner { min-width: 100px; max-width: 80%; }
