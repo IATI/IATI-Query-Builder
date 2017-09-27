@@ -6,9 +6,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="static/css/custom.css" type="text/css" rel="stylesheet">
     <link href="static/css/bootstrap-chosen.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css">
   </head>
   <body dir="ltr">
     <div class="container">
+      <div id="qb-top"></div>
+
       <div class="header row">
         <div class="col">
           <h1 dir="ltr">
@@ -160,6 +163,102 @@
           <div class="step-section">
             <div class="title">
               <span class="step">4</span>
+              <h3>Select additional fields</h3>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="row form-group">
+              <div class="col-auto">
+                <label>
+                  <div>
+                    <span class="tooltip-ui" data-toggle="tooltip" title="Specify the range of activity start dates that you are looking for (defaults to all).">
+                      Select start date
+                    </span>
+                  </div>
+                </label for="start_date">
+                <div class="clearfix"></div>
+                <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                  <div class="input-group-addon">
+                    <span class="tooltip-ui" data-toggle="tooltip" title="Identify activities with start dates after the specified date.">
+                      After
+                    </span>
+                  </div>
+                  <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="start_date__gt" name="start_date__gt" value="{{ start_date__gt }}">
+                  </input>
+                </div>
+                <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                  <div class="input-group-addon">
+                    <span class="tooltip-ui" data-toggle="tooltip" title="Identify activities with start dates before the specified date.">
+                      Before
+                    </span>
+                  </div>
+                  <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="start_date__lt" name="start_date__lt" value="{{ start_date__lt }}">
+                  </input>
+                </div>
+              </div>
+              <div class="col-auto">
+                <label>
+                  <div>
+                    <span class="tooltip-ui" data-toggle="tooltip" title="Specify the range of activity end dates that you are looking for (defaults to all).">
+                      Select end date
+                    </span>
+                  </div>
+                </label for="end_date">
+                <div class="clearfix"></div>
+                <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                  <div class="input-group-addon"/>
+                    <span class="tooltip-ui" data-toggle="tooltip" title="Identify activities with end dates after the specified date.">
+                      After
+                    </span>
+                  </div>
+                  <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="end_date__gt" name="end_date__gt" value="{{ end_date__gt }}">
+                  </input>
+                </div>
+                <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+                  <div class="input-group-addon">
+                    <span class="tooltip-ui" data-toggle="tooltip" title="Identify activities with end dates before the specified date.">
+                      Before
+                    </span>
+                  </div>
+                  <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="end_date__lt" name="end_date__lt" value="{{ end_date__lt }}">
+                  </input>
+                </div>
+              </div>
+            </div>
+
+            <div class="row form-group">
+              <label for="transaction_provider-org">
+                <div>
+                  <span class="tooltip-ui" data-toggle="tooltip" title="Find activities where at least one transaction is funded by the specified entity.">
+                    Select transaction provider org
+                  </span>
+                </div>
+              </label>
+              <div class="clearfix"></div>
+              <select data-placeholder="Choose a transaction provider organisation..." multiple class="chosen-select form-control" id="transaction_provider-org" name="transaction_provider-org[]">
+                {{ include('include/transaction_provider_org.html') }}
+              </select>
+            </div>
+
+            <div class="row form-group">
+              <label for="participating-org">
+                <div>
+                  <span class="tooltip-ui" data-toggle="tooltip" title="Find activities where the speficied entity is listed as a participating organisation.">
+                    Select participating organisation
+                  </span>
+                </div>
+              </label>
+              <div class="clearfix"></div>
+              <select data-placeholder="Choose a participating organisation..." multiple class="chosen-select form-control" id="participating-org" name="participating-org[]">
+                {{ include('include/participating_org.html') }}
+              </select>
+            </div>
+          </div>
+
+
+          <div class="step-section">
+            <div class="title">
+              <span class="step">5</span>
               <h3>How would you like to view this information?</h3>
             </div>
             <div class="clearfix"></div>
@@ -295,8 +394,12 @@
             </div>
           </div>
 
+          <br/>
           <div class="form-row">
-            <div class="col">
+
+            <div class="clearfix"></div>
+
+            <div class="col submit-buttons">
               <noscript><button class="btn btn-primary" type="submit">Build Query</button></noscript>
               <button class="btn btn-secondary" type="reset">Reset</button>
             </div>
@@ -304,7 +407,9 @@
 
         </form>
 
-        <div class="alert alert-success" id="js-query-link" role="alert">
+        <div style="width:100%;height:1em"></div>
+
+        <div style="display:none;" class="alert alert-success" id="js-query-link" role="alert">
           <strong>Your link:</strong> <a id="query-link" href="http://datastore.iatistandard.org/api/1/access/activity.csv">http://datastore.iatistandard.org/api/1/access/activity.csv</a> <span id="preview-link-wrapper">(<a id="preview-link" href="http://preview.iatistandard.org/" target="_blank" rel="noopener noreferrer">Preview as XML</a>)</span>
         </div>
 
@@ -330,6 +435,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <script src="static/js/chosen.jquery.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="static/js/datepicker.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 $(function() {
@@ -369,6 +476,19 @@ $(function() {
       return '';
     } else {
       return 'stream=True'
+    }
+  };
+
+  /*
+    Obtain the calendar date
+  */
+  QueryBuilder.LinkGen.getCalendarDate = function(id, name){
+    var calendarDate = $('#' + id).val();
+
+    if(calendarDate.trim() === ''){
+      return '';
+    } else {
+      return name + '=' + calendarDate;
     }
   };
 
@@ -425,8 +545,27 @@ $(function() {
     var sectors = QueryBuilder.LinkGen.getMultiSelectInfo('sector');
     var recipientCountries = QueryBuilder.LinkGen.getMultiSelectInfo('recipient-country');
     var recipientRegions = QueryBuilder.LinkGen.getMultiSelectInfo('recipient-region');
+    var start_date__lt = QueryBuilder.LinkGen.getCalendarDate('start_date__lt', 'start-date__lt');
+    var start_date__gt = QueryBuilder.LinkGen.getCalendarDate('start_date__gt', 'start-date__gt');
+    var end_date__lt = QueryBuilder.LinkGen.getCalendarDate('end_date__lt', 'end-date__lt');
+    var end_date__gt = QueryBuilder.LinkGen.getCalendarDate('end_date__gt', 'end-date__gt');
+    var transactionProviderOrg = QueryBuilder.LinkGen.getMultiSelectInfo('transaction_provider-org');
+    var participating_org = QueryBuilder.LinkGen.getMultiSelectInfo('participating-org');
     var sampleSize = QueryBuilder.LinkGen.getSampleSize();
-    var queryString = QueryBuilder.LinkGen.createQueryString([reportingOrgs, reportingOrgTypes, sectors, recipientCountries, recipientRegions, sampleSize]);
+    var queryString = QueryBuilder.LinkGen.createQueryString([
+      reportingOrgs,
+      reportingOrgTypes,
+      sectors,
+      recipientCountries,
+      recipientRegions,
+      start_date__lt,
+      start_date__gt,
+      end_date__lt,
+      end_date__gt,
+      transactionProviderOrg,
+      participating_org,
+      sampleSize
+    ]);
 
     fileType = fileType || '.csv';
 
@@ -449,7 +588,7 @@ $(function() {
     Set the event listeners for the generated link.
   */
   QueryBuilder.LinkGen.SetupEventListeners = function(){
-    var formElements = $('select, input[type=radio]');
+    var formElements = $('select, input[type=text], input[type=radio]');
 
     formElements.change(QueryBuilder.LinkGen.updateLink);
     };
@@ -458,6 +597,8 @@ $(function() {
     Initialise the client-side link generation.
   */
   QueryBuilder.LinkGen.Init = function(){
+    $('#js-query-link').show();
+
     QueryBuilder.LinkGen.SetupEventListeners();
     QueryBuilder.LinkGen.updateLink();
   };
@@ -509,7 +650,7 @@ $(function() {
     Set the event listeners for the preview integration
   */
   QueryBuilder.Preview.SetupEventListeners = function(){
-    var formElements = $('select, input[type=radio]');
+    var formElements = $('select, input[type=text], input[type=radio]');
 
     formElements.change(QueryBuilder.Preview.updateLink);
   };
@@ -543,6 +684,8 @@ $(function() {
   */
   QueryBuilder.UI.resetSelection = function(){
     setTimeout(function(){
+      $(window).scrollTop(0);
+
       $(".chosen-select").trigger("chosen:updated");
 
       QueryBuilder.LinkGen.updateLink();
