@@ -396,9 +396,9 @@
 
           <br/>
           <div class="form-row">
-            
+
             <div class="clearfix"></div>
-            
+
             <div class="col submit-buttons">
               <noscript><button class="btn btn-primary" type="submit">Build Query</button></noscript>
               <button class="btn btn-secondary" type="reset">Reset</button>
@@ -409,7 +409,7 @@
 
         <div style="width:100%;height:1em"></div>
 
-        <div class="alert alert-success" id="js-query-link" role="alert">
+        <div style="display:none;" class="alert alert-success" id="js-query-link" role="alert">
           <strong>Your link:</strong> <a id="query-link" href="http://datastore.iatistandard.org/api/1/access/activity.csv">http://datastore.iatistandard.org/api/1/access/activity.csv</a> <span id="preview-link-wrapper">(<a id="preview-link" href="http://preview.iatistandard.org/" target="_blank" rel="noopener noreferrer">Preview as XML</a>)</span>
         </div>
 
@@ -597,6 +597,8 @@ $(function() {
     Initialise the client-side link generation.
   */
   QueryBuilder.LinkGen.Init = function(){
+    $('#js-query-link').show();
+
     QueryBuilder.LinkGen.SetupEventListeners();
     QueryBuilder.LinkGen.updateLink();
   };
