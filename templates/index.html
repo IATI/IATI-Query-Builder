@@ -56,7 +56,7 @@
             <div class="clearfix"></div>
 
             <div class="row form-group">
-              <label for="reporting-org">
+              <label for="entry_1922375458">
                 <div>
                   <span class="tooltip-ui" data-toggle="tooltip" title="The reporting organisation is the publisher of the IATI data. You would choose this filter to analyse a particular donor or agency's data. This might typically be used in conjunction with a country and/or a sector.">
                     Select reporting organisation (eg UK DFID = GB-GOV-1)
@@ -65,14 +65,14 @@
                 <div dir="ltr"></div>
               </label>
               <div class="clearfix"></div>
-              <select data-placeholder="Choose a reporting organisation..." multiple class="chosen-select form-control" id="reporting-org" name="reporting-org[]">
+              <select data-placeholder="Choose a reporting organisation..." multiple class="chosen-select form-control" id="entry_1922375458[]" name="entry.1922375458[]">
                 {{ include('include/reporting_org.html') }}
               </select>
               <p class="explaination-text"><strong>WARNING:</strong> The Datastore contains activities reported by both primary and secondary sources. A secondary source, such as the UNOCHA Financial Tracking Service (FTS), reports data it holds about other agencies’ activities. An agency may well report activities to both IATI and FTS, who in turn reports the same activities to IATI.</p>
             </div>
 
             <div class="row form-group">
-              <label for="reporting-org.type">
+              <label for="entry_18398991">
                 <div>
                   <span class="tooltip-ui" data-toggle="tooltip" title="This allows you to filter by the type of organisation. To access data on NGOs only you would select International NGO and/or National NGO and/or Regional NGO.">
                     Select type of reporting organisation (eg. INGO = 21)
@@ -80,7 +80,7 @@
                 </div>
               </label>
               <div class="clearfix"></div>
-              <select data-placeholder="Choose a reporting organisation type..." multiple class="chosen-select form-control" id="reporting-org.type" name="reporting-org.type[]">
+              <select data-placeholder="Choose a reporting organisation type..." multiple class="chosen-select form-control" id="entry_18398991[]" name="entry.18398991[]">
                 {{ include('include/reporting_org_type.html') }}
               </select>
             </div>
@@ -94,7 +94,7 @@
             <div class="clearfix"></div>
 
             <div class="row form-group">
-              <label for="sector">
+              <label for="entry_1954968791">
                 <div>
                   <span class="tooltip-ui" data-toggle="tooltip" title="Choose the sector or sectors you are looking for.">
                     Select sector (eg Basic Health Care = 12220)
@@ -102,7 +102,7 @@
                 </div>
               </label>
               <div class="clearfix"></div>
-              <select data-placeholder="Choose a sector..." multiple class="chosen-select form-control" id="sector" name="sector[]">
+              <select data-placeholder="Choose a sector..." multiple class="chosen-select form-control" id="entry_1954968791[]" name="entry.1954968791[]">
                 {{ include('include/sector.html') }}
               </select>
               <p class="explaination-text">For more detail of what the sectors are, see the <a href="http://iatistandard.org/202/codelists/Sector" rel="noopener noreferrer" target="_blank">DAC 5 Digit Sector</a> codelist.</p>
@@ -123,7 +123,7 @@
                 <div class="errorbox-good">
                   <div dir="ltr">
                     <div>
-                      <label for="recipient-country">
+                      <label for="entry_605980212">
                         <div>
                           <span class="tooltip-ui" data-toggle="tooltip" title="Choose the recipient country or countries you are looking for.">
                             Select recipient country
@@ -131,7 +131,7 @@
                         </div>
                       </label>
                       <div class="clearfix"></div>
-                      <select data-placeholder="Choose a country..." multiple class="chosen-select form-control" id="recipient-country" name="recipient-country[]">
+                      <select data-placeholder="Choose a country..." multiple class="chosen-select form-control" id="entry_605980212[]" name="entry.605980212[]">
                         {{ include('include/country.html') }}
                       </select>
                     </div>
@@ -140,7 +140,7 @@
                 <div class="errorbox-good">
                   <div dir="ltr">
                     <div>
-                      <label for="recipient-region">
+                      <label for="entry_1179181326">
                         <div>
                           <span class="tooltip-ui" data-toggle="tooltip" title="Selecting a region will return activities that publishers have been unable to allocate to specific countries.">
                             Select region (eg South Asia = 679)
@@ -148,7 +148,7 @@
                         </div>
                       </label>
                       <div class="clearfix"></div>
-                      <select data-placeholder="Choose a region..." multiple class="chosen-select form-control" id="recipient-region" name="recipient-region[]">
+                      <select data-placeholder="Choose a region..." multiple class="chosen-select form-control" id="entry_1179181326[]" name="entry.1179181326[]">
                         {{ include('include/region.html') }}
                       </select>
                       <p class="explaination-text"><strong>WARNING:</strong> Regions do not automatically contain the countries they are made up of.</p>
@@ -227,7 +227,7 @@
             </div>
 
             <div class="row form-group">
-              <label for="transaction_provider-org">
+              <label for="transaction_provider_org">
                 <div>
                   <span class="tooltip-ui" data-toggle="tooltip" title="Find activities where at least one transaction is funded by the specified entity.">
                     Select transaction provider org
@@ -235,13 +235,13 @@
                 </div>
               </label>
               <div class="clearfix"></div>
-              <select data-placeholder="Choose a transaction provider organisation..." multiple class="chosen-select form-control" id="transaction_provider-org" name="transaction_provider-org[]">
+              <select data-placeholder="Choose a transaction provider organisation..." multiple class="chosen-select form-control" id="transaction_provider_org" name="transaction_provider_org[]">
                 {{ include('include/transaction_provider_org.html') }}
               </select>
             </div>
 
             <div class="row form-group">
-              <label for="participating-org">
+              <label for="participating_org">
                 <div>
                   <span class="tooltip-ui" data-toggle="tooltip" title="Find activities where the speficied entity is listed as a participating organisation.">
                     Select participating organisation
@@ -249,7 +249,7 @@
                 </div>
               </label>
               <div class="clearfix"></div>
-              <select data-placeholder="Choose a participating organisation..." multiple class="chosen-select form-control" id="participating-org" name="participating-org[]">
+              <select data-placeholder="Choose a participating organisation..." multiple class="chosen-select form-control" id="participating_org" name="participating_org[]">
                 {{ include('include/participating_org.html') }}
               </select>
             </div>
@@ -266,16 +266,16 @@
 
             <div class="form-row">
               <div class="col">
-                <label for="format">
+                <label for="entry_1689841214">
                   <div>Choose format
-                    <span aria-label="(Required field)"></span>
+                    <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                   </div>
                 </label>
                 <ul id="qb-format-list">
                   <li>
                     <label>
-                      <input type="radio" name="format" value="activity" id="format-1" aria-label="Activity"
-                      {% if not format or (format and format == "activity") %}
+                      <input type="radio" name="entry.1085079344" value="activity" id="group_1085079344_1" aria-label="Activity"
+                      {% if not dataset or (dataset and dataset == "activity") %}
                         checked="checked"
                       {% endif %}
                       />
@@ -286,8 +286,8 @@
                   </li>
                   <li>
                     <label>
-                      <input type="radio" name="format" value="transaction" id="format-2" aria-label="Transaction"
-                      {% if format and format == "transaction" %}
+                      <input type="radio" name="entry.1085079344" value="transaction" id="group_1085079344_2" aria-label="Transaction"
+                      {% if dataset and dataset == "transaction" %}
                         checked="checked"
                       {% endif %}
                       />
@@ -298,8 +298,8 @@
                   </li>
                   <li>
                     <label>
-                      <input type="radio" name="format" value="budget" id="format-3" aria-label="Budget"
-                      {% if format and format == "budget" %}
+                      <input type="radio" name="entry.1085079344" value="budget" id="group_1085079344_3" aria-label="Budget"
+                      {% if dataset and dataset == "budget" %}
                         checked="checked"
                       {% endif %}
                       />
@@ -312,16 +312,16 @@
               </div>
 
               <div class="col">
-                <label for="grouping">
+                <label for="entry_1948547450">
                   <div>Repeat rows?
-                    <span aria-label="(Required field)"></span>
+                    <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                   </div>
                 </label>
                 <ul id="qb-grouping-list">
                   <li>
                     <label>
-                      <input type="radio" name="grouping" value="summary" id="grouping-1" aria-label="Summary"
-                      {% if not grouping or (grouping and grouping == "summary") %}
+                      <input type="radio" name="entry.71167035" value="summary" id="group_71167035_1" aria-label="Summary"
+                      {% if not format or (format and format == "summary") %}
                         checked="checked"
                       {% endif %}
                       />
@@ -332,8 +332,8 @@
                   </li>
                   <li>
                     <label>
-                      <input type="radio" name="grouping" value="by_sector" id="grouping-2" aria-label="By Sector"
-                      {% if grouping and grouping == "by_sector" %}
+                      <input type="radio" name="entry.71167035" value="by_sector" id="group_71167035_2" aria-label="By Sector"
+                      {% if format and format == "by_sector" %}
                         checked="checked"
                       {% endif %}
                       />
@@ -344,8 +344,8 @@
                   </li>
                   <li>
                     <label>
-                      <input type="radio" name="grouping" value="by_country" id="grouping-3" aria-label="By Country"
-                      {% if grouping and grouping == "by_country" %}
+                      <input type="radio" name="entry.71167035" value="by_country" id="group_71167035_3" aria-label="By Country"
+                      {% if format and format == "by_country" %}
                         checked="checked"
                       {% endif %}
                       />
@@ -358,15 +358,15 @@
               </div>
 
               <div class="col">
-                <label for="sample-size">
+                <label for="entry_1414120858">
                   <div>Choose sample size
-                    <span aria-label="(Required field)"></span>
+                    <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>
                   </div>
                 </label>
                 <ul id="qb-sample-size-list">
                   <li>
                     <label>
-                      <input type="radio" name="sample-size" value="50 rows" id="sample-size-1" aria-label="50 rows"
+                      <input type="radio" name="entry.1352830161" value="50 rows" id="group_1352830161_1" aria-label="50 rows"
                       {% if not size or (size and size == "50 rows") %}
                         checked="checked"
                       {% endif %}
@@ -378,7 +378,7 @@
                   </li>
                   <li>
                     <label>
-                      <input type="radio" name="sample-size" value="Entire selection" id="sample-size-2" aria-label="Entire selection"
+                      <input type="radio" name="entry.1352830161" value="Entire selection" id="group_1352830161_2" aria-label="Entire selection"
                       {% if size and size == "stream=True" %}
                         checked="checked"
                       {% endif %}
@@ -495,10 +495,10 @@ $(function() {
   /*
     Obtain info for a multi-select.
   */
-  QueryBuilder.LinkGen.getMultiSelectInfo = function(name){
+  QueryBuilder.LinkGen.getMultiSelectInfo = function(id, name){
     var separator = '%7C';
-    var multiSelect = $('[name="' + name + '[]"]');
-    var selectedOptions = $('[name="' + name + '[]"] option:checked');
+    var multiSelect = $('[name*="' + id + '"]');
+    var selectedOptions = $('[name*="' + id + '"] option:checked');
     var values = [];
 
     // have to use forEach because querySelectorAll is a NodeList which doesn't have a `map()` function
