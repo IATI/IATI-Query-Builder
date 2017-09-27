@@ -225,7 +225,7 @@ $context['selected_provider_orgs'] = isset($provider_orgs) ? $provider_orgs : nu
 $context['selected_sectors'] = isset($sector) ? $sector : null;
 $context['selected_countries'] = isset($country) ? $country : null;
 $context['selected_org_types'] = isset($type) ? $type : null;
-$context['selected_participating_orgs'] = isset($participating_org) ? $participating_org : null;
+$context['selected_participating_orgs'] = isset($participating_orgs) ? $participating_orgs : null;
 $context['selected_regions'] = isset($region) ? $region : null;
 $context['selected_date'] = isset($date) ? $date : null;
 
