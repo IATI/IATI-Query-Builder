@@ -540,17 +540,17 @@ $(function() {
     var baseURL = 'http://datastore.iatistandard.org/api/1/access/';
     var format = QueryBuilder.LinkGen.getFormat();
     var grouping = QueryBuilder.LinkGen.getGrouping();
-    var reportingOrgs = QueryBuilder.LinkGen.getMultiSelectInfo('1922375458', 'reporting-org');
-    var reportingOrgTypes = QueryBuilder.LinkGen.getMultiSelectInfo('18398991', 'reporting-org.type');
-    var sectors = QueryBuilder.LinkGen.getMultiSelectInfo('1954968791', 'sector');
-    var recipientCountries = QueryBuilder.LinkGen.getMultiSelectInfo('605980212', 'recipient-country');
-    var recipientRegions = QueryBuilder.LinkGen.getMultiSelectInfo('1179181326', 'recipient-region');
-    var startDateLT = QueryBuilder.LinkGen.getCalendarDate('start_date__lt', 'start-date__lt');
-    var startDateGT = QueryBuilder.LinkGen.getCalendarDate('start_date__gt', 'start-date__gt');
-    var endDateLT = QueryBuilder.LinkGen.getCalendarDate('end_date__lt', 'end-date__lt');
-    var endDateGT = QueryBuilder.LinkGen.getCalendarDate('end_date__gt', 'end-date__gt');
-    var transactionProviderOrg = QueryBuilder.LinkGen.getMultiSelectInfo('transaction_provider_org', 'transaction_provider-org');
-    var participatingOrg = QueryBuilder.LinkGen.getMultiSelectInfo('participating_org', 'participating-org');
+    var reportingOrgs = QueryBuilder.LinkGen.getMultiSelectInfo('reporting-org');
+    var reportingOrgTypes = QueryBuilder.LinkGen.getMultiSelectInfo('reporting-org.type');
+    var sectors = QueryBuilder.LinkGen.getMultiSelectInfo('sector');
+    var recipientCountries = QueryBuilder.LinkGen.getMultiSelectInfo('recipient-country');
+    var recipientRegions = QueryBuilder.LinkGen.getMultiSelectInfo('recipient-region');
+    var start_date__lt = QueryBuilder.LinkGen.getCalendarDate('start_date__lt', 'start-date__lt');
+    var start_date__gt = QueryBuilder.LinkGen.getCalendarDate('start_date__gt', 'start-date__gt');
+    var end_date__lt = QueryBuilder.LinkGen.getCalendarDate('end_date__lt', 'end-date__lt');
+    var end_date__gt = QueryBuilder.LinkGen.getCalendarDate('end_date__gt', 'end-date__gt');
+    var transactionProviderOrg = QueryBuilder.LinkGen.getMultiSelectInfo('transaction_provider-org');
+    var participating_org = QueryBuilder.LinkGen.getMultiSelectInfo('participating-org');
     var sampleSize = QueryBuilder.LinkGen.getSampleSize();
     var queryString = QueryBuilder.LinkGen.createQueryString([
       reportingOrgs,
@@ -558,12 +558,12 @@ $(function() {
       sectors,
       recipientCountries,
       recipientRegions,
-      startDateLT,
-      startDateGT,
-      endDateLT,
-      endDateGT,
+      start_date__lt,
+      start_date__gt,
+      end_date__lt,
+      end_date__gt,
       transactionProviderOrg,
-      participatingOrg,
+      participating_org,
       sampleSize
     ]);
 
