@@ -549,8 +549,8 @@ $(function() {
     var startDateGT = QueryBuilder.LinkGen.getCalendarDate('start_date__gt', 'start-date__gt');
     var endDateLT = QueryBuilder.LinkGen.getCalendarDate('end_date__lt', 'end-date__lt');
     var endDateGT = QueryBuilder.LinkGen.getCalendarDate('end_date__gt', 'end-date__gt');
-    var transactionProviderOrg = QueryBuilder.LinkGen.getMultiSelectInfo('transaction_provider-org');
-    var participatingOrg = QueryBuilder.LinkGen.getMultiSelectInfo('participating-org');
+    var transactionProviderOrgs = QueryBuilder.LinkGen.getMultiSelectInfo('transaction_provider-org');
+    var participatingOrgs = QueryBuilder.LinkGen.getMultiSelectInfo('participating-org');
     var sampleSize = QueryBuilder.LinkGen.getSampleSize();
     var queryString = QueryBuilder.LinkGen.createQueryString([
       reportingOrgs,
@@ -562,8 +562,8 @@ $(function() {
       startDateGT,
       endDateLT,
       endDateGT,
-      transactionProviderOrg,
-      participatingOrg,
+      transactionProviderOrgs,
+      participatingOrgs,
       sampleSize
     ]);
 
