@@ -183,7 +183,7 @@
                       After
                     </span>
                   </div>
-                  <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="start_date__gt" name="start_date__gt" value="{{ start_date__gt }}">
+                  <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="start-date__gt" name="start-date__gt" value="{{ start_date__gt }}">
                   </input>
                 </div>
                 <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
@@ -192,7 +192,7 @@
                       Before
                     </span>
                   </div>
-                  <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="start_date__lt" name="start_date__lt" value="{{ start_date__lt }}">
+                  <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="start-date__lt" name="start-date__lt" value="{{ start_date__lt }}">
                   </input>
                 </div>
               </div>
@@ -211,7 +211,7 @@
                       After
                     </span>
                   </div>
-                  <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="end_date__gt" name="end_date__gt" value="{{ end_date__gt }}">
+                  <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="end-date__gt" name="end-date__gt" value="{{ end_date__gt }}">
                   </input>
                 </div>
                 <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
@@ -220,7 +220,7 @@
                       Before
                     </span>
                   </div>
-                  <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="end_date__lt" name="end_date__lt" value="{{ end_date__lt }}">
+                  <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="end-date__lt" name="end-date__lt" value="{{ end_date__lt }}">
                   </input>
                 </div>
               </div>
@@ -482,13 +482,13 @@ $(function() {
   /*
     Obtain the calendar date
   */
-  QueryBuilder.LinkGen.getCalendarDate = function(id, name){
+  QueryBuilder.LinkGen.getCalendarDate = function(id){
     var calendarDate = $('#' + id).val();
 
     if(calendarDate.trim() === ''){
       return '';
     } else {
-      return name + '=' + calendarDate;
+      return id + '=' + calendarDate;
     }
   };
 
@@ -545,10 +545,10 @@ $(function() {
     var sectors = QueryBuilder.LinkGen.getMultiSelectInfo('sector');
     var recipientCountries = QueryBuilder.LinkGen.getMultiSelectInfo('recipient-country');
     var recipientRegions = QueryBuilder.LinkGen.getMultiSelectInfo('recipient-region');
-    var startDateLT = QueryBuilder.LinkGen.getCalendarDate('start_date__lt', 'start-date__lt');
-    var startDateGT = QueryBuilder.LinkGen.getCalendarDate('start_date__gt', 'start-date__gt');
-    var endDateLT = QueryBuilder.LinkGen.getCalendarDate('end_date__lt', 'end-date__lt');
-    var endDateGT = QueryBuilder.LinkGen.getCalendarDate('end_date__gt', 'end-date__gt');
+    var startDateLT = QueryBuilder.LinkGen.getCalendarDate('start-date__lt');
+    var startDateGT = QueryBuilder.LinkGen.getCalendarDate('start-date__gt');
+    var endDateLT = QueryBuilder.LinkGen.getCalendarDate('end-date__lt');
+    var endDateGT = QueryBuilder.LinkGen.getCalendarDate('end-date__gt');
     var transactionProviderOrgs = QueryBuilder.LinkGen.getMultiSelectInfo('transaction_provider-org');
     var participatingOrgs = QueryBuilder.LinkGen.getMultiSelectInfo('participating-org');
     var sampleSize = QueryBuilder.LinkGen.getSampleSize();
