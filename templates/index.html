@@ -10,6 +10,8 @@
   </head>
   <body dir="ltr">
     <div class="container">
+      <div id="qb-top"></div>
+
       <div class="header row">
         <div class="col">
           <h1 dir="ltr">
@@ -394,14 +396,18 @@
 
           <br/>
           <div class="form-row">
+            
             <div class="clearfix"></div>
-            <div class="col">
+            
+            <div class="col submit-buttons">
               <noscript><button class="btn btn-primary" type="submit">Build Query</button></noscript>
               <button class="btn btn-secondary" type="reset">Reset</button>
             </div>
           </div>
 
         </form>
+
+        <div style="width:100%;height:1em"></div>
 
         <div class="alert alert-success" id="js-query-link" role="alert">
           <strong>Your link:</strong> <a id="query-link" href="http://datastore.iatistandard.org/api/1/access/activity.csv">http://datastore.iatistandard.org/api/1/access/activity.csv</a> <span id="preview-link-wrapper">(<a id="preview-link" href="http://preview.iatistandard.org/" target="_blank" rel="noopener noreferrer">Preview as XML</a>)</span>
@@ -676,6 +682,8 @@ $(function() {
   */
   QueryBuilder.UI.resetSelection = function(){
     setTimeout(function(){
+      $(window).scrollTop(0);
+
       $(".chosen-select").trigger("chosen:updated");
 
       QueryBuilder.LinkGen.updateLink();
