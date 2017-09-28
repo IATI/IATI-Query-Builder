@@ -1,0 +1,8 @@
+<option value="">- None -</option>
+{% for key, value in reporting_orgs %}
+  <option value="{{ value }}"
+  {% if selected_provider_orgs and value in selected_provider_orgs %}
+    selected="selected"
+  {% endif %}
+  >{{ key }} : {{ value }}</option>
+{% endfor %}

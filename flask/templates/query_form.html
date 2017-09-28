@@ -1,0 +1,388 @@
+<div class="row"><!-- result -->
+  {% if api_link %}
+    <div class="alert alert-success" role="alert">
+      <strong>Your link:</strong> <a href="{{ api_link }}">{{ api_link|escape }}</a>
+    </div>
+
+    {% if notice_message %}
+      <div class="alert alert-warning" role="alert">
+        <strong>Warning:</strong> {{ notice_message }}
+      </div>
+    {% endif %}
+
+  {% elif error_message %}
+    <div class="alert alert-danger" role="alert">
+      <strong>Error:</strong> {{ error_message }}
+    </div>
+  {% endif %}
+</div>
+
+<form id="qb-form" action="index.php" method="post" target="_self" onsubmit="">
+
+  <h2>What information are you looking for?</h2>
+  <p>These options let you filter the information you are looking for. Additional filters <a href="http://datastore.iatistandard.org/docs/api/#filtering">are available</a> by querying the Datastore manually.</p>
+
+  <div class="step-section">
+    <div class="title">
+      <span class="step">1</span>
+      <h3>Select the data source</h3>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row form-group">
+      <label for="reporting-org">
+        <div>
+          <span class="tooltip-ui" data-toggle="tooltip" title="The reporting organisation is the publisher of the IATI data. You would choose this filter to analyse a particular donor or agency's data. This might typically be used in conjunction with a country and/or a sector.">
+            Select reporting organisation (eg UK DFID = GB-GOV-1)
+          </a>
+        </div>
+        <div dir="ltr"></div>
+      </label>
+      <div class="clearfix"></div>
+      <select data-placeholder="Choose a reporting organisation..." multiple class="chosen-select form-control" id="reporting-org" name="reporting-org[]">
+        {% include 'reporting_org.html' %}
+      </select>
+      <p class="explaination-text"><strong>WARNING:</strong> The Datastore contains activities reported by both primary and secondary sources. A secondary source, such as the UNOCHA Financial Tracking Service (FTS), reports data it holds about other agencies’ activities. An agency may well report activities to both IATI and FTS, who in turn reports the same activities to IATI.</p>
+    </div>
+
+    <div class="row form-group">
+      <label for="reporting-org.type">
+        <div>
+          <span class="tooltip-ui" data-toggle="tooltip" title="This allows you to filter by the type of organisation. To access data on NGOs only you would select International NGO and/or National NGO and/or Regional NGO.">
+            Select type of reporting organisation (eg. INGO = 21)
+          </a>
+        </div>
+      </label>
+      <div class="clearfix"></div>
+      <select data-placeholder="Choose a reporting organisation type..." multiple class="chosen-select form-control" id="reporting-org.type" name="reporting-org.type[]">
+        {% include 'reporting_org_type.html' %}
+      </select>
+    </div>
+  </div>
+
+  <div class="step-section">
+    <div class="title">
+      <span class="step">2</span>
+      <h3>Select the sector</h3>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row form-group">
+      <label for="sector">
+        <div>
+          <span class="tooltip-ui" data-toggle="tooltip" title="Choose the sector or sectors you are looking for.">
+            Select sector (eg Basic Health Care = 12220)
+          </a>
+        </div>
+      </label>
+      <div class="clearfix"></div>
+      <select data-placeholder="Choose a sector..." multiple class="chosen-select form-control" id="sector" name="sector[]">
+        {% include 'sector.html' %}
+      </select>
+      <p class="explaination-text">For more detail of what the sectors are, see the <a href="http://iatistandard.org/202/codelists/Sector" rel="noopener noreferrer" target="_blank">DAC 5 Digit Sector</a> codelist.</p>
+    </div>
+  </div>
+
+  <div class="step-section">
+    <div class="title">
+      <span class="step">3</span>
+      <h3>Select recipient location</h3>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row form-group">
+      <fieldset>
+        <legend>Select EITHER a country OR a region</legend>
+        <p class="explaination-text">Choosing a Region AND a Country will not return data as most publishers report to either a Country or a Region.</p>
+        <div class="errorbox-good">
+          <div dir="ltr">
+            <div>
+              <label for="recipient-country">
+                <div>
+                  <span class="tooltip-ui" data-toggle="tooltip" title="Choose the recipient country or countries you are looking for.">
+                    Select recipient country
+                  </a>
+                </div>
+              </label>
+              <div class="clearfix"></div>
+              <select data-placeholder="Choose a country..." multiple class="chosen-select form-control" id="recipient-country" name="recipient-country[]">
+                {% include 'country.html' %}
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="errorbox-good">
+          <div dir="ltr">
+            <div>
+              <label for="recipient-region">
+                <div>
+                  <span class="tooltip-ui" data-toggle="tooltip" title="Selecting a region will return activities that publishers have been unable to allocate to specific countries.">
+                    Select region (eg South Asia = 679)
+                  </a>
+                </div>
+              </label>
+              <div class="clearfix"></div>
+              <select data-placeholder="Choose a region..." multiple class="chosen-select form-control" id="recipient-region" name="recipient-region[]">
+                {% include 'region.html' %}
+              </select>
+              <p class="explaination-text"><strong>WARNING:</strong> Regions do not automatically contain the countries they are made up of.</p>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+
+  <div class="step-section">
+    <div class="title">
+      <span class="step">4</span>
+      <h3>Select additional fields</h3>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row form-group">
+      <div class="col-auto">
+        <label>
+          <div>
+            <span class="tooltip-ui" data-toggle="tooltip" title="Specify the range of activity start dates that you are looking for (defaults to all).">
+              Select start date
+            </span>
+          </div>
+        </label for="start_date">
+        <div class="clearfix"></div>
+        <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+          <div class="input-group-addon">
+            <span class="tooltip-ui" data-toggle="tooltip" title="Identify activities with start dates after the specified date.">
+              After
+            </span>
+          </div>
+          <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="start-date__gt" name="start-date__gt" value="{{ start_date__gt }}">
+          </input>
+        </div>
+        <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+          <div class="input-group-addon">
+            <span class="tooltip-ui" data-toggle="tooltip" title="Identify activities with start dates before the specified date.">
+              Before
+            </span>
+          </div>
+          <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="start-date__lt" name="start-date__lt" value="{{ start_date__lt }}">
+          </input>
+        </div>
+      </div>
+      <div class="col-auto">
+        <label>
+          <div>
+            <span class="tooltip-ui" data-toggle="tooltip" title="Specify the range of activity end dates that you are looking for (defaults to all).">
+              Select end date
+            </span>
+          </div>
+        </label for="end_date">
+        <div class="clearfix"></div>
+        <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+          <div class="input-group-addon"/>
+            <span class="tooltip-ui" data-toggle="tooltip" title="Identify activities with end dates after the specified date.">
+              After
+            </span>
+          </div>
+          <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="end-date__gt" name="end-date__gt" value="{{ end_date__gt }}">
+          </input>
+        </div>
+        <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd">
+          <div class="input-group-addon">
+            <span class="tooltip-ui" data-toggle="tooltip" title="Identify activities with end dates before the specified date.">
+              Before
+            </span>
+          </div>
+          <input class="form-control" placeholder="yyyy-mm-dd" type="text" id="end-date__lt" name="end-date__lt" value="{{ end_date__lt }}">
+          </input>
+        </div>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <label for="transaction_provider-org">
+        <div>
+          <span class="tooltip-ui" data-toggle="tooltip" title="Find activities where at least one transaction is funded by the specified entity.">
+            Select transaction provider org
+          </span>
+        </div>
+      </label>
+      <div class="clearfix"></div>
+      <select data-placeholder="Choose a transaction provider organisation..." multiple class="chosen-select form-control" id="transaction_provider-org" name="transaction_provider-org[]">
+        {% include 'transaction_provider_org.html' %}
+      </select>
+    </div>
+
+    <div class="row form-group">
+      <label for="participating-org">
+        <div>
+          <span class="tooltip-ui" data-toggle="tooltip" title="Find activities where the speficied entity is listed as a participating organisation.">
+            Select participating organisation
+          </span>
+        </div>
+      </label>
+      <div class="clearfix"></div>
+      <select data-placeholder="Choose a participating organisation..." multiple class="chosen-select form-control" id="participating-org" name="participating-org[]">
+        {% include 'participating_org.html' %}
+      </select>
+    </div>
+  </div>
+
+
+  <div class="step-section">
+    <div class="title">
+      <span class="step">5</span>
+      <h3>How would you like to view this information?</h3>
+    </div>
+    <div class="clearfix"></div>
+    <p>These options allow you to configure the way in which your data is disaggregated, making different sorts of analysis possible.</p>
+
+    <div class="form-row">
+      <div class="col">
+        <label for="format">
+          <div>Choose format
+            <span aria-label="(Required field)"></span>
+          </div>
+        </label>
+        <ul id="qb-format-list">
+          <li>
+            <label>
+              <input type="radio" name="format" value="activity" id="format-1" aria-label="Activity"
+              {% if not format or (format and format == "activity") %}
+                checked="checked"
+              {% endif %}
+              />
+              <span class="tooltip-ui" data-toggle="tooltip" title="Each row contains a unique activity. Financial information is aggregated. Budget information is excluded. Other potentially repeating fields (such as sectors) are reported in a single cell, delimited by semi-colons.">
+                One activity per row
+              </a>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="format" value="transaction" id="format-2" aria-label="Transaction"
+              {% if format and format == "transaction" %}
+                checked="checked"
+              {% endif %}
+              />
+              <span class="tooltip-ui" data-html="true" data-toggle="tooltip" title="Each row contains a unique financial transaction. The parent activity identifier and other activity-level fields are repeated for each transaction.<br/>If you are looking to analyse activity finances by year you need to select “Transactions” and calculate the year from the transaction date.">
+                One transaction per row
+              </a>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="format" value="budget" id="format-3" aria-label="Budget"
+              {% if format and format == "budget" %}
+                checked="checked"
+              {% endif %}
+              />
+              <span class="tooltip-ui" data-toggle="tooltip" title="Each row contains a budget-period entry. Transaction data is not included. The parent activity identifier and other activity-level fields are repeated for each budget line.">
+                One budget per row
+              </a>
+            </label>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <label for="grouping">
+          <div>Repeat rows?
+            <span aria-label="(Required field)"></span>
+          </div>
+        </label>
+        <ul id="qb-grouping-list">
+          <li>
+            <label>
+              <input type="radio" name="grouping" value="summary" id="grouping-1" aria-label="Summary"
+              {% if not grouping or (grouping and grouping == "summary") %}
+                checked="checked"
+              {% endif %}
+              />
+              <span class="tooltip-ui" data-toggle="tooltip" title="Information is not disaggregated, leading to repeated rows.">
+                No
+              </a>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="grouping" value="by_sector" id="grouping-2" aria-label="By Sector"
+              {% if grouping and grouping == "by_sector" %}
+                checked="checked"
+              {% endif %}
+              />
+              <span class="tooltip-ui" data-toggle="tooltip" title="Each Activity, Transaction or Budget row is repeated for each separate Sector reported. The corresponding percentage for the sector split is reported in a separate column. This allows you to easily add arithmetic to your spreadsheet to calculate values proportionately.">
+                Multi-sector expansion
+              </a>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="grouping" value="by_country" id="grouping-3" aria-label="By Country"
+              {% if grouping and grouping == "by_country" %}
+                checked="checked"
+              {% endif %}
+              />
+              <span class="tooltip-ui" data-toggle="tooltip" title="Each Activity, Transaction or Budget row is repeated for each separate Country reported. The corresponding percentage for the sector split is reported in a separate column. This allows you to easily add arithmetic to your spreadsheet to calculate values proportionately.">
+                Multi-country expansion
+              </a>
+            </label>
+          </li>
+        </ul>
+      </div>
+
+      <div class="col">
+        <label for="sample-size">
+          <div>Choose sample size
+            <span aria-label="(Required field)"></span>
+          </div>
+        </label>
+        <ul id="qb-sample-size-list">
+          <li>
+            <label>
+              <input type="radio" name="sample-size" value="50 rows" id="sample-size-1" aria-label="50 rows"
+              {% if not size or (size and size == "50 rows") %}
+                checked="checked"
+              {% endif %}
+              />
+              <span class="tooltip-ui" data-toggle="tooltip" title="Preview your selection by viewing only the first 50 rows of data.">
+                50 rows
+              </a>
+            </label>
+          </li>
+          <li>
+            <label>
+              <input type="radio" name="sample-size" value="Entire selection" id="sample-size-2" aria-label="Entire selection"
+              {% if size and size == "stream=True" %}
+                checked="checked"
+              {% endif %}
+              />
+              <span class="tooltip-ui" data-toggle="tooltip" title="View all of the data matching your query.">
+                Entire selection
+              </a>
+              <p class="explaination-text"><strong>WARNING:</strong> Depending on the query, this may cause the query to take a long time to return your data.</p>
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <br/>
+  <div class="form-row">
+
+    <div class="clearfix"></div>
+
+    <div class="col submit-buttons">
+      <noscript><button class="btn btn-primary" type="submit">Build Query</button></noscript>
+      <button class="btn btn-secondary" type="submit" name="reset" value="Reset" id="reset">Reset</button>
+    </div>
+  </div>
+
+</form>
+
+<div style="width:100%;height:1em"></div>
+
+<div style="display:none;" class="alert alert-success" id="js-query-link" role="alert">
+  <strong>Your link:</strong> <a id="query-link" href="http://datastore.iatistandard.org/api/1/access/activity.csv">http://datastore.iatistandard.org/api/1/access/activity.csv</a> <span id="preview-link-wrapper">(<a id="preview-link" href="http://preview.iatistandard.org/" target="_blank" rel="noopener noreferrer">Preview as XML</a>)</span>
+</div>
