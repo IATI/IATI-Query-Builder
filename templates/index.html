@@ -401,7 +401,7 @@
 
             <div class="col submit-buttons">
               <noscript><button class="btn btn-primary" type="submit">Build Query</button></noscript>
-              <button class="btn btn-secondary" type="reset">Reset</button>
+              <button class="btn btn-secondary" type="submit" name="reset" value="Reset" id="reset">Reset</button>
             </div>
           </div>
 
@@ -673,6 +673,7 @@ $(function() {
     // initialise chosen
     $(".chosen-select").chosen();
 
+    $('#reset').attr('type', 'reset');
     $('#qb-form').on('reset', QueryBuilder.UI.resetSelection);
 
     // init tooltips
