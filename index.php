@@ -112,6 +112,9 @@ if (isset($_POST) && $_POST != NULL) {
   //print_r($allowed_orgs);
   //$allowed_types = array();
   if (isset($_POST["reporting-org_type"])) {
+    // I know this looks like a typo, but it actually isn't.
+    // `reporting-org.type` gets posted, but PHP converts dots to
+    // underscores in the POST array.
     $requested_type = filter_var_array($_POST["reporting-org_type"], FILTER_SANITIZE_STRING);
     $type = build_sanitised_multi_select_values("codelists/OrganisationType.csv",$requested_type); //returns Null if 'none is selected
     //print_r($type);
