@@ -1,8 +1,20 @@
-<option value="">- None -</option>
-{% for key, value in reporting_orgs %}
-  <option value="{{ value }}"
-  {% if selected_orgs and value in selected_orgs %}
-    selected="selected"
-  {% endif %}
-  >{{ key }} : {{ value }}</option>
-{% endfor %}
+<label for="reporting-org">
+  <div>
+    <span class="tooltip-ui" data-toggle="tooltip" title="The reporting organisation is the publisher of the IATI data. You would choose this filter to analyse a particular donor or agency's data. This might typically be used in conjunction with a country and/or a sector.">
+      Select reporting organisation (eg UK DFID = GB-GOV-1)
+    </a>
+  </div>
+  <div dir="ltr"></div>
+</label>
+<div class="clearfix"></div>
+<select data-placeholder="Choose a reporting organisation..." multiple class="chosen-select form-control" id="reporting-org" name="reporting-org[]">
+  {<option value="">- None -</option>
+  {% for key, value in reporting_orgs %}
+    <option value="{{ value }}"
+    {% if selected_orgs and value in selected_orgs %}
+      selected="selected"
+    {% endif %}
+    >{{ key }} : {{ value }}</option>
+  {% endfor %}
+</select>
+<p class="explaination-text"><strong>WARNING:</strong> The Datastore contains activities reported by both primary and secondary sources. A secondary source, such as the UNOCHA Financial Tracking Service (FTS), reports data it holds about other agencies’ activities. An agency may well report activities to both IATI and FTS, who in turn reports the same activities to IATI.</p>

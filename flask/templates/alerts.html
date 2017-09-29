@@ -1,0 +1,16 @@
+{% if api_link %}
+  <div class="alert alert-success" role="alert">
+    <strong>Your link:</strong> <a href="{{ api_link }}">{{ api_link|escape }}</a>
+  </div>
+
+  {% if notice_message %}
+    <div class="alert alert-warning" role="alert">
+      <strong>Warning:</strong> {{ notice_message }}
+    </div>
+  {% endif %}
+
+{% elif error_message %}
+  <div class="alert alert-danger" role="alert">
+    <strong>Error:</strong> {{ error_message }}
+  </div>
+{% endif %}

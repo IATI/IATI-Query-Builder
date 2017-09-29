@@ -1,0 +1,43 @@
+<label for="format">
+  <div>Choose format
+    <span aria-label="(Required field)"></span>
+  </div>
+</label>
+<ul id="qb-format-list">
+  <li>
+    <label>
+      <input type="radio" name="format" value="activity" id="format-1" aria-label="Activity"
+      {% if not format or (format and format == "activity") %}
+        checked="checked"
+      {% endif %}
+      />
+      <span class="tooltip-ui" data-toggle="tooltip" title="Each row contains a unique activity. Financial information is aggregated. Budget information is excluded. Other potentially repeating fields (such as sectors) are reported in a single cell, delimited by semi-colons.">
+        One activity per row
+      </a>
+    </label>
+  </li>
+  <li>
+    <label>
+      <input type="radio" name="format" value="transaction" id="format-2" aria-label="Transaction"
+      {% if format and format == "transaction" %}
+        checked="checked"
+      {% endif %}
+      />
+      <span class="tooltip-ui" data-html="true" data-toggle="tooltip" title="Each row contains a unique financial transaction. The parent activity identifier and other activity-level fields are repeated for each transaction.<br/>If you are looking to analyse activity finances by year you need to select “Transactions” and calculate the year from the transaction date.">
+        One transaction per row
+      </a>
+    </label>
+  </li>
+  <li>
+    <label>
+      <input type="radio" name="format" value="budget" id="format-3" aria-label="Budget"
+      {% if format and format == "budget" %}
+        checked="checked"
+      {% endif %}
+      />
+      <span class="tooltip-ui" data-toggle="tooltip" title="Each row contains a budget-period entry. Transaction data is not included. The parent activity identifier and other activity-level fields are repeated for each budget line.">
+        One budget per row
+      </a>
+    </label>
+  </li>
+</ul>

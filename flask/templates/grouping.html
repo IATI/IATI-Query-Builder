@@ -1,0 +1,43 @@
+<label for="grouping">
+  <div>Repeat rows?
+    <span aria-label="(Required field)"></span>
+  </div>
+</label>
+<ul id="qb-grouping-list">
+  <li>
+    <label>
+      <input type="radio" name="grouping" value="summary" id="grouping-1" aria-label="Summary"
+      {% if not grouping or (grouping and grouping == "summary") %}
+        checked="checked"
+      {% endif %}
+      />
+      <span class="tooltip-ui" data-toggle="tooltip" title="Information is not disaggregated, leading to repeated rows.">
+        No
+      </a>
+    </label>
+  </li>
+  <li>
+    <label>
+      <input type="radio" name="grouping" value="by_sector" id="grouping-2" aria-label="By Sector"
+      {% if grouping and grouping == "by_sector" %}
+        checked="checked"
+      {% endif %}
+      />
+      <span class="tooltip-ui" data-toggle="tooltip" title="Each Activity, Transaction or Budget row is repeated for each separate Sector reported. The corresponding percentage for the sector split is reported in a separate column. This allows you to easily add arithmetic to your spreadsheet to calculate values proportionately.">
+        Multi-sector expansion
+      </a>
+    </label>
+  </li>
+  <li>
+    <label>
+      <input type="radio" name="grouping" value="by_country" id="grouping-3" aria-label="By Country"
+      {% if grouping and grouping == "by_country" %}
+        checked="checked"
+      {% endif %}
+      />
+      <span class="tooltip-ui" data-toggle="tooltip" title="Each Activity, Transaction or Budget row is repeated for each separate Country reported. The corresponding percentage for the sector split is reported in a separate column. This allows you to easily add arithmetic to your spreadsheet to calculate values proportionately.">
+        Multi-country expansion
+      </a>
+    </label>
+  </li>
+</ul>

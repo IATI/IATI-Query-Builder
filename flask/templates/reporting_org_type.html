@@ -1,8 +1,18 @@
-<option value="">- None -</option>
-{% for org_type in org_types %}
-  <option value="{{ org_type[0] }}"
-  {% if selected_org_types and org_type[0] in selected_org_types %}
-    selected="selected"
-  {% endif %}
-  >{{ org_type[0] }}: {{ org_type[1] }}</option>
-{% endfor %}
+<label for="reporting-org.type">
+  <div>
+    <span class="tooltip-ui" data-toggle="tooltip" title="This allows you to filter by the type of organisation. To access data on NGOs only you would select International NGO and/or National NGO and/or Regional NGO.">
+      Select type of reporting organisation (eg. INGO = 21)
+    </a>
+  </div>
+</label>
+<div class="clearfix"></div>
+<select data-placeholder="Choose a reporting organisation type..." multiple class="chosen-select form-control" id="reporting-org.type" name="reporting-org.type[]">
+  <option value="">- None -</option>
+  {% for org_type in org_types %}
+    <option value="{{ org_type[0] }}"
+    {% if selected_org_types and org_type[0] in selected_org_types %}
+      selected="selected"
+    {% endif %}
+    >{{ org_type[0] }}: {{ org_type[1] }}</option>
+  {% endfor %}
+</select>

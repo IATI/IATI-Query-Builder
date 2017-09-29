@@ -1,8 +1,25 @@
-<option value="">- None -</option>
-{% for region in regions %}
-  <option value="{{ region[0] }}"
-  {% if selected_regions and region[0] in selected_regions %}
-    selected="selected"
-  {% endif %}
-  >{{ region[0] }}: {{ region[1] }}</option>
-{% endfor %}
+<div class="errorbox-good">
+  <div dir="ltr">
+    <div>
+      <label for="recipient-region">
+        <div>
+          <span class="tooltip-ui" data-toggle="tooltip" title="Selecting a region will return activities that publishers have been unable to allocate to specific countries.">
+            Select region (eg South Asia = 679)
+          </a>
+        </div>
+      </label>
+      <div class="clearfix"></div>
+      <select data-placeholder="Choose a region..." multiple class="chosen-select form-control" id="recipient-region" name="recipient-region[]">
+        <option value="">- None -</option>
+        {% for region in regions %}
+          <option value="{{ region[0] }}"
+          {% if selected_regions and region[0] in selected_regions %}
+            selected="selected"
+          {% endif %}
+          >{{ region[0] }}: {{ region[1] }}</option>
+        {% endfor %}
+      </select>
+      <p class="explaination-text"><strong>WARNING:</strong> Regions do not automatically contain the countries they are made up of.</p>
+    </div>
+  </div>
+</div>

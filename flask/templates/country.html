@@ -1,8 +1,24 @@
-<option value="">- None -</option>
-{% for country in countries %}
-  <option value="{{ country[0] }}"
-  {% if selected_countries and country[0] in selected_countries %}
-    selected="selected"
-  {% endif %}
-  >{{ country[1] }}: {{ country[0] }}</option>
-{% endfor %}
+<div class="errorbox-good">
+  <div dir="ltr">
+    <div>
+      <label for="recipient-country">
+        <div>
+          <span class="tooltip-ui" data-toggle="tooltip" title="Choose the recipient country or countries you are looking for.">
+            Select recipient country
+          </a>
+        </div>
+      </label>
+      <div class="clearfix"></div>
+      <select data-placeholder="Choose a country..." multiple class="chosen-select form-control" id="recipient-country" name="recipient-country[]">
+        <option value="">- None -</option>
+        {% for country in countries %}
+          <option value="{{ country[0] }}"
+          {% if selected_countries and country[0] in selected_countries %}
+            selected="selected"
+          {% endif %}
+          >{{ country[1] }}: {{ country[0] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+</div>
