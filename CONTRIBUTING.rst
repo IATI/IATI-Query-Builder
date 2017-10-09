@@ -20,15 +20,15 @@ How to contribute code and documents
 How we use branches in this repository
 --------------------------------------
 
-* master represents our main development branch
-* live is the branch we are currently using for our deployed instance of the code
+* `dev` represents our main development branch
+* `master` is the branch we are currently using for our deployed instance of the code
 * Other branches represent development work or bug fixes.
 
 Submitting changes
 ------------------
 
 * Fork this repository (if you haven't previously)
-* Make sure you're working on top of an up to date copy of IATI's master branch
+* Make sure you're working on top of an up to date copy of IATI's `dev` branch
     - Create a branch named after the work you're doing (if you're targeting a specific issue, start the branch name with the issue number e.g. ``42-feature-name``)
 * Do your work
     - If your work addresses a specific issue, reference that issue in your commit message by starting the commit message with ``[#issue number]`` e.g. ``[#64]``
