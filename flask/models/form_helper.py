@@ -1,3 +1,4 @@
+"""Helper functions for form."""
 import csv
 import json
 
@@ -6,6 +7,7 @@ CACHEFILE = 'groups_cache_dc.json'
 
 
 def csv_to_array(path):
+    """Add non-title rows of CSV file to list."""
     csv_list = list()
 
     try:
@@ -21,6 +23,7 @@ def csv_to_array(path):
 
 
 def build_sanitised_multi_select_values(path, sanitized_values):
+    """Check values of a list are permitted and add to multi-select list."""
     values = list()
     allowed_values = csv_to_array(path)
 
@@ -35,6 +38,7 @@ def build_sanitised_multi_select_values(path, sanitized_values):
 
 
 def reporting_orgs(cache_file=CACHEFILE):
+    """Return sorted dictionary for organisations."""
     reporting_orgs = dict()
     excluded_ids = ['To be confirmed.']
 
@@ -55,9 +59,22 @@ def reporting_orgs(cache_file=CACHEFILE):
 
     return sorted_dict
 
-# def get_countries(country_codelist="codelists/Country.csv"):
-#     countries = list()
-#     country_file = country_codelist
-#
-#     try:
-#         with open(country_file) as
+
+def get_countries(country_codelist="codelists/Country.csv"):
+    """Format country list for multiselect."""
+    countries = list()
+    country_file = country_codelist
+
+    try:
+        with open(country_file) as country_f:
+            country = country_f.read()
+            data = country.splitlines()
+            data.pop(0)
+            for value in data:
+                html_escape_value = value.replace('&', '&amp;').replace('"', '&quot;').replace('<', '&lt;').replace('>', '&gt;')
+
+                convert_case_value = html_escape_value.lower().title()
+                countries.append(convert_case_value)
+                return countries
+    except:
+        pass

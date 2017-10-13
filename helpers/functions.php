@@ -91,7 +91,7 @@ function get_regions() {
       fclose($handle);
   }
   return $regions;
-}
+} // duplicates csv_to_array function
 
 function get_org_types() {
   $org_types = array();
@@ -104,7 +104,7 @@ function get_org_types() {
       fclose($handle);
   }
   return $org_types;
-}
+} // duplicates csv_to_array function
 
 function get_sector_categories() {
   $selected = "";
