@@ -47,13 +47,13 @@ refresh_groups_cache($ckan,$data,$cachefile);
 function refresh_groups_cache ($ckan,$data,$cachefile) {
   echo "Refreshing Group data...<br/>";
   $groups = array();
-	if (count($data) > 500) {
-	  for ($i = 0; $i < count($data); $i++) {
-	    $groups[$data[$i]] = $ckan->get_group_entity($data[$i]);
-	  }
-	  $groups = json_encode($groups);
-	  file_put_contents($cachefile,$groups);
-	}
+  if (count($data) > 500) {
+    for ($i = 0; $i < count($data); $i++) {
+      $groups[$data[$i]] = $ckan->get_group_entity($data[$i]);
+    }
+    $groups = json_encode($groups);
+    file_put_contents($cachefile,$groups);
+  }
 }
 */
 ?>
