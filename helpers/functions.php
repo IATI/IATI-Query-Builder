@@ -160,7 +160,7 @@ function get_sector_categories() {
     );
     fclose($handle);
   }
-
+  echo "<pre>"; print_r($categories); echo "</pre>"; //debugging
   return $categories;
 }
 ?>

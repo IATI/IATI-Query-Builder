@@ -78,3 +78,7 @@ def get_countries(country_codelist="codelists/Country.csv"):
                 return countries
     except:
         pass
+
+def get_sector_categories(sector_file='codelists/Sector.csv', sector_category_file='codelists/SectorCategory.csv'):
+    """Create multiselect list for sectors."""
+    pass # awaiting latest pyIATI changes
