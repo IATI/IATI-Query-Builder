@@ -38,13 +38,13 @@ class TestFormHelper(object):
 
     def test_get_countries_returns_list(self):
         """Check function creates list with expected formatted values."""
-        result = form_helper.get_countries(country_codelist=TEST_CSV_PATH)
+        result = form_helper.get_countries()
         assert isinstance(result, list)
-        assert '1,Cat,Red' in result
+        assert 'Kazakhstan' in result
 
     # def test_get_sector_categories_returns_populated_dict(self):
     #     """Check function creates a populated dict as expected."""
-    #     result = form_helper.get_sector_categories(sector_file='tests/test_data/sector_test.csv', sector_category_file='tests/test_data/sector_category_test.csv')
+    #     result = form_helper.get_sector_categories(sector_category_file='tests/test_data/sector_category_test.csv')
     #     assert result == [{
     #         'category': '111',
     #         'category_name': 'Education, level unspecified',

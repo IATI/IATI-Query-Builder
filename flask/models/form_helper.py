@@ -1,13 +1,19 @@
 """Helper functions for form."""
 import csv
 import json
+import iati
 
 
 CACHEFILE = 'groups_cache_dc.json'
 
 
 def csv_to_array(path):
-    """Add non-title rows of CSV file to list."""
+    """Add non-title rows of CSV file to list.
+
+    Note:
+        This replaces WET functions 'get_regions', and 'get_org_types' in original code.
+
+    """
     csv_list = list()
 
     try:
@@ -60,25 +66,26 @@ def reporting_orgs(cache_file=CACHEFILE):
     return sorted_dict
 
 
-def get_countries(country_codelist="codelists/Country.csv"):
+def get_countries():
     """Format country list for multiselect."""
     countries = list()
-    country_file = country_codelist
+    country_codelist = iati.default.codelist('Country')
 
-    try:
-        with open(country_file) as country_f:
-            country = country_f.read()
-            data = country.splitlines()
-            data.pop(0)
-            for value in data:
-                html_escape_value = value.replace('&', '&amp;').replace('"', '&quot;').replace('<', '&lt;').replace('>', '&gt;')
+    for country_code in country_codelist.codes:
+        country_name = country_code.name
 
-                convert_case_value = html_escape_value.lower().title()
-                countries.append(convert_case_value)
-                return countries
-    except:
-        pass
+        html_escape_value = country_name.replace('&', '&amp;').replace('"', '&quot;').replace('<', '&lt;').replace('>', '&gt;')
 
-def get_sector_categories(sector_file='codelists/Sector.csv', sector_category_file='codelists/SectorCategory.csv'):
-    """Create multiselect list for sectors."""
-    pass # awaiting latest pyIATI changes
+        convert_case_value = html_escape_value.lower().title()
+        countries.append(convert_case_value)
+
+    return countries
+
+
+# def get_sector_categories(sector_category_file='codelists/SectorCategory.csv'):
+#     """Create multiselect list for sectors."""
+#     dac_3_categories = dict()
+#     sector_category_codelist = iati.default.codelist('SectorCategory')
+#
+#     for sector_category_code in sector_category_codelist:
+#         dac_3_categories[sector_category_code.value] = sector_category_code.name
