@@ -42,14 +42,14 @@ class TestFormHelper(object):
         assert isinstance(result, list)
         assert 'Kazakhstan' in result
 
-    # def test_get_sector_categories_returns_populated_dict(self):
-    #     """Check function creates a populated dict as expected."""
-    #     result = form_helper.get_sector_categories(sector_category_file='tests/test_data/sector_category_test.csv')
-    #     assert result == [{
-    #         'category': '111',
-    #         'category_name': 'Education, level unspecified',
-    #         'data': [
-    #             ['11110', 'Education policy and administrative management', 'Education sector policy, planning and programmes; aid to education ministries, administration and management systems; institution capacity building and advice; school management and governance; curriculum and materials development; unspecified education activities.', 'en', '111', 'Education, level unspecified', 'Education sector policy, planning and programmes; aid to education ministries, administration and management systems; institution capacity building and advice; school management and governance; curriculum and materials development; unspecified education activities.'],
-    #             ['11120', 'Education facilities and training', 'Educational buildings, equipment, materials; subsidiary services to education (boarding facilities, staff housing); language training; colloquia, seminars, lectures, etc.', 'en', '111', 'Education, level unspecified', 'Education sector policy, planning and programmes; aid to education ministries, administration and management systems; institution capacity building and advice; school management and governance; curriculum and materials development; unspecified education activities.']
-    #         ]
-    #     }]
+    def test_get_sector_categories_returns_populated_dict(self):
+        """Check function creates a populated dict as expected."""
+        result = form_helper.get_sector_categories()
+        assert result == [{
+            'category': '111',
+            'category_name': 'Education, level unspecified',
+            'data': [
+                ['11110', 'Education policy and administrative management', 'Education sector policy, planning and programmes; aid to education ministries, administration and management systems; institution capacity building and advice; school management and governance; curriculum and materials development; unspecified education activities.', 'en', '111', 'Education, level unspecified', 'Education sector policy, planning and programmes; aid to education ministries, administration and management systems; institution capacity building and advice; school management and governance; curriculum and materials development; unspecified education activities.'],
+                ['11120', 'Education facilities and training', 'Educational buildings, equipment, materials; subsidiary services to education (boarding facilities, staff housing); language training; colloquia, seminars, lectures, etc.', 'en', '111', 'Education, level unspecified', 'Education sector policy, planning and programmes; aid to education ministries, administration and management systems; institution capacity building and advice; school management and governance; curriculum and materials development; unspecified education activities.']
+            ]
+        }]

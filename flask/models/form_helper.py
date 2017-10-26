@@ -27,6 +27,10 @@ def csv_to_array(path):
     except:
         pass
 
+def html_escape_filter(value):
+    """Convert special characters to HTML character values."""
+    return value.replace('&', '&amp;').replace('"', '&quot;').replace('<', '&lt;').replace('>', '&gt;')
+
 
 def build_sanitised_multi_select_values(path, sanitized_values):
     """Check values of a list are permitted and add to multi-select list."""
@@ -74,7 +78,7 @@ def get_countries():
     for country_code in country_codelist.codes:
         country_name = country_code.name
 
-        html_escape_value = country_name.replace('&', '&amp;').replace('"', '&quot;').replace('<', '&lt;').replace('>', '&gt;')
+        html_escape_value = html_escape_filter(country_name)
 
         convert_case_value = html_escape_value.lower().title()
         countries.append(convert_case_value)
@@ -82,10 +86,11 @@ def get_countries():
     return countries
 
 
-# def get_sector_categories(sector_category_file='codelists/SectorCategory.csv'):
+# def get_sector_categories():
 #     """Create multiselect list for sectors."""
 #     dac_3_categories = dict()
 #     sector_category_codelist = iati.default.codelist('SectorCategory')
 #
 #     for sector_category_code in sector_category_codelist:
-#         dac_3_categories[sector_category_code.value] = sector_category_code.name
+#         sector_category_value = sector_category_code.value
+#         sector_category_value[:2])
