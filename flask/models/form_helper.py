@@ -13,6 +13,9 @@ def csv_to_array(path):
     Note:
         This replaces WET functions 'get_regions', and 'get_org_types' in original code.
 
+    Todo:
+        Test for exceptions.
+
     """
     csv_list = list()
 
@@ -33,7 +36,12 @@ def html_escape_filter(value):
 
 
 def build_sanitised_multi_select_values(path, sanitized_values):
-    """Check values of a list are permitted and add to multi-select list."""
+    """Check values of a list are permitted and add to multi-select list.
+
+    Todo:
+        Rename this function to describe actual purpose. Maybe something like `filter_permitted_values`.
+
+    """
     values = list()
     allowed_values = csv_to_array(path)
 
@@ -78,19 +86,34 @@ def get_countries():
     for country_code in country_codelist.codes:
         country_name = country_code.name
 
-        html_escape_value = html_escape_filter(country_name)
+        html_escaped_name = html_escape_filter(country_name)
 
-        convert_case_value = html_escape_value.lower().title()
+        convert_case_value = html_escaped_name.lower().title()
         countries.append(convert_case_value)
 
     return countries
 
 
-# def get_sector_categories():
-#     """Create multiselect list for sectors."""
-#     dac_3_categories = dict()
-#     sector_category_codelist = iati.default.codelist('SectorCategory')
-#
-#     for sector_category_code in sector_category_codelist:
-#         sector_category_value = sector_category_code.value
-#         sector_category_value[:2])
+def get_sector_categories():
+    """Create multiselect list for sectors.
+
+    Todo:
+        Refactor when Codelists updated for optimal awesome.
+
+    """
+    sector_set = list()
+
+    sector_codelist = iati.default.codelist('Sector')
+    sector_category_codelist = iati.default.codelist('SectorCategory')
+
+    all_the_codes = list(sector_category_codelist.codes) + list(sector_codelist.codes)
+
+    for sector_code in all_the_codes:
+        sector = dict()
+        sector['code'] = sector_code.value
+        sector['name'] = sector_code.name
+        sector_set.append(sector)
+
+    sector_set = sorted(sector_set, key=lambda sector: str(sector['code']))
+
+    return sector_set
