@@ -1,0 +1,8 @@
+{<option value="">- None -</option>
+{% for name, iati_id in reporting_orgs.items() %}
+  <option value="{{ name }}: {{ iati_id }}"
+  {% if selected_orgs and value in selected_orgs %}
+    selected="selected"
+  {% endif %}
+  >{{ name }}: {{ iati_id }}</option>
+{% endfor %}

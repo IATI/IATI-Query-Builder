@@ -1,5 +1,5 @@
 """A module to test form helper functions."""
-from flask.models import form_helper
+from ..models import form_helper
 
 
 TEST_CSV_PATH = 'tests/test_data/test.csv'
@@ -36,10 +36,10 @@ class TestFormHelper(object):
         assert isinstance(result, dict)
         assert result == {"1":"this is an id1","2":"this is an id2","3":"this is an id3"}
 
-    def test_get_countries_returns_list(self):
+    def test_get_countries_returns_dict(self):
         """Check function creates list with expected formatted values."""
         result = form_helper.get_countries()
-        assert isinstance(result, list)
+        assert isinstance(result, dict)
         assert 'Kazakhstan' in result
 
     def test_get_sector_categories_returns_populated_dict(self):

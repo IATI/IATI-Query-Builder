@@ -1,5 +1,5 @@
 """A module to test Query Builder model."""
-from flaskself.models import query_builder
+from ..models import form_helper
 
 
 class TestQueryBuilder(object):

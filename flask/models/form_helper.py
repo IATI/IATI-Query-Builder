@@ -15,6 +15,7 @@ def csv_to_array(path):
 
     Todo:
         Test for exceptions.
+        Return list instead of dict.
 
     """
     csv_list = list()
@@ -30,16 +31,13 @@ def csv_to_array(path):
     except:
         pass
 
-def html_escape_filter(value):
-    """Convert special characters to HTML character values."""
-    return value.replace('&', '&amp;').replace('"', '&quot;').replace('<', '&lt;').replace('>', '&gt;')
-
 
 def build_sanitised_multi_select_values(path, sanitized_values):
     """Check values of a list are permitted and add to multi-select list.
 
     Todo:
         Rename this function to describe actual purpose. Maybe something like `filter_permitted_values`.
+        Flask has build in defences against XSS attacks so is this even needed?
 
     """
     values = list()
@@ -54,6 +52,13 @@ def build_sanitised_multi_select_values(path, sanitized_values):
         return None
     return values
 
+def sort_dict_by_keys(dictionary_to_sort):
+    """Sort a dict by its keys."""
+    sorted_dict = dict()
+    for key in sorted(dictionary_to_sort.keys(), key=str.lower):
+        sorted_dict[key] = dictionary_to_sort[key]
+    return sorted_dict
+
 
 def reporting_orgs(cache_file=CACHEFILE):
     """Return sorted dictionary for organisations."""
@@ -64,34 +69,33 @@ def reporting_orgs(cache_file=CACHEFILE):
         groups = json.load(c_file)
 
         for key, value in groups.items():
-            if value['packages'] is not None:
+            if value['packages'] != list():
                 publisher_iati_id = value['extras']['publisher_iati_id']
-                if publisher_iati_id is not None:
-                    if publisher_iati_id not in excluded_ids:
-                        reporting_orgs[value['display_name']] = publisher_iati_id
+                if publisher_iati_id not in excluded_ids:
+                    reporting_orgs[value['display_name']] = publisher_iati_id
 
-    sorted_dict = dict()
+    sorted_orgs = sort_dict_by_keys(reporting_orgs)
 
-    for key in sorted(reporting_orgs.keys()):
-        sorted_dict[key] = reporting_orgs[key]
-
-    return sorted_dict
+    return sorted_orgs
 
 
 def get_countries():
-    """Format country list for multiselect."""
-    countries = list()
+    """Format country list for multiselect.
+
+    Todo:
+        More research into built in defences against XSS attack.
+
+    """
+    countries = dict()
     country_codelist = iati.default.codelist('Country')
 
     for country_code in country_codelist.codes:
-        country_name = country_code.name
+        country_name = country_code.name.title()
+        countries[country_name] = country_code.value
 
-        html_escaped_name = html_escape_filter(country_name)
+    sorted_countries = sort_dict_by_keys(countries)
 
-        convert_case_value = html_escaped_name.lower().title()
-        countries.append(convert_case_value)
-
-    return countries
+    return sorted_countries
 
 
 def get_sector_categories():
