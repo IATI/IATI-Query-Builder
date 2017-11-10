@@ -56,7 +56,7 @@ def build_sanitised_multi_select_values(path, sanitized_values):
 def sort_dict_by_keys(dictionary_to_sort):
     """Sort a dict by its keys."""
     sorted_dict = dict()
-    for key in sorted(dictionary_to_sort.keys(), key=str.lower):
+    for key in sorted(dictionary_to_sort.keys(), key=str.lower()):
         sorted_dict[key] = dictionary_to_sort[key]
     return sorted_dict
 
@@ -96,7 +96,6 @@ def get_codelist_values(codelist_name):
         codelist_values[code.value] = code.name
 
     sorted_codelist_values = sort_dict_by_keys(codelist_values)
-    # import pdb; pdb.set_trace()
 
     return sorted_codelist_values
 
