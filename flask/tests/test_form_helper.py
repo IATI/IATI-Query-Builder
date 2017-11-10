@@ -1,4 +1,9 @@
-"""A module to test form helper functions."""
+"""A module to test form helper functions.
+
+Todo:
+    Add acceptance test framework and test. Maybe Capybara and Selenium?
+
+"""
 from ..models import form_helper
 
 
