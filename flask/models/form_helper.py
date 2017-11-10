@@ -7,7 +7,7 @@ import iati
 CACHEFILE = 'groups_cache_dc.json'
 
 
-def csv_to_array(path):
+def csv_to_list(path):
     """Add non-title rows of CSV file to list.
 
     Note:
@@ -29,7 +29,7 @@ def csv_to_array(path):
                 csv_list.append(value)
         return csv_list
     except:
-        pass
+        raise ValueError("File not found.")
 
 
 def build_sanitised_multi_select_values(path, sanitized_values):
@@ -41,7 +41,7 @@ def build_sanitised_multi_select_values(path, sanitized_values):
 
     """
     values = list()
-    allowed_values = csv_to_array(path)
+    allowed_values = csv_to_list(path)
 
     if (sanitized_values != list()):
         for requested_value in sanitized_values:
@@ -51,6 +51,7 @@ def build_sanitised_multi_select_values(path, sanitized_values):
     if (values == list()):
         return None
     return values
+
 
 def sort_dict_by_keys(dictionary_to_sort):
     """Sort a dict by its keys."""
@@ -79,11 +80,33 @@ def reporting_orgs(cache_file=CACHEFILE):
     return sorted_orgs
 
 
+def get_codelist_values(codelist_name):
+    """Format list for multiselect from a given codelist.
+
+    Todo:
+        More research into built in defences against XSS attack.
+        Refactor with get_countries to make DRY.
+
+    """
+    codelist_values = dict()
+    codelist = iati.default.codelist(codelist_name)
+
+    for code in codelist.codes:
+        name = code.name
+        codelist_values[code.value] = code.name
+
+    sorted_codelist_values = sort_dict_by_keys(codelist_values)
+    # import pdb; pdb.set_trace()
+
+    return sorted_codelist_values
+
+
 def get_countries():
     """Format country list for multiselect.
 
     Todo:
         More research into built in defences against XSS attack.
+        Need to refactor with get_codelist_values to make DRY.
 
     """
     countries = dict()
@@ -105,7 +128,7 @@ def get_sector_categories():
         Refactor when Codelists updated for optimal awesome.
 
     """
-    sector_set = list()
+    sector_list = list()
 
     sector_codelist = iati.default.codelist('Sector')
     sector_category_codelist = iati.default.codelist('SectorCategory')
@@ -116,8 +139,7 @@ def get_sector_categories():
         sector = dict()
         sector['code'] = sector_code.value
         sector['name'] = sector_code.name
-        sector_set.append(sector)
+        sector_list.append(sector)
 
-    sector_set = sorted(sector_set, key=lambda sector: str(sector['code']))
-
-    return sector_set
+    sector_list = sorted(sector_list, key=lambda sector: str(sector['code']))
+    return sector_list

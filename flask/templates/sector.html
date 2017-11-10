@@ -8,16 +8,12 @@
 <div class="clearfix"></div>
 <select data-placeholder="Choose a sector..." multiple class="chosen-select form-control" id="sector" name="sector[]">
   <option value="">- None -</option>
-  {% for item in sector_categories %}
-    <optgroup label="{{ item['category'] }} {{ item['category_name'] }}">
-    {% for datum in item['data'] %}
-      <option value="{{ datum[0] }}"
-      {% if selected_sectors and datum[0] in selected_sectors %}
-        selected="selected"
-      {% endif %}
-      >{{ datum[0] }}: {{ datum[1] }}</option>
-    {% endfor %}
-    </optgroup>
+  {% for sector in sector_categories %}
+    <option value="{{ sector['code'] }}"
+    {% if selected_sectors and sector[0] in selected_sectors %}
+      selected="selected"
+    {% endif %}
+    >{{ sector['code'] }}: {{ sector['name'] }}</option>
   {% endfor %}
 </select>
 <p class="explaination-text">For more detail of what the sectors are, see the <a href="http://iatistandard.org/202/codelists/Sector" rel="noopener noreferrer" target="_blank">DAC 5 Digit Sector</a> codelist.</p>

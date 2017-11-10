@@ -14,9 +14,9 @@ class TestFormHelper(object):
 
     """
 
-    def test_csv_to_array_returns_populated_list(self):
+    def test_csv_to_list_returns_populated_list(self):
         """Check a list is populated."""
-        result = form_helper.csv_to_array(TEST_CSV_PATH)
+        result = form_helper.csv_to_list(TEST_CSV_PATH)
         assert isinstance(result, list)
         assert result != list()
 
