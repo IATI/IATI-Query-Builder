@@ -9,8 +9,8 @@ app = Flask(__name__)
 def index():
     reporting_orgs = form_helper.reporting_orgs()
     countries = form_helper.get_countries()
-    regions = form_helper.get_codelist_values('Region')
-    org_types = form_helper.get_codelist_values('OrganisationType')
+    regions = form_helper.get_codelist_values('Region', lambda x: int(x))
+    org_types = form_helper.get_codelist_values('OrganisationType', lambda x: x.lower())
     sector_categories = form_helper.get_sector_categories()
     non_escaped_html = '<br>'
 

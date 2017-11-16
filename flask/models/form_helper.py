@@ -53,10 +53,10 @@ def build_sanitised_multi_select_values(path, sanitized_values):
     return values
 
 
-def sort_dict_by_keys(dictionary_to_sort):
+def sort_dict_by_keys(dictionary_to_sort, key_function):
     """Sort a dict by its keys."""
     sorted_dict = dict()
-    for key in sorted(dictionary_to_sort.keys(), key=str.lower()):
+    for key in sorted(dictionary_to_sort.keys(), key=lambda x: key_function(x)):
         sorted_dict[key] = dictionary_to_sort[key]
     return sorted_dict
 
@@ -75,12 +75,12 @@ def reporting_orgs(cache_file=CACHEFILE):
                 if publisher_iati_id not in excluded_ids:
                     reporting_orgs[value['display_name']] = publisher_iati_id
 
-    sorted_orgs = sort_dict_by_keys(reporting_orgs)
+    sorted_orgs = sort_dict_by_keys(reporting_orgs, lambda x: x.lower())
 
     return sorted_orgs
 
 
-def get_codelist_values(codelist_name):
+def get_codelist_values(codelist_name, sort_func):
     """Format list for multiselect from a given codelist.
 
     Todo:
@@ -95,7 +95,7 @@ def get_codelist_values(codelist_name):
         name = code.name
         codelist_values[code.value] = code.name
 
-    sorted_codelist_values = sort_dict_by_keys(codelist_values)
+    sorted_codelist_values = sort_dict_by_keys(codelist_values, sort_func)
 
     return sorted_codelist_values
 
@@ -115,7 +115,7 @@ def get_countries():
         country_name = country_code.name.title()
         countries[country_name] = country_code.value
 
-    sorted_countries = sort_dict_by_keys(countries)
+    sorted_countries = sort_dict_by_keys(countries, lambda x: x.lower())
 
     return sorted_countries
 
