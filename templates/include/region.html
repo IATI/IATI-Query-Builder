@@ -1,8 +1,0 @@
-<option value="">- None -</option>
-{% for region in regions %}
-  <option value="{{ region[0] }}"
-  {% if selected_regions and region[0] in selected_regions %}
-    selected="selected"
-  {% endif %}
-  >{{ region[0] }}: {{ region[1] }}</option>
-{% endfor %}

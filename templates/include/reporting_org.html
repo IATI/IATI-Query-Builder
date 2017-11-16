@@ -1,8 +1,0 @@
-<option value="">- None -</option>
-{% for key, value in reporting_orgs %}
-  <option value="{{ value|escape|trim }}"
-  {% if selected_orgs and value in selected_orgs %}
-    selected="selected"
-  {% endif %}
-  >{{ key|escape|trim }} : {{ value|escape|trim }}</option>
-{% endfor %}

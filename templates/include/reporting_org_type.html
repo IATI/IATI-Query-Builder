@@ -1,8 +1,0 @@
-<option value="">- None -</option>
-{% for org_type in org_types %}
-  <option value="{{ org_type[0] }}"
-  {% if selected_org_types and org_type[0] in selected_org_types %}
-    selected="selected"
-  {% endif %}
-  >{{ org_type[0] }}: {{ org_type[1] }}</option>
-{% endfor %}
