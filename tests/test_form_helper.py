@@ -36,7 +36,6 @@ class TestFormHelper(object):
 
     def test_reporting_orgs_returns_sorted_dictionary(self):
         """Check function creates a JSON compatible sorted dictionary."""
-        # cache_file = 'tests/test_data/mock_cache.json'
         result = form_helper.reporting_orgs(TEST_CACHE_FILE)
         assert isinstance(result, dict)
         assert result == {"1":"this is an id1","2":"this is an id2","3":"this is an id3"}

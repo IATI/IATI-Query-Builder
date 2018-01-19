@@ -1,6 +1,6 @@
 """Controller module for Query Builder app."""
 from flask import Flask, render_template
-from models import form_helper
+from .models import form_helper
 
 app = Flask(__name__)
 

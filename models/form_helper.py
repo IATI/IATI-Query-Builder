@@ -1,10 +1,14 @@
-"""Helper functions for form."""
+"""Helper functions for form.
+
+Todo: Rename org variable names to publisher for clarity.
+
+"""
 import csv
 import json
 import iati
 
 
-CACHEFILE = 'groups_cache_dc.json'
+CACHEFILE = 'publisher_cache.json'
 
 
 def csv_to_list(path):
@@ -65,17 +69,16 @@ def reporting_orgs(cache_file=CACHEFILE):
     """Return sorted dictionary for organisations."""
     reporting_orgs = dict()
     excluded_ids = ['To be confirmed.']
+    publisher_dict = dict()
 
     with open(cache_file) as c_file:
-        groups = json.load(c_file)
+        org_info = json.load(c_file)
 
-        for key, value in groups.items():
-            if value['packages'] != list():
-                publisher_iati_id = value['extras']['publisher_iati_id']
-                if publisher_iati_id not in excluded_ids:
-                    reporting_orgs[value['display_name']] = publisher_iati_id
+        for org in org_info:
+            if org['package_count'] > 0:
+                publisher_dict[org['display_name']] = org['publisher_iati_id']
 
-    sorted_orgs = sort_dict_by_keys(reporting_orgs, lambda x: x.lower())
+    sorted_orgs = sort_dict_by_keys(publisher_dict, lambda x: x.lower())
 
     return sorted_orgs
 
