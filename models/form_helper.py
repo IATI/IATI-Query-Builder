@@ -11,50 +11,50 @@ import iati
 CACHEFILE = 'publisher_cache.json'
 
 
-def csv_to_list(path):
-    """Add non-title rows of CSV file to list.
-
-    Note:
-        This replaces WET functions 'get_regions', and 'get_org_types' in original code.
-
-    Todo:
-        Test for exceptions.
-        Return list instead of dict.
-
-    """
-    csv_list = list()
-
-    try:
-        with open(path, 'r') as csvfile:
-            csv_file = csvfile.read()
-            data = csv_file.splitlines()
-            data.pop(0)
-            for value in data:
-                csv_list.append(value)
-        return csv_list
-    except:
-        raise ValueError("File not found.")
-
-
-def build_sanitised_multi_select_values(path, sanitized_values):
-    """Check values of a list are permitted and add to multi-select list.
-
-    Todo:
-        Rename this function to describe actual purpose. Maybe something like `filter_permitted_values`.
-        Flask has build in defences against XSS attacks so is this even needed?
-
-    """
-    values = list()
-    allowed_values = csv_to_list(path)
-
-    if (sanitized_values != list()):
-        for requested_value in sanitized_values:
-            if (requested_value in allowed_values) and (requested_value is not None):
-                values.append(requested_value)
-
-    if (values == list()):
-        return None
-    return values
+# def csv_to_list(path):
+#     """Add non-title rows of CSV file to list.
+#
+#     Note:
+#         This replaces WET functions 'get_regions', and 'get_org_types' in original code.
+#
+#     Todo:
+#         Test for exceptions.
+#         Return list instead of dict.
+#
+#     """
+#     csv_list = list()
+#
+#     try:
+#         with open(path, 'r') as csvfile:
+#             csv_file = csvfile.read()
+#             data = csv_file.splitlines()
+#             data.pop(0)
+#             for value in data:
+#                 csv_list.append(value)
+#         return csv_list
+#     except:
+#         raise ValueError("File not found.")
+#
+#
+# def build_sanitised_multi_select_values(path, sanitized_values):
+#     """Check values of a list are permitted and add to multi-select list.
+#
+#     Todo:
+#         Rename this function to describe actual purpose. Maybe something like `filter_permitted_values`.
+#         Flask has build in defences against XSS attacks so is this even needed?
+#
+#     """
+#     values = list()
+#     allowed_values = csv_to_list(path)
+#
+#     if (sanitized_values != list()):
+#         for requested_value in sanitized_values:
+#             if (requested_value in allowed_values) and (requested_value is not None):
+#                 values.append(requested_value)
+#
+#     if (values == list()):
+#         return None
+#     return values
 
 
 def sort_dict_by_keys(dictionary_to_sort, key_function):

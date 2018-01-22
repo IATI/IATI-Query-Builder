@@ -19,20 +19,20 @@ class TestFormHelper(object):
 
     """
 
-    def test_csv_to_list_returns_populated_list(self):
-        """Check a list is populated."""
-        result = form_helper.csv_to_list(TEST_CSV_PATH)
-        assert isinstance(result, list)
-        assert result != list()
-
-    def test_build_sanitised_multi_select_values_returns_populated_list(self):
-        """Check a list is populated as expected with permitted values."""
-        sanitized_values = ['cat', 'penguin']
-        allowed_values_path = 'tests/test_data/allowed_values_test.csv'
-        result = form_helper.build_sanitised_multi_select_values(allowed_values_path, sanitized_values)
-        assert isinstance(result, list)
-        assert len(result) == 2
-        assert 'duck' not in result
+    # def test_csv_to_list_returns_populated_list(self):
+    #     """Check a list is populated."""
+    #     result = form_helper.csv_to_list(TEST_CSV_PATH)
+    #     assert isinstance(result, list)
+    #     assert result != list()
+    #
+    # def test_build_sanitised_multi_select_values_returns_populated_list(self):
+    #     """Check a list is populated as expected with permitted values."""
+    #     sanitized_values = ['cat', 'penguin']
+    #     allowed_values_path = 'tests/test_data/allowed_values_test.csv'
+    #     result = form_helper.build_sanitised_multi_select_values(allowed_values_path, sanitized_values)
+    #     assert isinstance(result, list)
+    #     assert len(result) == 2
+    #     assert 'duck' not in result
 
     def test_reporting_orgs_returns_sorted_dictionary(self):
         """Check function creates a JSON compatible sorted dictionary."""
