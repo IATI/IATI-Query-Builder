@@ -4,7 +4,7 @@ Todo:
     Add acceptance test framework and test. Maybe Capybara and Selenium?
 
 """
-from ..models import form_helper
+from models import form_helper
 
 
 TEST_CSV_PATH = 'tests/test_data/test.csv'
