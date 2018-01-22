@@ -1,8 +1,4 @@
-"""Helper functions for form.
-
-Todo: Rename org variable names to publisher for clarity.
-
-"""
+"""A module to generate refined data for form selection menus."""
 import csv
 import json
 import iati
@@ -66,7 +62,7 @@ def sort_dict_by_keys(dictionary_to_sort, key_function):
 
 
 def reporting_orgs(cache_file=CACHEFILE):
-    """Return sorted dictionary for organisations."""
+    """Return sorted dictionary for reporting organisations."""
     reporting_orgs = dict()
     excluded_ids = ['To be confirmed.']
     publisher_dict = dict()
