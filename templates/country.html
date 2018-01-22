@@ -11,12 +11,12 @@
       <div class="clearfix"></div>
       <select data-placeholder="Choose a country..." multiple class="chosen-select form-control" id="recipient-country" name="recipient-country[]">
         <option value="">- None -</option>
-        {% for name, country_code in countries.items() %}
-          <option value="{{ name }} : {{ country_code }}"
+        {% for country_code, name in countries.items() %}
+          <option value="{{ country_code }} : {{ name | title }}"
           {% if selected_countries and country[0] in selected_countries %}
             selected="selected"
           {% endif %}
-          >{{ name }}: {{ country_code }}</option>
+          >{{ country_code }}: {{ name | title }}</option>
         {% endfor %}
       </select>
     </div>
