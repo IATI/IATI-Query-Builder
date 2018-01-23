@@ -6,12 +6,13 @@
 
 A simple form that will build a query string that can then be used to fetch data from the IATI Datastore API.
 
-See it in action here - http://datastore.iatistandard.org/query/index.php
+See it in action here - http://datastore.iatistandard.org/query
 
 
 ## Requirements
 
-A webserver running php and php-curl.  PHP dependencies are managed using [Composer](http://culttt.com/2013/01/07/what-is-php-composer/).
+<!-- A webserver with apache? -->
+TBC
 
 
 ## Installation
@@ -21,36 +22,17 @@ A webserver running php and php-curl.  PHP dependencies are managed using [Compo
 git clone https://github.com/IATI/IATI-Query-Builder.git
 cd IATI-Query-Builder
 
-# Install dependencies
-composer install
+Activate Python virtual environment.
 
-# If running for the first time, prepare the helper script that enables you to get data for current IATI publishers
-# This involves copying the file to a filename of your choice and uncommenting the code
-cp helpers/refresh_group_data.example.php helpers/YOUR_FILENAME.php
-nano helpers/YOUR_FILENAME.php
+# Install dependencies
+pip install -r requirements.txt
 
 # Run the script to get data for current IATI publishers using the CKAN API
-php helpers/YOUR_FILENAME.php
+# Ideally set this up as a regular cron job
+<!-- Add instructions for get_publishers.py -->
 
-# You may wish to ensure that the included codelists are up-to-date (optional)
-./update-codelists.sh
+# Run the flask app
+flask run
 
-# Run a webserver
-php -S localhost:8000
-
-# Open a browser and visit localhost:8000
+# Open a browser and visit localhost:5000
 ```
-
-
-## Helper scripts
-
-### Getting the latest IATI publishers
-The `/helpers` directory has a script `refresh_group_data.example.php` that will enable you to get data relating to current IATI publishers.
-
-Running this script will generate a `.json` file of 'groups' (i.e. publishers) in use on the IATI registry, and this in turn will populate the 'Reporting Organisation' multi-select element in the form.
-
-### Getting the latest IATI publishers
-The script `update-codelists.sh` will re-download latest versions of the required codelists.
-
-### Automating updates
-To automate regular updates, you could set-up both of these scripts as a cron job on your server.
