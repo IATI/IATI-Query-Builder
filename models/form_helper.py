@@ -1,5 +1,4 @@
 """A module to generate refined data for form selection menus."""
-import csv
 import json
 import iati
 
@@ -10,13 +9,13 @@ CACHEFILE = 'publisher_cache.json'
 def sort_dict_by_keys(dictionary_to_sort, key_function):
     """Sort a dictionary by its keys."""
     sorted_dict = dict()
-    for key in sorted(dictionary_to_sort.keys(), key=lambda x: key_function(x)):
+    for key in sorted(dictionary_to_sort.keys(), key=key_function):
         sorted_dict[key] = dictionary_to_sort[key]
     return sorted_dict
 
 
 def sorted_reporting_orgs(cache_file=CACHEFILE):
-    """Return sorted dictionary for reporting organisations."""
+    """Return a sorted dictionary for reporting organisations."""
     reporting_orgs = dict()
 
     with open(cache_file) as c_file:
@@ -32,12 +31,11 @@ def sorted_reporting_orgs(cache_file=CACHEFILE):
 
 
 def get_codelist_values(codelist_name, sort_func):
-    """Format list for multiselect from a given codelist."""
+    """Format dictionary for multiselect menus from a given codelist."""
     codelist_values = dict()
     codelist = iati.default.codelist(codelist_name)
 
     for code in codelist.codes:
-        name = code.name
         codelist_values[code.value] = code.name
 
     sorted_codelist_values = sort_dict_by_keys(codelist_values, sort_func)

@@ -7,9 +7,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    """Render main template with core variables assigned prospective values."""
     reporting_orgs = form_helper.sorted_reporting_orgs()
     countries = form_helper.get_codelist_values('Country', lambda x: x.lower())
-    regions = form_helper.get_codelist_values('Region', lambda x: int(x))
+    regions = form_helper.get_codelist_values('Region', int)
     org_types = form_helper.get_codelist_values('OrganisationType', lambda x: x.lower())
     sector_categories = form_helper.get_sector_categories()
     non_escaped_html = '<br/>'

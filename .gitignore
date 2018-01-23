@@ -1,3 +1,10 @@
+###
+### Project-specific ignored files
+###
+
+# Cache file generated from get_publishers.py
+publisher_cache.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

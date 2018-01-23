@@ -1,3 +1,4 @@
+"""A module to pull organisation information from the IATI Registry as a JSON cache."""
 import requests
 
 from ckanapi import RemoteCKAN
