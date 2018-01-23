@@ -4,7 +4,7 @@ Todo:
     Add acceptance test framework and test. Maybe Capybara and Selenium?
 
 """
-from models import form_helper
+from models import multiselect_menus
 
 
 TEST_CSV_PATH = 'tests/test_data/test.csv'
@@ -21,13 +21,13 @@ class TestFormHelper(object):
 
     def test_reporting_orgs_returns_sorted_dictionary(self):
         """Check function creates a JSON compatible sorted dictionary."""
-        result = form_helper.sorted_reporting_orgs(TEST_CACHE_FILE)
+        result = multiselect_menus.sorted_reporting_orgs(TEST_CACHE_FILE)
         assert isinstance(result, dict)
         assert result == {"1":"this is an id1","2":"this is an id2","3":"this is an id3"}
 
     def test_get_sector_categories_returns_populated_dict(self):
         """Check function creates a populated dict as expected."""
-        result = form_helper.get_sector_categories()
+        result = multiselect_menus.get_sector_categories()
         assert isinstance(result, list)
         assert result[0]['code'] == '111'
         assert result[-1]['code'] == '99820'
