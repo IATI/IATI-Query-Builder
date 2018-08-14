@@ -136,11 +136,14 @@ $(function() {
   */
   QueryBuilder.LinkGen.updateLink = function(){
     var linkElement = $('#query-link');
+    var downloadButton = $('#download');
     var linkLocation = QueryBuilder.LinkGen.createLink();
 
     // update the link
     linkElement.attr('href', linkLocation);
     linkElement.text(linkLocation);
+
+    downloadButton.attr('href', linkLocation);
   };
 
   /*
@@ -150,13 +153,14 @@ $(function() {
     var formElements = $('select, input[type=text], input[type=radio]');
 
     formElements.change(QueryBuilder.LinkGen.updateLink);
-    };
+  };
 
   /*
     Initialise the client-side link generation.
   */
   QueryBuilder.LinkGen.Init = function(){
     $('#js-query-link').show();
+    $('.submit-buttons').prepend('<a id="download" class="btn btn-primary" href="#">Download</a>');
 
     QueryBuilder.LinkGen.SetupEventListeners();
     QueryBuilder.LinkGen.updateLink();
