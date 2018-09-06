@@ -50,10 +50,10 @@ function reporting_orgs() {
   $reporting_orgs = array();
   $excluded_ids = array("To be confirmed.");
   foreach ($groups as $key=>$value) {
-    if (!empty($value["packages"])) { //only select publishers with files!
-      if (!empty($value["extras"]["publisher_iati_id"])) { //only select publishers with and id
-        if (!in_array($value["extras"]["publisher_iati_id"],$excluded_ids)) { //don't select publishers with excluded ids
-          $reporting_orgs[$value["display_name"]] = $value["extras"]["publisher_iati_id"];
+    if (($value["result"]["package_count"])> 0) { //only select publishers with files!
+      if (!empty($value["result"]["publisher_iati_id"])) { //only select publishers with and id
+        if (!in_array($value["result"]["publisher_iati_id"],$excluded_ids)) { //don't select publishers with excluded ids
+          $reporting_orgs[$value["result"]["title"]] = $value["result"]["publisher_iati_id"];
         }
       }
     }

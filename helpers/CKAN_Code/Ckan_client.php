@@ -34,7 +34,7 @@ class Ckan_client
 	 * @link	http://knowledgeforge.net/ckan/doc/ckan/api.html#api-versions
 	 * @since	Version 0.1.0
 	 */
-	private $api_version = '1';
+	private $api_version = '3';
 
 	/**
 	 * URI to the CKAN web service.
@@ -83,18 +83,18 @@ class Ckan_client
 	 * @since	Version 0.1.0
 	 */
 	private $resources = array(
-		'package_register' => 'rest/package',
-		'package_entity' => 'rest/package',
-		'group_register' => 'rest/group',
-		'group_entity' => 'rest/group',
-		'tag_register' => 'rest/tag',
-		'tag_entity' => 'rest/tag',
-		'rating_register' => 'rest/rating',
-		'rating_entity' => 'rest/rating',
-		'revision_register' => 'rest/revision',
-		'revision_entity' => 'rest/revision',
-		'license_list' => 'rest/licenses',
-		'package_search' => 'search/package'
+		'package_register' => 'action/package_list',
+		'package_entity' => 'action/package_show',
+		'group_register' => 'action/group_list',
+		'group_entity' => 'action/group_show',
+		'tag_register' => 'action/tag_list',
+		'tag_entity' => 'action/tag_show',
+		'rating_register' => 'action/rating_list',
+		'rating_entity' => 'action/rating_show',
+		'revision_register' => 'action/revision_list',
+		'revision_entity' => 'action/revision_show',
+		'license_list' => 'action/licenses_list',
+		'package_search' => 'action/package_search'
 	);
 
 	/**
@@ -284,7 +284,7 @@ class Ckan_client
 	public function get_package_entity($package)
 	{
 		return $this->make_request('GET', 
-			$this->resources['package_entity'] . '/' . urlencode($package));
+			$this->resources['package_entity'] . '?id=' . urlencode($package));
 	}
 
 	/**
@@ -298,7 +298,7 @@ class Ckan_client
 	public function put_package_entity($package, $data)
 	{
 		return $this->make_request('PUT', 
-			$this->resources['package_entity'] . '/' . urlencode($package), 
+			$this->resources['package_entity'] . '?id=' . urlencode($package), 
 			$data);
 	}
 
@@ -346,8 +346,9 @@ class Ckan_client
 	 */
 	public function get_group_entity($group)
 	{
+		print($group);
 		return $this->make_request('GET', 
-			$this->resources['group_entity'] . '/' . urlencode($group));
+			$this->resources['group_entity'] . '?id=' . urlencode($group));
 	}
 
 	// Group utility alias
@@ -391,7 +392,7 @@ class Ckan_client
 	public function get_tag_entity($tag)
 	{
 		return $this->make_request('GET', $this->resources['tag_entity'] . 
-			'/' . urlencode($tag));
+			'?id=' . urlencode($tag));
 	}
 
 	// Tag utility alias
@@ -433,7 +434,7 @@ class Ckan_client
 	public function get_revision_entity($revision)
 	{
 		return $this->make_request('GET', 
-			$this->resources['revision_entity'] . '/' . urlencode($revision));
+			$this->resources['revision_entity'] . '?id=' . urlencode($revision));
 	}
 
 	// Revision utility alias
