@@ -70,15 +70,14 @@ if (isset($_POST) && $_POST != NULL) {
   $cachefile = "helpers/groups_cache_dc.json";
   $groups = file_get_contents($cachefile);
   $groups = json_decode($groups,true);
-
   //Set up an array of Organisations and their IDs
   $reporting_orgs = array();
   $excluded_ids = array("To be confirmed.");
   foreach ($groups as $key=>$value) {
-    if (!empty($value["packages"])) { //only select publishers with files!
-      if (!empty($value["extras"]["publisher_iati_id"])) { //only select publishers with and id
-        if (!in_array($value["extras"]["publisher_iati_id"],$excluded_ids)) { //don't select publishers with excluded ids
-          $allowed_orgs[] = $value["extras"]["publisher_iati_id"];
+    if (($value["result"]["package_count"])> 0) { //only select publishers with files!
+      if (!empty($value["result"]["publisher_iati_id"])) { //only select publishers with and id
+        if (!in_array($value["result"]["publisher_iati_id"],$excluded_ids)) { //don't select publishers with excluded ids
+          $allowed_orgs[] = $value["result"]["publisher_iati_id"];
         }
       }
     }
