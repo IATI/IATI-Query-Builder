@@ -11,7 +11,7 @@ cd codelists
 
 # Perform the loop to get each codelist
 for codelist_name in "Country" "Region" "Sector" "SectorCategory" "OrganisationType"; do
-    wget "http://iatistandard.org/codelists/downloads/clv1/codelist/$codelist_name.csv"
+    wget "http://reference.iatistandard.org/codelists/downloads/clv1/codelist/$codelist_name.csv"
 done
 
 # Go back to the root directory
