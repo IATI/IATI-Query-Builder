@@ -1,3 +1,10 @@
+# _NOTE_
+
+## IATI-Query-Builder is Deprecated and Archived
+
+- Check out [Datastore Search Advanced](https://datastore.iatistandard.org/advanced) for Query Building needs
+- This repository is Deprecated, Archived, and not maintained by IATI
+
 # IATI-Query-Builder
 
 [![License: MIT](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://github.com/IATI/IATI-Query-Builder#licence)
